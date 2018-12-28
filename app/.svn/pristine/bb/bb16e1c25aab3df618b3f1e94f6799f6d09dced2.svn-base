@@ -1,0 +1,26 @@
+package app.entity.json.wt;
+
+import lombok.Data;
+
+import java.util.Optional;
+
+@Data
+public class KnowledgeResourceView {
+    private String id;
+    private String name;
+    private String url;
+    private String type;
+    private int energy;
+    private boolean learnt;
+
+    public static final String COURSE = "course";
+    public static final String CONTENT = "content";
+
+    public boolean isCourse(){
+        return Optional.ofNullable(type).orElse("").equals(COURSE);
+    }
+
+    public boolean isContent(){
+        return Optional.ofNullable(type).orElse("").equals(CONTENT);
+    }
+}

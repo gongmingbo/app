@@ -1,0 +1,26 @@
+package app.entity.coursetime;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+public class CoursesTemplate {
+private	Date firstday;
+private List< CourseTemplate> courses;
+public Date getFirstday() {
+	return firstday;
+}
+public void setFirstday(Date firstday) {
+	this.firstday = firstday;
+}
+public List< CourseTemplate> getCourses() {
+	return courses;
+}
+public void setCourses(List< CourseTemplate>courses) {
+	this.courses = courses;
+}
+@Override
+public String toString() {
+	return "CoursesTemplate [firstday=" + firstday + ", courses=" + courses + "]";
+}
+	
+}

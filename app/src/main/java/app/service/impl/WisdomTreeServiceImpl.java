@@ -1,0 +1,340 @@
+package app.service.impl;
+
+import app.entity.json.ContentBaseView;
+import app.entity.json.CourseBaseView;
+import app.entity.json.KnowledgeContent;
+import app.entity.json.wt.KnowledgePointView;
+import app.entity.json.wt.KnowledgeResourceView;
+import app.entity.json.wt.PointRelationView;
+import app.entity.json.wt.WisdomTreeView;
+import app.entity.smart.Knowledge;
+import app.entity.smart.ProfessionClassification;
+import app.entity.user.Learnt;
+import app.entity.user.PassKnowledge;
+import app.entity.user.Ranking;
+import app.repository.*;
+import app.service.CareerService;
+import app.service.WisdomTreeService;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.sql.Timestamp;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Collectors;
+
+@Service
+public class WisdomTreeServiceImpl implements WisdomTreeService {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass()) ;
+
+    private Gson gson = new Gson();
+
+    @Autowired
+    private PassKnowledgeRepository passKnowledgeRepository;
+
+    @Autowired
+    private ContentRepository contentRepository;
+
+    @Autowired
+    private LearntRepository learntRepository;
+
+    @Autowired
+    private CareerService careerService;
+    @Autowired
+    private ProfessionClassificationRepository proRepository;
+
+    @Autowired
+    private RankingRepository rankingRepository;
+
+    @Override
+    public List<PassKnowledge> getWisdomTree(String userId, String proId){
+        if (proId == null){
+            return passKnowledgeRepository.findByUserId(userId);
+        }else{
+            PassKnowledge passKnowledge = passKnowledgeRepository.findByUserIdAndProfessionId(userId, proId);
+            return Collections.singletonList(passKnowledge);
+        }
+
+    }
+
+    @Override
+    @Transactional
+    public void learn(String resourceId, String user, String type) {
+        List<PassKnowledge> passKnowledge = passKnowledgeRepository.findByUserId(user);
+        List<Learnt> learnt = learntRepository.findByUserId(user);
+        Set<String > learntResource;
+        Set<String > learntCourse = learnt.stream().filter(p->p.getType().equals(KnowledgeResourceView.COURSE))
+                .map(Learnt::getLearntId).collect(Collectors.toSet());
+        Set<String > learntContent = learnt.stream().filter(p->!p.getType().equals(KnowledgeResourceView.COURSE))
+                .map(Learnt::getLearntId).collect(Collectors.toSet());
+        if (type.equals(KnowledgeResourceView.COURSE)){
+            learntResource = learntCourse;
+        }else {
+            learntResource = learntContent;
+        }
+
+        if (learntResource.contains(resourceId)){
+            return;
+        }
+
+        if (passKnowledge != null && passKnowledge.size() > 0){
+            AtomicBoolean savedAsLearnt = new AtomicBoolean(false);
+            for (PassKnowledge pk : passKnowledge){
+                WisdomTreeView treeView = gson.fromJson(pk.getPlan(), WisdomTreeView.class);
+                List<Learnt> learntHistory = gson.fromJson(pk.getLearnt(), new TypeToken<List<Learnt>>(){}.getType());
+                boolean changed = false;
+                List<KnowledgePointView> points = treeView.getPoints().stream()
+                        .filter(p->!p.getStatus().equals(KnowledgePointView.LOCKED))
+                        .collect(Collectors.toList());
+                for (KnowledgePointView point: points){
+                    int num = point.getResources().stream()
+                            .filter(p->p.getId().equals(resourceId))
+                            .peek(p-> {
+                                p.setLearnt(true);
+                                Learnt l = new Learnt();
+                                l.setUserId(user);
+                                l.setLearntTime(new Timestamp(System.currentTimeMillis()));
+                                l.setType(p.getType());
+                                l.setLearntId(p.getId());
+                                l.setEnergy(p.getEnergy());
+                                l.setName(p.getName());
+                                learntHistory.add(l);
+                                if (!savedAsLearnt.get()){
+                                    learntRepository.save(l);
+                                    savedAsLearnt.set(true);
+                                }
+                            })
+                            .map(KnowledgeResourceView::getEnergy)
+                            .findAny().orElse(-1);
+                    if (num > -1){
+                        changed = true;
+                        tryAchieve(treeView, point, learntCourse, learntContent, learntHistory);
+                        treeView.addFloatingEnergy(num);
+                    }
+                }
+                if (changed){
+                    pk.setLearnt(gson.toJson(learntHistory));
+                    pk.setPlan(gson.toJson(treeView));
+                    learntStatistics(learntHistory, pk);
+                    passKnowledgeRepository.save(pk);
+                }
+            }
+        }
+    }
+    private void learntStatistics(List<Learnt> history, PassKnowledge pk){
+        int learntCourseCount = 0,learntArticleCount = 0,learntVideoCount = 0;
+        for (Learnt l : history){
+            if (l.getType() == null){
+                logger.warn("resource does not contain type attribute: " + l.getId());
+                continue;
+            }
+            switch (l.getType()){
+                case KnowledgeResourceView.COURSE:
+                    learntCourseCount ++;
+                    break;
+                case KnowledgeResourceView.ARTICLE:
+                    learntArticleCount ++;
+                    break;
+                case KnowledgeResourceView.VIDEO:
+                    learntVideoCount ++;
+                    break;
+                default:
+                    break;
+            }
+        }
+        pk.setLearntCourseCount(learntCourseCount);
+        pk.setLearntArticleCount(learntArticleCount);
+        pk.setLearntVideoCount(learntVideoCount);
+    }
+
+    private void learntAndTry(WisdomTreeView treeView, KnowledgePointView point, Collection<String> learntCourse, Collection<String> learntContent, List<Learnt> history){
+        boolean shouldTry = false;
+        int energy = 0;
+        for (KnowledgeResourceView re : point.getResources()){
+            if ((!re.isCourse() && learntContent.contains(re.getId()))
+                    || (re.isCourse() && learntCourse.contains(re.getId()))){
+                re.setLearnt(true);
+                shouldTry = true;
+                energy += re.getEnergy();
+                Learnt l = new Learnt();
+                l.setLearntTime(new Timestamp(System.currentTimeMillis()));
+                l.setType(re.getType());
+                l.setLearntId(re.getId());
+                l.setEnergy(re.getEnergy());
+                l.setName(re.getName());
+                history.add(l);
+            }
+        }
+        if (shouldTry){
+            treeView.addFloatingEnergy(energy);
+            tryAchieve(treeView, point, learntCourse, learntContent, history);
+        }
+    }
+
+    private void tryAchieve(WisdomTreeView treeView, KnowledgePointView point, Collection<String> learntCourse, Collection<String> learntContent,  List<Learnt> history){
+        int curEnergy = point.getResources().stream()
+                .filter(KnowledgeResourceView::isLearnt)
+                .mapToInt(KnowledgeResourceView::getEnergy)
+                .sum();
+        if (point.getStatus().equals(KnowledgePointView.AVAILABLE) && point.getEnergy() <= curEnergy){
+            setAchieved(treeView, point, learntCourse, learntContent, history);
+            treeView.getRelations().stream().filter(p->p.getTo().equals(point.getId())).forEach(p->p.setTraveled(true));
+        }
+    }
+
+    private void setAchieved(WisdomTreeView tree,KnowledgePointView point, Collection<String> learntCourse, Collection<String> learntContent, List<Learnt> history) {
+        point.setStatus(KnowledgePointView.ACHIEVED);
+        tree.countIncrease();
+
+        Map<String, KnowledgePointView> pointViewMap = tree.getPoints().stream().collect(Collectors.toMap(KnowledgePointView::getId, p->p));
+        for (KnowledgePointView pv: tree.getPoints()){
+            if (pv.getAllPres().contains(point.getId())){
+                if (pv.getStatus().equals(KnowledgePointView.LOCKED)){
+                    for (List<String> pre: pv.getPres()){
+                        if (pre.stream().allMatch(p->pointViewMap.get(p).getStatus().equals(KnowledgePointView.ACHIEVED))){
+                            pv.setStatus(KnowledgePointView.AVAILABLE);
+                            learntAndTry(tree, pv, learntCourse, learntContent, history);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        for (List<String > singlePre : point.getPres()){
+            if (singlePre.stream().allMatch(p->pointViewMap.get(p).getStatus().equals(KnowledgePointView.ACHIEVED))){
+                tree.getRelations().stream().filter(p->p.getTo().equals(point.getId())).forEach(p->p.setTraveled(true));
+            }
+        }
+    }
+
+
+    @Override
+    @Transactional
+    public void newTree(String user, String proId) {
+        PassKnowledge passKnowledge = passKnowledgeRepository.findByUserIdAndProfessionId(user, proId);
+        if (passKnowledge != null){
+            return;
+        }
+        passKnowledge = new PassKnowledge();
+        passKnowledge.setUserId(user);
+        passKnowledge.setProfessionId(proId);
+        ProfessionClassification pro = proRepository.findOne(proId);
+        List<Learnt> learnt = learntRepository.findByUserId(user);
+        Set<String > learntCourse = learnt.stream().filter(p->p.getType().equals(KnowledgeResourceView.COURSE))
+                .map(Learnt::getLearntId).collect(Collectors.toSet());
+        Set<String > learntContent = learnt.stream().filter(p->!p.getType().equals(KnowledgeResourceView.COURSE))
+                .map(Learnt::getLearntId).collect(Collectors.toSet());
+
+        WisdomTreeView treeView = new WisdomTreeView();
+        List<Knowledge> knowledge = careerService.getKnowledgeOfProfession(proId);
+        List<KnowledgePointView> pointViews = new ArrayList<>();
+        List<KnowledgePointView> availablePoints = new ArrayList<>();
+        List<PointRelationView> relationViews = new ArrayList<>();
+        List<Learnt> learntHistory = new ArrayList<>();
+        treeView.setProId(proId);
+        treeView.setProName(pro.getProfessionName());
+        treeView.setPoints(pointViews);
+        treeView.setRelations(relationViews);
+        treeView.setCount(0);
+        treeView.setEnergy(pro.getEnergy());
+        for (Knowledge kn : knowledge){
+            KnowledgePointView pointView = new KnowledgePointView();
+            pointView.setId(kn.getKnowledgeId());
+            pointView.setName(kn.getKnowledgeName());
+            pointView.setDesc(kn.getRemark());
+            pointView.setEnergy(kn.getEnergy());
+            pointView.setSource(kn.getIcon());
+            if (kn.getPrerequisites() == null || kn.getPrerequisites().isEmpty()){
+                pointView.setPres(Collections.emptyList());
+                pointView.setAllPres(Collections.emptyList());
+                pointView.setStatus(KnowledgePointView.AVAILABLE);
+                availablePoints.add(pointView);
+            }else {
+                pointView.setPres(kn.getPrereqs());
+                pointView.setAllPres(kn.getPrerequisites().stream().map(Knowledge::getKnowledgeId).collect(Collectors.toList()));
+                pointView.setStatus(KnowledgePointView.LOCKED);
+                for (String pre: pointView.getAllPres()){
+                    PointRelationView relationView = new PointRelationView();
+                    relationView.setFrom(pre);
+                    relationView.setTo(pointView.getId());
+                    relationViews.add(relationView);
+                }
+            }
+            pointViews.add(pointView);
+            KnowledgeContent content =  kn.getKnowledgeContent();
+            List<KnowledgeResourceView> resources = new ArrayList<>();
+            for (CourseBaseView course: content.getCourses()){
+                KnowledgeResourceView resourceView = new KnowledgeResourceView();
+                resourceView.setId(course.getId());
+                resourceView.setLearnt(false);
+                resourceView.setName(course.getName());
+                resourceView.setEnergy(course.getEnergy());
+                resourceView.setType(KnowledgeResourceView.COURSE);
+                resourceView.setEndTime(course.getEndTime() == null ? 0L : course.getEndTime());
+                resources.add(resourceView);
+            }
+            for (ContentBaseView contentView: content.getContents()){
+                KnowledgeResourceView resourceView = new KnowledgeResourceView();
+                resourceView.setId(contentView.getId());
+                resourceView.setEnergy(contentView.getEnergy());
+                resourceView.setName(contentView.getTitle());
+                resourceView.setLearnt(false);
+                resourceView.setUrl("/api/content/" + contentView.getId());
+                resourceView.setType(contentView.getType());
+                resources.add(resourceView);
+            }
+            pointView.setResources(resources);
+        }
+        for(KnowledgePointView pv : availablePoints){
+            learntAndTry(treeView, pv, learntCourse, learntContent, learntHistory);
+        }
+        passKnowledge.setLearnt(gson.toJson(learntHistory));
+        passKnowledge.setPlan(gson.toJson(treeView));
+        learntStatistics(learntHistory, passKnowledge);
+        passKnowledgeRepository.save(passKnowledge);
+    }
+
+    @Override
+    public List<Learnt> learntHistory(String userId, String proId){
+        PassKnowledge passKnowledge = passKnowledgeRepository.findByUserIdAndProfessionId(userId, proId);
+        return gson.fromJson(passKnowledge.getLearnt(), new TypeToken<List<Learnt>>(){}.getType());
+    }
+
+
+    @Override
+    @Transactional
+    @Scheduled(cron = "${ranking.cron}")
+    public void rank(){
+        rankingRepository.deleteAll();
+        List<ProfessionClassification> pros = proRepository.findAll();
+        for (ProfessionClassification pro : pros){
+            List<Ranking> rankings = passKnowledgeRepository.doRanking(pro.getProfessionId());
+            int i = 0;
+            for (Ranking r : rankings){
+                r.setRank(++i);
+            }
+            rankingRepository.save(rankings);
+        }
+    }
+
+    @Transactional
+    @Override
+    public void checkCourse(String user){
+        List<PassKnowledge> passKnowledge = passKnowledgeRepository.findByUserId(user);
+        for (PassKnowledge pk : passKnowledge) {
+            WisdomTreeView treeView = gson.fromJson(pk.getPlan(), WisdomTreeView.class);
+            List<KnowledgePointView> pointViews = treeView.getPoints().stream().filter(p -> p.getStatus().equals(KnowledgePointView.AVAILABLE)).collect(Collectors.toList());
+            for (KnowledgePointView pointView : pointViews) {
+                pointView.getResources().stream().filter(KnowledgeResourceView::isCourse).filter(p -> p.getEndTime() < System.currentTimeMillis()).forEach(p -> learn(p.getId(), user, KnowledgeResourceView.COURSE));
+            }
+        }
+    }
+
+}

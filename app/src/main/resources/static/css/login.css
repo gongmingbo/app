@@ -1,0 +1,54 @@
+.ican-wrapper {
+  height: 100%;
+  background: url("../imgs/bg.png") no-repeat 0 0 /100% 100%;
+  position: relative;
+}
+.ican-wrapper .login-box {
+  width: 500px;
+  height: 600px;
+  background-color: #343D5F;
+  position: absolute;
+  top: 50%;
+  right: 10%;
+  transform: translate(0,-50%);
+}
+.ican-wrapper .login-box h3 {
+  color: #FEFEFF;
+  font-size: 30px;
+  font-weight: 400px;
+  margin-left: 55px;
+}
+.ican-wrapper .login-box h3:nth-of-type(1) {
+  margin-top: 85px;
+  margin-bottom: 20px;
+}
+.ican-wrapper .login-box input {
+  width: 400px;
+  height: 40px;
+  border: 1px solid #4892F6;
+  margin-left: 57px;
+  background-repeat: no-repeat;
+  background-position: 8px 5px;
+  text-indent: 50px;
+}
+.ican-wrapper .login-box input:nth-of-type(1) {
+  background-image: url("../imgs/user_0.png");
+  margin-top: 100px;
+  margin-bottom: 40px;
+}
+.ican-wrapper .login-box input:nth-of-type(2) {
+  background-image: url("../imgs/pwd_0.png");
+}
+.ican-wrapper .login-box button {
+  width:200px;
+  height:40px;
+  background:linear-gradient(90deg,rgba(19,194,249,1) 0%,rgba(139,86,243,1) 100%);
+  border-radius:20px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 400;
+  color: #FEFEFF;
+  margin-left: 56px;
+  margin-top: 56px;
+  cursor: pointer;
+}

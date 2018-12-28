@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>登陆</title>
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/label_management.css">
+    <script type="text/javascript" src="/jquery-3.3.1.min.js"></script>
+</head>
+
+<body>
+<div class="ican-wrapper">
+    <div th:replace="navi :: myNavi(${dir})"></div>
+    <div class="content">
+        <h3>
+            <span>标签库</span>
+            <span>用户可在个人中心进行选择标签（最多选五个），可根据用户选择的标签来推送学习资料</span>
+        </h3>
+        <div class="label-box">
+            <div class="label label-add">添加标签</div>
+            <p>（点击标签可进行删除、修改）</p>
+        </div>
+    </div>
+    <div class="modal" style="display: none">
+        <div class="form">
+            <h3>编辑标签</h3>
+            <div class="section">
+                <label for="">标签名称：</label>
+                <input type="text" id="input-label">
+                <input type="hidden">
+            </div>
+            <button id="delete">删除</button>
+            <button id="sure">确定</button>
+            <input id="id" type="hidden" value="">
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    window.onload = function () {
+        function ajax(url, data, type) {
+            var result;
+            $.ajax({
+                type: type,
+                url: url,
+                data: data,
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                    result = data;
+                }
+            });
+            return result;
+        }
+
+        getTable();
+        function getTable() {
+            var url = "/web/label"
+            var result = ajax(url, "", "GET")
+            console.log(result)
+            var html = ""
+            for (index in result) {
+                var c = result[index]
+                html += '<div id="' + c.id + '" class="label tag">' + c.tagName + '</div>'
+            }
+            $(".tag").remove()
+            $(".label-add").after($(html))
+        }
+
+        $(".label-box").on("click", ".tag", function () {
+            $(".modal").find("h3").text("编辑标签")
+            var name = $(this).text()
+            var id = $(this).attr("id")
+            $("#input-label").val(name)
+            $("#input-label").next().val(name)
+            $("#id").val(id)
+            $(".modal").show();
+        })
+        $(".label-box").on("click", ".label-add", function () {
+            $(".modal").find("h3").text("添加标签")
+            $("#id").val("")
+            $("#input-label").val("")
+            $("#input-label").next().val("")
+            $(".modal").show();
+        })
+        $(".modal").on("click", "#delete", function () {
+            if (!confirm("确认删除该标签吗")) {
+                return
+            }
+            var url = "/web/deleteLabel"
+            var result = ajax(url, {id: $("#id").val()}, "POST")
+            if (result.id) {
+                getTable();
+                $(".modal").hide();
+            }
+        })
+
+        $(".modal").on("click", "#sure", function () {
+            var name = $("#input-label").val()
+            if (!name) {
+                alert("该标签名称不能为空")
+                return ;
+            }
+            if (distinct() == true) {
+                alert("该标签已经存在")
+                return
+            }
+            var url = "/web/label"
+            var result = ajax(url, {tagName: $("#input-label").val(), id: $("#id").val()}, "POST")
+            if (result.id) {
+                getTable();
+                $(".modal").hide();
+            }
+        })
+        function distinct() {
+            var name = $("#input-label").val()
+            var oldName = $("#input-label").next().val()
+            if (!oldName || name != name) {
+                var url = "/web/distinctLabel"
+                var result = ajax(url, {tagName: $("#input-label").val(),}, "GET")
+                return result.state;
+            }
+        }
+    }
+</script>
+</html>

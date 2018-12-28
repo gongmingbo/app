@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>选修课程录入</title>
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/need.css">
+    <link rel="stylesheet" href="/css/pageation.css">
+    <script type="text/javascript" src="/pinying.js"></script>
+    <script type="text/javascript" src="/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/pagination.js"></script>
+    <style>
+        .addCourse {
+            float: right;
+            width: 80px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            background: #fff;
+            cursor: pointer;
+            margin-top: 20px;
+            display: inline-block;
+        }
+        .serch_name{
+            margin-top: 20px;
+            width: 220px;
+            height: 30px;
+            float: right;
+            margin-right: 5px;
+        }
+        .course_introduction {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+            overflow: hidden;
+            /* white-space: nowrap; */
+            /* overflow: hidden; */
+            max-width: 200px;
+            /* max-height: 40px; */
+            /* text-overflow: ellipsis; */
+        }
+    </style>
+</head>
+
+<body>
+<div th:replace="navi :: myNavi(${dir})"></div>
+
+<div class="ican-select">
+    <section class="choose" id="choose">
+        <label for="schools">学校 :</label>
+        <input type="text" id="chooseItem">
+        <input type="hidden" id="chooseItem_hide">
+        <div id="schools" class="dataWrapper">
+            <p>选择学校</p>
+            <ul>
+                <li class="active">常用</li>
+                <li>A</li>
+                <li>B</li>
+                <li>C</li>
+                <li>D</li>
+                <li>E</li>
+                <li>F</li>
+                <li>G</li>
+                <li>H</li>
+                <li>I</li>
+                <li>J</li>
+                <li>K</li>
+                <li>L</li>
+                <li>M</li>
+                <li>N</li>
+                <li>O</li>
+                <li>P</li>
+                <li>Q</li>
+                <li>R</li>
+                <li>S</li>
+                <li>T</li>
+                <li>U</li>
+                <li>V</li>
+                <li>W</li>
+                <li>X</li>
+                <li>Y</li>
+                <li>Z</li>
+            </ul>
+            <div class="school-list">
+                <h3>A</h3>
+                <div class="school-names">
+             <span th:each="school,schoolStat : ${list}"
+                   th:text="${school.orgName}"
+                   th:data="${school.orgId}">
+            </span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <label for="institute">院系 :</label>
+        <select id="institute">
+
+        </select>
+        <!--</section>
+        <section>
+            <label for="specialty">专业 :</label>
+            <select id="specialty">
+
+            </select>
+        </section>
+        <section>
+            <label for="grade">专业 :</label>
+            <select id="grade">
+
+            </select>
+        </section>-->
+</div>
+<div class="ican-class">
+    <table cellspacing="0" class="tableElective" id="schoolTable">
+        <caption>选修课程列表
+            <button type="button" class="addCourse" onclick="serchAction()">搜索</button>
+            <input type="text" placeholder="输入课程名" class="serch_name">
+        </caption>
+        <thead>
+        <tr>
+            <th colspan="8">
+                <button onclick="checkedAll()">全选</button>
+                <button onclick="checkeOthers()">反选</button>
+                <button onclick="deleteClass()">删除</button>
+                <button onclick="addClass()">添加</button>
+                <button onclick="edit()">编辑</button>
+            </th>
+        </tr>
+        <tr>
+            <th style="text-align: center;">序号</th>
+            <th>课程编号</th>
+            <th>课程名称</th>
+            <th>课程学分</th>
+            <th>课程学时</th>
+            <th>考核方式</th>
+            <th>课程简介</th>
+           <!-- <th>操作</th>-->
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    <!--    分页              -->
+    <div class="pagination_container">
+        <ul class="pagination" id="page"></ul>
+        <div class="pageJump">
+            <!-- <input class='current_page' type="hidden" value="${pageNo}"/>-->
+            <!--  <p>共<span class="total_page">2</span>页</p>-->
+            <form action="" id="getPageNo" method="post">
+                <input type="hidden" id="pageNo" name="pageNo" value=""/>
+                <input type="hidden" id="total_page_" name="total_page_" value=""/>
+                <!-- <span>跳转到第</span>
+                 <input type="text" id="jumpPageNo" name="jumpPageNo"/>
+                 <span>页</span>
+                 <input label="站点id" name="Site" value="${Site }" type="hidden"/>
+                 <input label="栏目id" name="Column" value="${Column }" type="hidden"/>
+                 <input type="hidden" id="date_date" name="date" value="${date }"/>
+                 <button type="button" class="button">确定</button>-->
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function page(state) {
+            Page({
+                num: $("#total_page_").val(), //页码数
+                startnum: $("#pageNo").val(), //指定页码
+                elem: $('#page'), //指定的元素
+                callback: function (n) { //回调函数
+                    $("input[name='pageNo']").val(n);
+                    // $("#getPageNo").submit();
+                    console.log(n)
+                    if (n == 1) {
+                        $('#page a').removeClass('not_allow');
+                        $('.page_prev').addClass('not_allow');
+                    } else if (n >= $('.total_page').html()) {
+                        $('#page a').removeClass('not_allow');
+                        $('.page_next').addClass('not_allow')
+                    } else {
+                        $('#page a').removeClass('not_allow');
+                    }
+                        addTable(n)
+                }
+            });
+        }
+    </script>
+    <!-- 分页 -->
+</div>
+<div class="ican-modal" id="editorModal">
+    <form action="" id="form_data" style="z-index: 1000">
+        <span class="title"></span>
+        <span class="close">x</span>
+        <section>
+            <label for="">课程编号:</label>
+            <input type="text" name="courseCode" class="must">
+            <input type="hidden">
+        </section>
+        <section>
+            <label for="">课程名称:</label>
+            <input type="text" name="courseName" class="must">
+        </section>
+        <section>
+            <label for="">课程学分:</label>
+            <input type="text" name="courseCredit" class="must">
+        </section>
+        <section>
+            <label for="">课程学时:</label>
+            <input type="text" name="courseHour" class="must">
+        </section>
+        <section>
+            <label for="">考核方式:</label>
+            <input type="text" name="assessmentMethod" class="must">
+        </section>
+        <section>
+            <label for="">课程标签:</label>
+            <input type="text" name="courseTags" class="must">
+        </section>
+        <section>
+            <label for="">能量值:</label>
+            <input type="text" name="powerPoint" class="must">
+        </section>
+        <section>
+            <label for="">课程简介:</label>
+            <!--<input type="" name="CourseIntroduction" placeholder="" class="must">-->
+            <textarea rows="3" cols="32" name="courseIntroduction" style="border: 1px solid #DCDCDC;">
+            </textarea>
+        </section>
+        <!--<section>
+            <label for="">节数:</label>
+            &lt;!&ndash; <input type="text" name="number_form">&ndash;&gt;
+            <select name=number_form class="must">
+                <option value="1">上午1、2节</option>
+                <option value="2">上午3、4节</option>
+                <option value="3">下午1、2节</option>
+                <option value="4">下午3、4节</option>
+                <option value="5">晚上1、2节</option>
+            </select>
+        </section>
+        <section>
+            <label for="">星期:</label>
+            <select  name=weeks_form>
+                <option value="1">星期一</option>
+                <option value="2">星期二</option>
+                <option value="3">星期三</option>
+                <option value="4">星期四</option>
+                <option value="5">星期五</option>
+                <option value="6">星期六</option>
+                <option value="7">星期日</option>
+            </select>
+        </section>
+        </section>
+        <section>
+            <label for="">老师:</label>
+            <input type="text" name="teacher" class="must">
+        </section>
+        <section>
+            <label for="">能量值:</label>
+            <input type="text" name="powers" class="must">
+        </section>
+        <section>
+            <label for="">课程标签:</label>
+            <input name=tag type="text" class="must">
+        </section>-->
+        <!--<button type="button">删除</button>-->
+        <button type="button" onclick="submitAction();">确定</button>
+        <input type="hidden" name="id">
+        <input type="hidden" name="courseType" th:value="${type}">
+    </form>
+</div>
+<script>
+    //初始化choose组件
+    var type = "必修课"
+    function initChoose() {
+        document.querySelector('#choose').addEventListener("click", function (e) {
+            if (e.target.nodeName === "INPUT") {
+                $(".school-names span").each(function () {
+                    var fisrtName = $(this).text().substring(0, 1);
+                    console.log(fisrtName);
+                    var arrRslt = makePy(fisrtName);
+                    if (arrRslt[0] == 'A') {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+                document.querySelector('.dataWrapper').style.display = "block"
+            }
+            if (e.target.nodeName === "LI") {
+                document.querySelector('#choose h3').innerText = e.target.innerText
+                $(".school-names span").each(function () {
+                    var fisrtName = $(this).text().substring(0, 1);
+                    console.log(fisrtName);
+                    var arrRslt = makePy(fisrtName);
+                    if (arrRslt[0] == e.target.innerText) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+                Array.prototype.slice.apply(e.target.parentNode.children).forEach(function (element) {
+                    element.classList.remove('active')
+                });
+                e.target.classList.add('active')
+            }
+            if (e.target.nodeName === "SPAN") {
+                document.querySelector('.dataWrapper').style.display = "none"
+                document.querySelector('#chooseItem').value = e.target.innerText
+                $("#chooseItem_hide").val($(e.target).attr("data"))
+                getschool();
+               // addTable();
+            }
+        })
+    }
+    //显示模态框
+    function openElectiveModal() {
+        document.querySelector('#editorModal').style.display = "block"
+        document.querySelector('#editorModal .title').innerText = "添加课程"
+    }
+    //判断是否选中checkbox
+    function isCheck() {
+        document.querySelector('.tableElective').addEventListener('click', function () {
+            Array.prototype.slice.call(document.querySelectorAll('input[type=checkbox]')).forEach(function (x) {
+                if (x.checked) {
+                    x.parentNode.parentNode.style.background = "#343D5F"
+                } else {
+                    x.parentNode.parentNode.style.background = "#48516F"
+                }
+            })
+        })
+    }
+    //全选
+    function checkedAll() {
+        Array.prototype.slice.call(document.querySelectorAll('input[type=checkbox]')).forEach(function (x) {
+            x.checked = true
+        })
+    }
+    //反选
+    function checkeOthers() {
+        Array.prototype.slice.call(document.querySelectorAll('input[type=checkbox]')).forEach(function (x) {
+            x.checked = !x.checked
+        })
+    }
+    //添加
+    var addAndedit;
+    function addClass() {
+        addAndedit = "add"
+        $("#form_data")[0].reset();
+        $("#form_data input[name='id']").val("")
+        openElectiveModal()
+    }
+    //编辑
+    function edit() {
+        addAndedit = "edit"
+        if ($('input:checkbox:checked').length > 1) {
+            alert("请选择一个节点")
+            return
+        }
+        var id = $('input:checkbox:checked').eq(0).next().val();
+        var url = "/web/course/get/course"
+        var list = ajax(url, {id: id})
+        console.log(list)
+        $("input[name='courseCode']").val(list[0].courseCode)
+        $("input[name='courseCode']").next().val(list[0].courseCode)
+        $("input[name='courseName']").val(list[0].courseName)
+        $("input[name='courseCredit']").val(list[0].courseCredit)
+        $("input[name='courseHour']").val(list[0].courseHour)
+        $("input[name='assessmentMethod']").val(list[0].assessmentMethod)
+        $("input[name='powerPoint']").val(list[0].powerPoint)
+        $("textarea[name='courseIntroduction']").text(list[0].courseIntroduction)
+        $("input[name='id']").val(list[0].id)
+        var tags=eval("("+list[0].courseTags+")")
+        var arr=new Array()
+        for(p in tags){
+            arr.push(tags[p])
+        }
+        var tg=arr.join(",")
+        $("input[name='courseTags']").val(tg)
+    /*    $("input[name='id']").val(list[0].id)
+        $("select[name='number_form'] option").each(function () {
+            $(this).removeAttr("selected")
+            if ($(this).attr("value") == list[0].sectionNumber) (
+                $(this).attr("selected", "selected")
+            )
+        })
+        $("select[name='weeks_form'] option").each(function () {
+            $(this).removeAttr("selected")
+            if ($(this).attr("value") == list[0].week) (
+                $(this).attr("selected", "selected")
+            )
+        })*/
+        document.querySelector('#editorModal .title').innerText = "编辑课程"
+        document.querySelector('#editorModal').style.display = "block";
+    }
+    // 删除
+    function deleteClass() {
+        if ($('input:checkbox:checked').length < 1) {
+            alert("删除不能为空")
+            return
+        }
+        var ids = new Array()
+        $('input:checkbox:checked').each(function () {
+            ids.push($(this).next().val())
+        })
+        var id = ids.join(",")
+        var schoolId = $("#grade").val()
+        var list = ajax("/web/course/delete", {id: id, schoolId: schoolId})
+        addTable(1)
+        if (list.state != true) {
+            alert("删除异常")
+            return;
+        }
+        Array.prototype.slice.call(document.querySelectorAll('input[type=checkbox]')).forEach(function (x) {
+            if (x.checked) {
+                x.parentNode.parentNode.remove()
+            }
+        })
+    }
+    window.onload = function () {
+        initChoose()
+        isCheck()
+    }
+
+    var option = $('<option value="">请选择则</option>');
+    function getschool() {
+        var url = "/web/course/get/college";
+        var data = {pid: $("#chooseItem").next().val()};
+        var list = ajax(url, data);
+        $("#institute").empty();
+        $("#institute").append(option)
+        for (p in list) {
+            var c = list[p]
+            $("#institute").append($('<option value="' + c.orgId + '">' + c.orgName + '</option>'))
+        }
+
+    }
+    $("#chooseItem").change(function () {
+        getschool();
+        //addTable();
+    });
+    $("#institute").change(function () {
+        //getschool();
+        addTable(1);
+        page(false);
+    });
+
+    function addTable(n) {
+        var url = "/web/course/get/coursetable";
+        var serchName=$(".serch_name").val()
+        var data = {schoolId:  $("#institute").val(), type: type ,pageNum:n,serchName:serchName};
+        var lists = ajax(url, data);
+        console.log(lists)
+        var list =lists.data;
+        var html = "";
+        for (p in list) {
+            var c = list[p]
+            html += getTr(c,p)
+        }
+        $("#pageNo").val(lists.page.page)
+        $("#total_page_").val(lists.page.totalPage)
+        $("#schoolTable tbody").empty();
+        $("#schoolTable tbody").append($(html))
+        page(false);
+    }
+    function serchAction() {
+        addTable(1);
+    }
+    function getTr(data,p) {
+       var c = data;
+       var courseIntroduction
+       if (!c.courseIntroduction){
+           courseIntroduction=""
+       }else {
+           courseIntroduction=c.courseIntroduction
+       }
+        /*   var name;
+        var dayOfWeek;
+        if (1 == c.sectionNumber) {
+            name = '上午1、2节'
+        } else if (2 == c.sectionNumber) {
+            name = '上午3、4节'
+        } else if (3 == c.sectionNumber) {
+            name = '下午1、2节'
+        } else if (4 == c.sectionNumber) {
+            name = '下午3、4节'
+        } else if (5 == c.sectionNumber) {
+            name = '晚上1、2节'
+        }
+        if (1 == c.week) {
+            dayOfWeek = '星期一'
+        } else if (2 == c.week) {
+            dayOfWeek = '星期二'
+        } else if (3 == c.week) {
+            dayOfWeek = '星期三'
+        } else if (4 == c.week) {
+            dayOfWeek = '星期四'
+        } else if (5 == c.week) {
+            dayOfWeek = '星期五'
+        }else if (6 == c.week) {
+            dayOfWeek = '星期六'
+        }else if (7 == c.week) {
+            dayOfWeek = '星期日'
+        }*/
+        var tr = '<tr>' +
+            '<td>' +
+            ' <input type="checkbox">' +
+            ' <input type="hidden" value="' + c.id + '">' +
+            '  <p class="titleChoose">' + p + '</p>' +
+            '  </td>' +
+            '   <td>' +
+            '   <p>' + c.courseCode + '</p>' +
+            '   </td>' +
+            '   <td>' +
+            '    <p>' + c.courseName + '</p>' +
+            ' </td>' +
+            ' <td>' +
+            ' <p>' + c.courseCredit + '</p>' +
+            '</td>' +
+            ' <td>' +
+            '<p>' + c.courseHour + '</p>' +
+            '</td>' +
+            ' <td>' +
+            '<p>' + c.assessmentMethod + '</p>' +
+            '</td>' +
+            ' <td>' +
+            '<p class="course_introduction" title="'+courseIntroduction+'">' + courseIntroduction + '</p>' +
+            '</td>' +
+            '</tr>';
+
+        return tr;
+    }
+
+    //添加课程
+    function submitAction() {
+        var formData = new FormData($("#form_data")[0]);
+        formData.append("orgId", $("#institute").val())
+        formData.append("type", type)
+        if (!$("#institute").val()){
+            alert("请选择学校院系")
+            return
+        }
+        var url = "/web/course/add/course";
+        var keep = true;
+        $(".must").each(function () {
+            if (!$(this).val()) {
+                keep = false;
+                return;
+            }
+        })
+        if (!keep) {
+            alert("请完善信息")
+            return
+        }
+        //整数正则
+        var re = /^[1-9]+[0-9]*]*$/;
+        //匹配小说
+        var dobreg=/^[0-9]+\.?[0-9]+?$/;
+        if (!re.test($("input[name='powerPoint']").val())) {
+            alert("能量值请输入正整数")
+            return
+        }
+       if (re.test($("input[name='courseCredit']").val())||dobreg.test($("input[name='courseCredit']").val())) {
+
+         }else {
+           alert("请输入正整数或小数")
+           return
+       }
+        if (re.test($("input[name='courseHour']").val())||dobreg.test($("input[name='courseCredit']").val())) {
+
+        }else {
+            alert("请输入正整数或小数")
+            return
+        }
+
+        //匹配周数
+       /* var reg = /^[0-9]{1,2}-[0-9]{1,2}$/;
+        var val = $("input[name='weeks']").val()
+        if (!reg.test(val)) {
+            alert("请输入正确周数格式")
+            return;
+        }*/
+       var b=dinstinctCourseCode();
+       if (b==true){
+           alert("该课程编号已经存在")
+           return
+       }
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: formData,
+            dataType: 'json',
+            async: false,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                console.log(data);
+                if (data.id) {
+                    addTable(1);
+                    document.querySelector('#editorModal').style.display = "none";
+                    $("#form_data")[0].reset();
+                    $("#form_data input[name='id']").val("")
+                    $("input[name='courseCode']").next().val("")
+                    $("input[name='id']").val("")
+                } else {
+                    alert("操作失败")
+                }
+            }
+        });
+
+    }
+    $(".close").click(function () {
+        $("#form_data")[0].reset();
+        $("#form_data input[name='id']").val("")
+        $("input[name='courseCode']").next().val("")
+        document.querySelector('#editorModal').style.display = "none";
+    })
+    //查看课程编号是否重复
+    function dinstinctCourseCode() {
+        var courseCode=$("input[name='courseCode']").val()
+        var oldCourseCode=$("input[name='courseCode']").next().val()
+        var url ="/web/course/coursecode"
+        if (!oldCourseCode || (oldCourseCode && courseCode != oldCourseCode)) {
+          var result=  ajax(url,{courseCode:courseCode})
+            console.log(result)
+            return result.state;
+        }
+    }
+    function ajax(url, data) {
+        var result;
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: data,
+            dataType: "json",
+            async: false,
+            success: function (data) {
+                result = data;
+            }
+        });
+        return result;
+    }
+</script>
+</body>
+
+</html>

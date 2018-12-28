@@ -1,0 +1,79 @@
+package app.entity.smart;
+
+import javax.persistence.*;
+
+import app.entity.json.KnowledgeContent;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+
+import app.config.JsonDataUserType;
+
+import java.util.List;
+
+/**
+ * 知识点表
+ *
+ * @author gongmingbo
+ */
+@Entity
+@Table(name = "app_knowledge")
+@TypeDef(name = "JsonDataUserType", typeClass = JsonDataUserType.class)
+@Data
+public class Knowledge {
+    @Id
+    @GeneratedValue(generator = "knowledge_id")
+    @GenericGenerator(name = "knowledge_id", strategy = "uuid")
+    private String knowledgeId;
+
+    //职业id
+    private String professionId;
+
+    private String knowledgeName;
+
+    @Column(columnDefinition = "jsonb")
+    @Type(type = "JsonDataUserType")
+    @JsonIgnore
+    private String tag;
+
+    @Transient
+    private List<String> tags;
+
+    private boolean knowledgeExam;
+
+    private String icon;
+
+    private String exam;
+
+    private String iconFilename;
+
+    private String examFilename;
+
+    private String remark;
+    //知识点对应的 内容id
+    @Column(columnDefinition = "jsonb")
+    @Type(type = "JsonDataUserType")
+    @JsonIgnore
+    private String contents;
+
+    @Transient
+    private KnowledgeContent knowledgeContent;
+
+    @JoinTable(name = "app_knowledge_prerequisite", joinColumns = {
+            @JoinColumn(name = "knowledgeId") },
+            inverseJoinColumns = { @JoinColumn(name = "prerequisiteId")
+    })
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Knowledge> prerequisites;
+
+    @Column(columnDefinition = "jsonb")
+    @Type(type = "JsonDataUserType")
+    @JsonIgnore
+    private String prerequisiteIds;
+
+    @Transient
+    private List<String> prereqs;
+}

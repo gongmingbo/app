@@ -1,0 +1,45 @@
+package app.apiservice;
+
+
+import app.entity.user.User;
+import app.packet.error.ErrorEnum;
+import app.packet.request.CommonPacket;
+import app.packet.response.CommonMessage;
+import app.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+/**
+ * 个人中心
+ */
+
+@RestController
+@ControllerAdvice
+@RequestMapping(path = "/api")
+public class PersonCenter {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass()) ;
+
+    @Autowired
+    private UserService userService;
+
+    @RequestMapping(path="/personcenter",method= RequestMethod.POST)
+    public CommonMessage personcenter(@RequestBody CommonPacket packet){
+        logger.info("userId is: " + packet.getUsername());
+        logger.info("deviceId is: " + packet.getDeviceId());
+        logger.info("token is: " + packet.getToken());
+        User user=userService.getUser(packet.getUsername());
+        CommonMessage message;
+        if(user==null){
+            message = CommonMessage.failure(ErrorEnum.COURSE_INVALID);
+        }else{
+            message=CommonMessage.success(user,null);
+        }
+        return message;
+}
+    @ExceptionHandler(value = Exception.class)
+    public CommonMessage errorHandler(Exception ex) {
+        return CommonMessage.failure(ErrorEnum.SERVER_INTERNAL_ERROR);
+    }
+}

@@ -1,0 +1,26 @@
+package app.service;
+
+import app.entity.user.User;
+import app.packet.request.CommonPacket;
+
+import java.io.UnsupportedEncodingException;
+
+public interface UserService {
+    User getUser(String username);
+
+    User getUserByTelephone(String mobile);
+
+    boolean validatePassword(String username, String password);
+    String getToken(String username, String deviceId);
+
+
+    String validateAndRefreshToken(String username, String deviceId, String token);
+
+    String validateAndRefreshToken(CommonPacket packet);
+
+    boolean valid(String user, String messageId, String code) throws UnsupportedEncodingException;
+
+    String sendSmsCode(String mobile) throws UnsupportedEncodingException;
+
+    void save(String mobile, String password);
+}

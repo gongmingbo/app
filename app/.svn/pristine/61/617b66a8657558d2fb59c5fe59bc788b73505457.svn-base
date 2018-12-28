@@ -1,0 +1,175 @@
+package app.bankview;
+
+import app.entity.content.IconManagement;
+import app.entity.content.Tags;
+import app.entity.json.ContentBaseView;
+import app.entity.json.CourseBaseView;
+import app.entity.json.KnowledgeContent;
+import app.entity.smart.CourseBaseInfo;
+import app.entity.smart.Knowledge;
+import app.entity.smart.ProfessionClassification;
+import app.packet.error.ErrorEnum;
+import app.packet.response.CommonMessage;
+import app.repository.IconRepository;
+import app.repository.ProfessionRepository;
+import app.repository.TagRepository;
+import app.service.CareerService;
+import app.service.CourseService;
+import com.google.gson.Gson;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Controller
+@ControllerAdvice
+@RequestMapping(path = "/web")
+public class KnowledgeController {
+
+    @Autowired
+    private CareerService careerService;
+    @Autowired
+    private ProfessionRepository professionRepository;
+    @Autowired
+    private CourseService courseService;
+    @Autowired
+    private TagRepository tagRepository;
+    @Autowired
+    private IconRepository iconRepository;
+    @RequestMapping(path = "/pro/{pro_id}/knowledge", method = RequestMethod.GET)
+    String knowledgePage(@PathVariable("pro_id") String proId, Model model){
+        ProfessionClassification professionClassification = professionRepository.findOne(proId);
+        List<Knowledge> knowledgeList = careerService.getKnowledgeOfProfession(proId);
+        int enery=0;
+        for(Knowledge k:knowledgeList){
+            String content=k.getContents();
+            Gson gson=new Gson();
+            KnowledgeContent knowledgeContent=gson.fromJson(content,KnowledgeContent.class);
+            int contentEnergy=knowledgeContent.getContents().stream().collect(Collectors.summingInt(ContentBaseView::getEnergy));
+            int courseEnergy= knowledgeContent.getCourses().stream().collect(Collectors.summingInt(CourseBaseView::getEnergy));
+             enery+=contentEnergy+courseEnergy;
+        }
+        professionClassification.setEnergy(enery);
+        model.addAttribute("knowledgeList", knowledgeList);
+        model.addAttribute("pro", professionClassification);
+        return "profession_more";
+    }
+
+    @RequestMapping(path = "/pro/{pro_id}/knowledge", method = RequestMethod.GET, consumes = "application/json")
+    @ResponseBody
+    CommonMessage knowledges(@PathVariable("pro_id") String proId){
+        List<Knowledge> knowledgeList = careerService.getKnowledgeOfProfession(proId);
+        return CommonMessage.success(knowledgeList);
+    }
+//编辑
+    @RequestMapping(path = "/knowledge/{kn_id}", method = RequestMethod.GET)
+    String fetch(@PathVariable("kn_id") String knowId, Model model){
+        Knowledge cur = careerService.getKnowledge(knowId);
+        List<CourseBaseInfo> courses = courseService.getAllElective();
+        List<ContentBaseView> contents = courseService.getAllContentBaseView();
+        List<Knowledge> knowledge = careerService.getOtherKnowledgeOfProfession(cur.getProfessionId(), knowId);
+        List<Tags> tags = tagRepository.findAll();
+
+        List<IconManagement>icons=iconRepository.findAll();
+//        model.addAttribute("courses", gson.toJson(courses.stream().collect(Collectors.groupingBy(CourseBaseInfo::getId))));
+//        model.addAttribute("contents", gson.toJson(contents.stream().collect(Collectors.groupingBy(ContentBaseView::getId))));
+        ProfessionClassification pro = professionRepository.findOne(cur.getProfessionId());
+        model.addAttribute("pro", pro);
+        model.addAttribute("operation", "modify");
+
+        model.addAttribute("courses", courses);
+        model.addAttribute("contents", contents);
+        model.addAttribute("knowledge", knowledge);
+        model.addAttribute("knowledgeIds", cur.getPrereqs());
+        model.addAttribute("tags", tags);
+        model.addAttribute("tagList",cur.getTags());
+        model.addAttribute("icons", icons);
+        model.addAttribute("iconImage", cur.getIcon());
+//        model.addAttribute("knowledgeContent", cur.getKnowledgeContent());
+        model.addAttribute("kn", cur);
+        return "profession_more_add";
+    }
+
+    @RequestMapping(path = "/knowledge/{kn_id}", method = RequestMethod.GET, consumes = "application/json")
+    @ResponseBody
+    CommonMessage fetch(@PathVariable("kn_id") String knowId){
+        Knowledge knowledge = careerService.getKnowledge(knowId);
+        return CommonMessage.success(knowledge);
+    }
+
+
+    @RequestMapping(path = "/knowledge/{kn_id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    CommonMessage delete(@PathVariable("kn_id") String knowId){
+        int ret = careerService.deleteKnowledge(knowId);
+        switch (ret){
+            case 0:
+                return CommonMessage.success();
+            case 1:
+                return CommonMessage.failure(ErrorEnum.OBJECT_ALREADY_IN_USE);
+            default:
+                return CommonMessage.success();
+        }
+    }
+//baiinjizishidian
+    @RequestMapping(path = "/knowledge/{kn_id}", method = RequestMethod.POST)
+    @ResponseBody
+    CommonMessage modify(@PathVariable("kn_id") String knowId, @RequestBody Knowledge knowledge){
+        Knowledge cur = careerService.getKnowledge(knowId);
+        String professionId=cur.getProfessionId();
+        knowledge.setProfessionId(professionId);
+        BeanUtils.copyProperties(knowledge, cur);
+        cur.setKnowledgeId(knowId);
+        careerService.saveKnowledge(cur);
+        return CommonMessage.success();
+    }
+//zengjianzishidian
+    @RequestMapping(path = "/pro/{pro_id}/knowledge", method = RequestMethod.PUT)
+    @ResponseBody
+    CommonMessage add( @PathVariable("pro_id") String proId, @RequestBody Knowledge knowledge){
+        knowledge.setProfessionId(proId);
+        careerService.saveKnowledge(knowledge);
+        return CommonMessage.success();
+    }
+
+    @RequestMapping(path = "/pro/{pro_id}/knowledge/add", method = RequestMethod.GET)
+    String addPage( @PathVariable("pro_id") String proId, Model model){
+        Gson gson = new Gson();
+        ProfessionClassification pro = professionRepository.findOne(proId);
+        model.addAttribute("pro", pro);
+        model.addAttribute("operation", "add");
+        List<CourseBaseInfo> courses = courseService.getAllElective();
+        List<ContentBaseView> contents = courseService.getAllContentBaseView();
+        List<Knowledge> knowledge = careerService.getKnowledgeOfProfession(proId);
+        List<Tags> tags = tagRepository.findAll();
+
+        List<IconManagement>icons=iconRepository.findAll();
+//        model.addAttribute("courses", gson.toJson(courses.stream().collect(Collectors.groupingBy(CourseBaseInfo::getId))));
+//        model.addAttribute("contents", gson.toJson(contents.stream().collect(Collectors.groupingBy(ContentBaseView::getId))));
+
+        model.addAttribute("courses", courses);
+        model.addAttribute("contents", contents);
+        model.addAttribute("knowledge", knowledge);
+        model.addAttribute("tags", tags);
+        model.addAttribute("icons", icons);
+        model.addAttribute("tagList",Collections.EMPTY_LIST);
+        model.addAttribute("iconImage", null);
+        model.addAttribute("knowledgeIds", Collections.EMPTY_LIST);
+
+        Knowledge kn = new Knowledge();
+        kn.setKnowledgeContent(new KnowledgeContent(Collections.EMPTY_LIST, Collections.EMPTY_LIST));
+        model.addAttribute("kn", kn);
+        return "profession_more_add";
+    }
+
+    @ExceptionHandler(value = Exception.class)
+    public CommonMessage errorHandler(Exception ex) {
+        ex.printStackTrace();
+        return CommonMessage.failure(ErrorEnum.SERVER_INTERNAL_ERROR);
+    }
+}

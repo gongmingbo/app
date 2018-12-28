@@ -1,0 +1,265 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>后台管理</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/need.css">
+    <script type="text/javascript" charset="utf-8" src="/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/ueditor.all.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/lang/zh-cn/zh-cn.js"></script>
+    <script type="text/javascript" src="/jquery-3.3.1.min.js"></script>
+    <style type="text/css">
+        input[type="text"] {
+            width: 220px;
+            height: 30px;
+        }
+
+        .rows_cols {
+            margin-bottom: 20px;
+        }
+
+        select {
+            width: 120px;
+            height: 30px;
+        }
+
+        #editor {
+            display: none;
+        }
+
+        .button_style {
+            width: 44px;
+            height: 20px;
+            background: rgba(52, 61, 95, 1);
+            border-radius: 4px;
+            color: #fff;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        .button_style_big{
+            width: 80px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            background: #fff;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .margin{
+            margin-left: 57%;
+        }
+          body{
+              color: black;
+          }
+        .font_color{
+            color: white;
+        }
+        #editor{
+            color: black;
+        }
+    </style>
+</head>
+<body>
+<div class="ican-header font_color">
+    <h1>
+        <img src="/imgs/logo.png" alt="">
+        知我
+    </h1>
+    <ul>
+        <li>必修课程录入</li>
+        <li class="active">选修课程录入</li>
+        <li>推荐学习录入</li>
+        <li>职业选择</li>
+    </ul>
+    <div class="login-state">
+        <span>小张</span>
+        <span>|</span>
+        <span>退出</span>
+    </div>
+</div>
+<div style="padding-left: 20%;margin-bottom: 5%;" class="font_color">
+    <h1>推介录入</h1>
+    <form action="" method="post" ENCTYPE="multipart/form-data" id="form_data">
+        <div class="rows_cols">
+            <span>标题：</span>
+            <input class="required" type="text" name="title" th:value="${baseContent.contentTitle}"/>
+            <input type="hidden"  th:value="${baseContent.contentTitle}">
+        </div>
+        <div class="rows_cols">
+            <span>标签：</span>
+            <input  class="required" type="text" name="tag"/>
+        </div>
+        <div class="rows_cols">
+            <span>描述：</span>
+            <!--  <input type="text" name="description" th:value="${baseContent.contentDescription}"/>-->
+            <textarea name="description" th:text="${baseContent.contentDescription}" rows="5" cols="90"></textarea>
+        </div>
+        <div class="rows_cols">
+            <span>类型：</span>
+            <select  class="required" name="type">
+                <option value="">--请选择--</option>
+                <option value="article">文章</option>
+                <option value="video">视频</option>
+            </select>
+            <span>附件：</span>
+            <input type="file" name="file" multiple="multiple"/>
+        </div>
+        <div class="rows_cols">
+            <ul class="attachments">
+                <!--<li>
+                    <span>ssss.mp4</span>
+                    <button type="button">删除</button>
+                    <input type="hidden" value="">
+                </li>-->
+            </ul>
+        </div>
+        <script id="editor" type="text/plain" style="width:1024px;height:500px;"></script>
+        <button class="button_style_big" type="button" onClick="javascript :history.back(-1);">取消</button>
+        <button class="button_style_big margin" type="button" onclick="submitAction();">提交</button>
+        <input type="hidden" name="id" th:value="${baseContent.id}">
+        <input type="hidden" name="professionId" th:value="${professionId}">
+    </form>
+</div>
+<script type="text/javascript" th:inline="javascript">
+    var ue = UE.getEditor('editor');
+    function submitAction() {
+        var formData = new FormData($("#form_data")[0]);
+        formData.append("body", ue.getContent());
+        var url = "/web/addcontent"
+        if ($("select[name='type']").val() == 'video') {
+            if ($("input[name='file']").val().length == 0) {
+                alert("视频类型需要上传视频");
+                return;
+            }
+        }
+        var booleam=true;
+        $(".required").each(function () {
+            if (!$(this).val()){
+                booleam=false;
+            }
+        })
+        if(!booleam){
+            alert("标题、标签、类型为必填字段")
+           return;
+        }
+       var resl=  distinctByTitle();
+        if (resl==true){
+            alert("该标题已经存在")
+            return;
+        }
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: formData,
+            dataType: 'json',
+            async: false,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                if (data.id) {
+                    alert("保存成功")
+                    window.history.back(-1)
+                } else {
+                    alert("保存失败")
+                }
+            }
+        });
+    }
+
+    var c = [[${baseContent}]];
+    console.log(c)
+    if (c.contentType == 'article') {
+        $("#editor").show();
+    }
+    $("select[name='type'] option").each(function () {
+        if (c.contentType==$(this).attr("value")){
+            $(this).attr("selected","selected")
+        }
+    })
+    if (c.id) {
+        ue.ready(function () {
+            ue.setContent(c.contenBody);
+            var tag = c.contentTag
+            var arr = new Array()
+            tag = eval("(" + tag + ")")
+            for (n in tag) {
+                arr.push(tag[n])
+            }
+            $("input[name='tag']").val(arr.join(","))
+            var attachments = c.attachments;
+            for (k in attachments) {
+                var attachment = attachments[k];
+                var li = '<li>' +
+                    '<span>' + attachment.attachmentName + '</span>' +
+                    ' <button type="button" class="delete button_style">删除</button>' +
+                    '<input type="hidden" value="' + attachment.id + '">' +
+                    '</li>';
+                $(".attachments").append($(li))
+            }
+
+        });
+    }
+    $("select[name='type']").change(function () {
+        if ("video" == $(this).val() || $(this).val() == "") {
+            $("#editor").hide();
+            ue.setContent("");
+        } else {
+            $("#editor").show();
+        }
+    })
+    $(".attachments").on("click", ".delete", function () {
+        var url = "/web/delete/attachment"
+        var data = {id: $(this).next().val()}
+        var result = ajax(url, data)
+        console.log(result)
+        if (result.id) {
+            $(this).parent().remove()
+        } else {
+            alert("删除失败")
+        }
+
+    })
+    function distinctByTitle() {
+        var nowTitle=$("input[name='title']").val()
+        var ogTitle=$("input[name='title']").next().val()
+        var url="/web/distinct"
+        var data={title:nowTitle}
+        var b =false;
+        if (!ogTitle||(ogTitle&&nowTitle!=ogTitle)){
+            var result = ajax(url,data)
+            b=result.state;
+        }
+        return b;
+    }
+
+    UE.Editor.prototype._bkGetActionUrl = UE.Editor.prototype.getActionUrl;
+    UE.Editor.prototype.getActionUrl = function (action) {
+        if (action == 'uploadimage' || action == 'uploadscrawl' || action == 'uploadimage') {//图片
+            return "/web/uploadimages";
+        } else if (action == 'uploadvideo') {//视频
+            return "/web/uploadvideo";
+        } else if (action == 'uploadfile') {//附件
+            return "/web/uploadfile";
+        } else {
+            return this._bkGetActionUrl.call(this, action);
+        }
+    }
+    function ajax(url, data) {
+        var result;
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: data,
+            dataType: "json",
+            async: false,
+            success: function (data) {
+                result = data;
+            }
+        });
+        return result;
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>登陆</title>
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/changePwd.css">
+    <script type="text/javascript" src="/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+  <div class="ican-wrapper">
+    <div class="box">
+        <div class="header">
+            <h3><img src="/imgs/logo.png"></h3>
+           <a href="/web/recommend"> <span>返回首页</span></a>
+        </div>
+        <div class="content">
+          <h3>修改密码</h3>
+          <form action="">
+            <div class="section first">
+                <label for="">原密码:</label>
+                <input type="password">
+            </div>
+            <div class="section">
+                <label for="">新密码:</label>
+                <input type="password">
+            </div>
+            <div class="section">
+                <label for="">确认密码:</label>
+                <input type="password">
+            </div>
+            <input type="button" value="取消" class="input-cancel">
+            <input type="button" value="确认" class="input-sure">
+          </form>
+        </div>
+    </div>
+  </div>
+  <script>
+    
+  </script>
+</body>
+</html>

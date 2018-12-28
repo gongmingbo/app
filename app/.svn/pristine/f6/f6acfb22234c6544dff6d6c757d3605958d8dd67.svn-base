@@ -1,0 +1,92 @@
+package app.entity.smart;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.TypeDef;
+
+import app.config.JsonDataUserType;
+/**
+ * 职业分类表
+ * @author gongmingbo
+ *
+ */
+@Entity
+@Table(name="app_profession_classification")
+public class ProfessionClassification {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	private String  professionId;
+	private String 	professionName;
+	private String 	professionDescription;
+	private String 	futureProspects;
+	private String 	industry;
+	private String 	salary;
+	private String 	parentId;
+	private String 	remark;
+	@Override
+	public String toString() {
+		return "ProfessionClassification [id=" + id + ", professionId=" + professionId + ", professionName="
+				+ professionName + ", professionDescription=" + professionDescription + ", futureProspects="
+				+ futureProspects + ", industry=" + industry + ", salary=" + salary + ", ParentId=" + parentId
+				+ ", remark=" + remark + "]";
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getProfessionId() {
+		return professionId;
+	}
+	public void setProfessionId(String professionId) {
+		this.professionId = professionId;
+	}
+	public String getProfessionName() {
+		return professionName;
+	}
+	public void setProfessionName(String professionName) {
+		this.professionName = professionName;
+	}
+	public String getProfessionDescription() {
+		return professionDescription;
+	}
+	public void setProfessionDescription(String professionDescription) {
+		this.professionDescription = professionDescription;
+	}
+	public String getFutureProspects() {
+		return futureProspects;
+	}
+	public void setFutureProspects(String futureProspects) {
+		this.futureProspects = futureProspects;
+	}
+	public String getIndustry() {
+		return industry;
+	}
+	public void setIndustry(String industry) {
+		this.industry = industry;
+	}
+	public String getSalary() {
+		return salary;
+	}
+	public void setSalary(String salary) {
+		this.salary = salary;
+	}
+	public String getParentId() {
+		return parentId;
+	}
+	public void setParentId(String parentId) {
+		parentId = parentId;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+}

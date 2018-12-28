@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>职业选择</title>
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/need.css">
+    <script src="/jquery-3.3.1.min.js"></script>
+    <style>
+        .more a {
+            color: #13B5B1;
+            text-decoration: none;
+        }
+        .hide{
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+<div th:replace="navi :: myNavi(${dir})"></div>
+<div class="ican-select" style="display: none;">
+    <section class="choose" id="choose">
+        <label for="schools">学校 :</label>
+        <input type="text" id="chooseItem">
+        <div id="schools" class="dataWrapper">
+            <p>支持中文/拼音/简拼输入</p>
+            <ul>
+                <li class="active">常用</li>
+                <li>A</li>
+                <li>B</li>
+                <li>C</li>
+                <li>D</li>
+                <li>E</li>
+                <li>F</li>
+                <li>G</li>
+                <li>H</li>
+                <li>I</li>
+                <li>J</li>
+                <li>K</li>
+                <li>L</li>
+                <li>M</li>
+                <li>N</li>
+                <li>O</li>
+                <li>P</li>
+                <li>Q</li>
+                <li>R</li>
+                <li>S</li>
+                <li>T</li>
+                <li>U</li>
+                <li>V</li>
+                <li>W</li>
+                <li>X</li>
+                <li>Y</li>
+                <li>Z</li>
+            </ul>
+            <div class="school-list">
+                <h3>A</h3>
+                <div class="school-names">
+                    <span>安庆大学</span>
+                    <span>澳门f大学</span>
+                    <span>澳门大学</span>
+                    <span>澳门大dfdf学</span>
+                    <span>澳门大学</span>
+                    <span>澳门大学sfsdfsdf</span>
+                    <span>澳门大学</span>
+                    <span>澳门大学ffdf</span>
+                    <span>澳门大学</span>
+                    <span>澳门大学</span>
+                    <span>澳门大学</span>
+                    <span>澳门大dfd学</span>
+                    <span>澳门大学</span>
+                    <span>澳门大学</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <label for="institute">院系 :</label>
+        <select id="institute">
+            <option value="">计算机学院</option>
+            <option value="">建筑学院</option>
+            <option value="">物理学院</option>
+        </select>
+    </section>
+    <section>
+        <label for="specialty">专业 :</label>
+        <select id="specialty">
+            <option value="">软件工程</option>
+            <option value="">数学</option>
+            <option value="">物理</option>
+        </select>
+    </section>
+</div>
+<div class="ican-cards">
+    <h3>推荐职位</h3>
+    <div class="cards-box">
+        <section class="addCard"></section>
+        <section th:each="pro: ${pros}" th:id="${pro.professionId}" th:style="${pro.active} ? 'border-color: #13B5B1' : 'border-color:red'">
+            <div class="top">
+                <p th:text="${pro.professionName}" class="career_name"></p>
+                <img src="/imgs/change.png" alt="" class="imgEditor">
+                <img src="/imgs/delete.png" alt="" class="imgDelete">
+            </div>
+            <div class="content">
+                <p>
+                    <span>知识体系:</span>
+                    <span th:text="${pro.knowledgeNumber} + '个'" class="knowledge_number"></span>
+                </p>
+                <p>
+                    <span>能量值:</span>
+                    <span th:text="${pro.energy} + 'J'" class="career_energy"></span>
+                </p>
+                <p th:if="${pro.active}">
+                    <button class="deactivate">禁用</button>
+                    <button class="activate hide">启用</button>
+                </p>
+                <p th:if="${!pro.active}">
+                    <button class="deactivate hide">禁用</button>
+                    <button class="activate">启用</button>
+                </p>
+            </div>
+            <div class="more"><a th:href="'/web/pro/' + ${pro.professionId} + '/knowledge'">查看更多</a></div>
+        </section>
+    </div>
+</div>
+<div class="ican-modal" id="deleteModal">
+    <div class="delete-box">
+        <h3>确定删除该资料？</h3>
+        <div><span>职位名称:</span>
+            <span id="pro_name">产品经理</span>
+        </div>
+        <button class="deleteModalCancl">取消</button>
+        <button class="confirm">确定</button>
+    </div>
+</div>
+<div class="ican-modal" id="editorModal">
+    <form enctype="application/x-www-form-urlencoded">
+        <h3></h3>
+        <section>
+            <label for="">职位名称:</label>
+            <input type="text" name="professionName" id="professionName">
+        </section>
+        <!--  <section>
+            <label for="">目标大纲:</label>
+            <input type="text" name="knowledgeNumber" id="knowledgeNumber">
+          </section>
+          <section>
+            <label for="">目标能量值:</label>
+            <input type="text" name="energy" id="energy">
+          </section>-->
+        <button type="button" class="cancel">取消</button>
+        <button type="button" class="confirm">确定</button>
+    </form>
+</div>
+<script>
+    var todo;
+    var id;
+
+    //初始化choose组件
+    function initChoose() {
+        document.querySelector('#choose').addEventListener("click", function (e) {
+            if (e.target.nodeName === "INPUT") {
+                document.querySelector('.dataWrapper').style.display = "block"
+            }
+            if (e.target.nodeName === "LI") {
+                document.querySelector('#choose h3').innerText = e.target.innerText
+                Array.prototype.slice.apply(e.target.parentNode.children).forEach(element => {
+                    element.classList.remove('active')
+                });
+                e.target.classList.add('active')
+            }
+            if (e.target.nodeName === "SPAN") {
+                document.querySelector('.dataWrapper').style.display = "none"
+                document.querySelector('#chooseItem').value = e.target.innerText
+            }
+        })
+    }
+
+    //监听卡片点击事件
+    function cardClick() {
+        document.querySelector('.cards-box').addEventListener('click', function (e) {
+            //删除卡片
+            if (e.target.nodeName === "IMG" && e.target.className === "imgDelete") {
+                $('#pro_name').text(e.target.previousElementSibling.previousElementSibling.innerText)
+                document.querySelector('#deleteModal').style.display = "block"
+                todo = 'delete'
+                id = e.target.parentElement.parentElement.getAttribute('id')
+            }
+            //编辑卡片
+            if (e.target.nodeName === "IMG" && e.target.className === "imgEditor") {
+                clear()
+                document.querySelector('#editorModal').style.display = "block"
+                document.querySelector('#editorModal h3').innerText = "编辑职位"
+                id = e.target.parentElement.parentElement.getAttribute('id')
+                var sec = $('#' + id)
+                var name = sec.find('.career_name').text()
+                var number = sec.find('.knowledge_number').text().replace("个", "");
+                var energy = sec.find('.career_energy').text().replace("J", "");
+                $('#professionName').val(name);
+                $('#knowledgeNumber').val(number);
+                $('#energy').val(energy);
+                todo = 'edit'
+            }
+            //添加卡片
+            if (e.target.nodeName === "SECTION" && e.target.className === "addCard") {
+                clear()
+                document.querySelector('#editorModal').style.display = "block"
+                document.querySelector('#editorModal h3').innerText = "添加职位"
+                todo = 'add'
+            }
+        })
+    }
+
+    function clear() {
+        $('form').find("input").each(function (i, ele) {
+            $(ele).val("");
+        })
+    }
+
+    function suc(res) {
+        if (res.success) {
+            window.location.reload()
+        } else {
+            alert(res.errorMessage)
+        }
+    }
+
+    $('.cancel').on('click', function () {
+        document.querySelector('#editorModal').style.display = "none"
+        document.querySelector('#deleteModal').style.display = "none"
+    })
+    $(".deleteModalCancl").on('click', function () {
+        //document.querySelector('#editorModal').style.display = "none"
+        document.querySelector('#deleteModal').style.display = "none"
+    })
+    $('.confirm').on('click', function () {
+        var fd = {}
+        $('form').find("input").each(function (i, ele) {
+            fd[$(ele).attr('name')] = $(ele).val();
+        })
+
+        switch (todo) {
+            case 'add':
+                $.ajax({
+                    url: "/web/pro",
+                    type: "PUT",
+                    data: fd,
+                    processData: true,
+//                 contentType: false,
+                    success: suc
+                });
+                break;
+            case 'delete':
+                $.ajax({
+                    url: "/web/pro/" + id,
+                    type: "DELETE",
+                    processData: false,
+                    success: suc
+                });
+                break;
+            case 'edit':
+                $.ajax({
+                    url: "/web/pro/" + id,
+                    type: "POST",
+                    data: fd,
+                    processData: true,
+//                 contentType: false,
+                    success: suc
+                });
+                break;
+            default:
+                return
+        }
+    });
+    $(".cards-box").on('click', '.activate', function () {
+        var ac = $(this);
+        var dea = ac.prev();
+        var sec = ac.parents('section');
+        var id = sec.attr('id');
+
+        $.post("/web/pro/activate", {
+            id, activate: true
+        }, function (res) {
+            if (!res.success) {
+                alert(res.errorMessage)
+            } else {
+                dea.removeClass('hide');
+                ac.addClass('hide');
+                sec.css("border-color", "#13B5B1");
+            }
+        })
+    });
+    $(".cards-box").on('click', '.deactivate', function () {
+        var dea = $(this);
+        var ac = dea.next();
+        var sec = ac.parents('section');
+        var id = sec.attr('id');
+
+        $.post("/web/pro/activate", {
+            id, activate: false
+        }, function (res) {
+            if (!res.success) {
+                alert(res.errorMessage)
+            } else {
+                ac.removeClass('hide');
+                dea.addClass('hide');
+                sec.css("border-color", "red");
+            }
+        })
+    });
+    window.onload = function () {
+        initChoose()
+        cardClick()
+    }
+</script>
+</body>
+</html>

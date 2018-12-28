@@ -1,0 +1,53 @@
+package app.apiservice;
+
+import app.entity.content.BaseContent;
+import app.entity.content.Comment;
+import app.packet.error.ErrorEnum;
+import app.packet.request.CommonPacket;
+import app.packet.response.CommonMessage;
+import app.repository.CommentRepository;
+import app.repository.ContentRepository;
+import app.repository.LearntRepository;
+import app.service.WisdomTreeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@RestController
+@ControllerAdvice
+@RequestMapping(path = "/api/content")
+public class Content {
+    @Autowired
+    private ContentRepository contentRepository;
+
+    @Autowired
+    private CommentRepository commentRepository;
+
+    @Autowired
+    private LearntRepository learntRepository;
+
+    @Autowired
+    private WisdomTreeService wisdomTreeService;
+
+    @RequestMapping(path = "/fetch", method = RequestMethod.POST)
+    @Transactional
+    public CommonMessage syllabus(@RequestBody CommonPacket<String> packet) {
+        String contentId = packet.getData();
+        BaseContent content = contentRepository.findOne(contentId);
+        if (content == null){
+            return CommonMessage.failure(ErrorEnum.INVALID_PARAM);
+        }
+        content.readIncrease();
+        contentRepository.save(content);
+        List<Comment> comments = commentRepository.findByResource(content);
+        Map<String, Object> param = new HashMap<>();
+        param.put("content", content);
+        param.put("comments", comments);
+        wisdomTreeService.learn(content.getResourcesId(), packet.getUsername(), content.getContentType());
+        return CommonMessage.success(param);
+    }
+}

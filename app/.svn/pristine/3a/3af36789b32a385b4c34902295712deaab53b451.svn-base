@@ -1,0 +1,19 @@
+package app.repository;
+
+import app.entity.content.BaseContent;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import javax.print.DocFlavor;
+import java.util.List;
+
+/**
+ * Created by gongmingbo on 2018/11/12.
+ */
+@Repository
+public interface ContentRepository extends JpaRepository<BaseContent,Long>{
+    Page<BaseContent> findAll(Pageable pageable);
+    Page<BaseContent> findByProfessionIdAndState(Pageable pageable,String professionId,String state);
+}

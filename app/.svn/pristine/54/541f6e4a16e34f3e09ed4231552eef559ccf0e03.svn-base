@@ -1,0 +1,334 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>后台管理</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/need.css">
+    <link rel="stylesheet" href="/chosen/chosen.css">
+    <script type="text/javascript" charset="utf-8" src="/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/ueditor.all.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/lang/zh-cn/zh-cn.js"></script>
+    <script type="text/javascript" src="/jquery-3.3.1.min.js"></script>
+    <script src="/chosen/chosen.jquery.js"></script>
+
+    <style type="text/css">
+        input[type="text"] {
+            width: 650px;
+            height: 30px;
+        }
+        .rows_cols {
+            margin-bottom: 20px;
+        }
+        select {
+            width: 120px;
+            height: 30px;
+        }
+        #editor {
+            display: none;
+        }
+        .button_style {
+            width: 44px;
+            height: 20px;
+            background: rgba(52, 61, 95, 1);
+            border-radius: 4px;
+            color: #fff;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        .button_style_big {
+            width: 80px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            background: #fff;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .margin {
+            margin-left: 860px;
+        }
+        body {
+            color: black;
+        }
+        .font_color {
+            color: white;
+        }
+        #editor {
+            color: black;
+        }
+        .attchent{
+            display: none;
+        }
+        input[type="file"] {
+            text-indent: 0;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="navi :: myNavi(${dir})"></div>
+<div style="padding-left: 20%;margin-bottom: 5%;" class="font_color">
+    <div class="top" style=" width: 1000px;margin-top: 20px; margin-bottom: 20px; border-bottom: 1px solid #333C5B; padding-bottom: 10px;">
+    <a style= "text-decoration:none;color: white" href="/web/recommend"> <span onclick="javascript:window.history.back()" style="cursor: pointer;">
+        <<返回推荐录入</span></a>
+    </div>
+    <div style="color: #13b5b1;font-size: 18px;margin-bottom: 40px;">
+        <span style="margin-right: 10px;">|</span>
+        <span class="title"></span>
+    </div>
+    <form action="" method="post" ENCTYPE="multipart/form-data" id="form_data">
+        <div class="rows_cols">
+            <span class="span_must">*</span>
+            <span>标题：</span>
+            <input class="required" type="text" name="title" th:value="${baseContent.contentTitle}"/>
+            <input type="hidden" th:value="${baseContent.contentTitle}">
+        </div>
+        <div class="rows_cols">
+            <span class="span_must">*</span>
+            <span>标签：</span>
+           <!-- <input class="required" type="text" name="tag" placeholder="多个标签用逗号（,）隔开"/>-->
+            <select class="chosen-select required" multiple name="tag" data-placeholder="选择标签" style="margin-left: 5px;">
+                <option th:each="tag : ${tagsList}" th:value="${tag.tagName}"
+                         th:text="${tag.tagName}" th:selected="${#lists.contains(tags,tag.tagName)}"></option>
+            </select>
+        </div>
+        <div class="rows_cols">
+            <span class="span_must">*</span>
+            <span>启用评论：</span>
+            <input value="on"  type="radio" name="comment" checked/>是
+            <input value="not"  type="radio" name="comment"/>否
+        </div>
+
+        <!--<div class="rows_cols" style="display: none;">
+            <span>描述：</span>
+            &lt;!&ndash;  <input type="text" name="description" th:value="${baseContent.contentDescription}"/>&ndash;&gt;
+            <textarea name="description" th:text="${baseContent.contentDescription}" rows="5" cols="90" placeholder="100字以内"></textarea>
+        </div>-->
+        <div class="rows_cols">
+            <span class="span_must">*</span>
+            <span>类型：</span>
+            <select class="required" name="type">
+                <option value="">--请选择--</option>
+                <option value="article">文章</option>
+                <option value="video">视频</option>
+            </select>
+            <span style="margin-left: 40px;" class="span_must attchent">*</span>
+            <span class="attchent">附件：</span>
+             <input class="attchent" type="file" name="file"/>
+        </div>
+        <div class="rows_cols">
+            <ul class="attachments"></ul>
+        </div>
+        <script id="editor" type="text/plain" style="width:1024px;height:500px;"></script>
+        <button class="button_style_big" type="button" onClick="javascript :history.back(-1);">取消</button>
+        <button class="button_style_big margin" type="button" onclick="submitAction();">提交</button>
+        <input type="hidden" name="id" th:value="${baseContent.id}">
+        <input type="hidden" name="professionId" th:value="${professionId}">
+    </form>
+</div>
+<script type="text/javascript" th:inline="javascript">
+    $(function () {
+        $('.chosen-select').chosen({no_results_text: "还没有这个标签:", width: "650px"});
+    })
+    var ue = UE.getEditor('editor');
+    //常用视频格式
+    var videoType= [ ".avi", ".rm", ".rmvb",  ".mkv", ".mp4",  ".wmv", ".3gp"];
+    function submitAction() {
+        var formData = new FormData($("#form_data")[0]);
+        var ta=$("select[name='tag']").val().join(",")
+        formData.append("body", ue.getContent());
+        formData.append("ta",ta)
+        var url = "/web/addcontent"
+        if ($("select[name='type']").val() == 'video') {
+            if($(".attachments li").length>0 && $("input[name='file']").val().length >0 ){
+                alert("视频只能上传一个");
+                return;
+            }else if ($(".attachments li").length==0 && $("input[name='file']").val().length == 0){
+                alert("视频类型需要上传视频");
+                return;
+            }
+            if ($(".attachments li").length<1 && $("input[name='file']").val()){
+                var name=$("input[name='file']").val()
+                var suffix=name.substring(name.lastIndexOf("."))
+                if ($.inArray(suffix,videoType)==-1){
+                    alert("请上传正确的视频格式")
+                    return
+                }
+            }
+           $("#module").show();
+           setInterval("clock()",1000);
+        }else if (!$("select[name='type']").val()){
+             alert("请选择类型")
+            return
+        }else {
+            if (!ue.getContent()){
+                alert("请输入正文内容")
+                return
+            }
+        }
+
+        var booleam = true;
+        $(".required").each(function () {
+            if (!$(this).val()) {
+                booleam = false;
+            }
+        })
+        if (!booleam) {
+            alert("标题、标签、类型为必填字段")
+            return;
+        }
+        var resl = distinctByTitle();
+        if (resl == true) {
+            alert("该标题已经存在")
+            return;
+        }
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: formData,
+            dataType: 'json',
+            async: true,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                if (data.id) {
+                   // alert("保存成功")
+                    $("#module").hide()
+                    window.history.back(-1)
+                } else {
+                    $("#module").hide()
+                    alert("保存失败")
+                }
+            }
+        });
+    }
+
+    var c = [[${baseContent}]];
+    console.log(c)
+    if (c.contentType == 'article') {
+        $("#editor").show();
+        $("input[name='file']").attr("multiple","multiple")
+    }else if (c.contentType == 'video'){
+       $(".attchent").show();
+    }
+
+    $("select[name='type'] option").each(function () {
+        if (c.contentType == $(this).attr("value")) {
+            $(this).attr("selected", "selected")
+        }
+    })
+    if (c.id) {
+        ue.ready(function () {
+            ue.setContent(c.contenBody);
+           /* var tag = c.contentTag
+            var arr = new Array()
+            tag = eval("(" + tag + ")")
+            for (n in tag) {
+                arr.push(tag[n])
+            }
+            $("input[name='tag']").val(arr.join(","))*/
+           $(".title").text("编辑")
+            var attachments = c.attachments;
+            for (k in attachments) {
+                var attachment = attachments[k];
+                var li = '<li>' +
+                    '<span>' + attachment.attachmentName + '</span>' +
+                    ' <button type="button" class="delete button_style">删除</button>' +
+                    '<input type="hidden" value="' + attachment.id + '">' +
+                    '</li>';
+                $(".attachments").append($(li))
+            }
+            if(c.comment==true){
+                $("input[name='comment']").eq(0).attr("checked",true)
+            }else {
+                $("input[name='comment']").eq(1).attr("checked",true)
+            }
+
+        });
+    }else{
+        $(".title").text("新增")
+    }
+    $("select[name='type']").change(function () {
+        if ("video" == $(this).val() || $(this).val() == "") {
+            $("#editor").hide();
+            $(".attchent").show();
+            $("input[name='file']").removeAttr("multiple")
+            ue.setContent("");
+        } else {
+            $("#editor").show();
+            $(".attchent").hide();
+            $("input[name='file']").attr("multiple","multiple")
+        }
+    })
+    $(".attachments").on("click", ".delete", function () {
+        if (!confirm("确定删除该视频吗")){
+            return;
+        }
+        var url = "/web/delete/attachment"
+        var data = {id: $(this).next().val()}
+        var result = ajax(url, data)
+        console.log(result)
+        if (result.id) {
+            $(this).parent().remove()
+        } else {
+            alert("删除失败")
+        }
+
+    })
+    function distinctByTitle() {
+        var nowTitle = $("input[name='title']").val()
+        var ogTitle = $("input[name='title']").next().val()
+        var url = "/web/distinct"
+        var data = {title: nowTitle}
+        var b = false;
+        if (!ogTitle || (ogTitle && nowTitle != ogTitle)) {
+            var result = ajax(url, data)
+            b = result.state;
+        }
+        return b;
+    }
+
+    UE.Editor.prototype._bkGetActionUrl = UE.Editor.prototype.getActionUrl;
+    UE.Editor.prototype.getActionUrl = function (action) {
+        if (action == 'uploadimage' || action == 'uploadscrawl' || action == 'uploadimage') {//图片
+            return "/web/uploadimages";
+        } else if (action == 'uploadvideo') {//视频
+            return "/web/uploadvideo";
+        } else if (action == 'uploadfile') {//附件
+            return "/web/uploadfile";
+        } else {
+            return this._bkGetActionUrl.call(this, action);
+        }
+    }
+    function ajax(url, data) {
+        var result;
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: data,
+            dataType: "json",
+            async: false,
+            success: function (data) {
+                result = data;
+            }
+        });
+        return result;
+    }
+    var indexx=0;
+    function clock() {
+        indexx=indexx+1
+        if(indexx%2==0){
+            $(".box_title").text('正在上传视频.....');
+        }else {
+            $(".box_title").text('正在上传视频...');
+        }
+    }
+</script>
+<div class="module_box ican-modal" id="module">
+    <div class="module_content delete-box">
+        <div style="color: #13b5b1;" class="box_title">正在上传视频.....</div>
+    </div>
+</div>
+</body>
+</html>

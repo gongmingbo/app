@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>必修课程录入</title>
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/need.css">
+    <script type="text/javascript" src="/pinying.js"></script>
+    <script type="text/javascript" src="/jquery-3.3.1.min.js"></script>
+</head>
+
+<body>
+<div class="ican-header">
+    <h1>
+        <img src="/imgs/logo.png" alt="">
+        知我
+    </h1>
+    <ul>
+        <li class="active">必修课程录入</li>
+        <li>选修课程录入</li>
+        <li>推荐学习录入</li>
+        <li>职业选择</li>
+    </ul>
+    <div class="login-state">
+        <span>小张</span>
+        <span>|</span>
+        <span>退出</span>
+    </div>
+</div>
+<div class="ican-select">
+    <section class="choose" id="choose">
+        <label for="schools">学校 :</label>
+        <input type="text" id="chooseItem" placeholder="请选择学校">
+        <div id="schools" class="dataWrapper">
+            <!--<p>支持中文/拼音/简拼输入</p>-->
+            <ul>
+                <li class="active">常用</li>
+                <li>A</li>
+                <li>B</li>
+                <li>C</li>
+                <li>D</li>
+                <li>E</li>
+                <li>F</li>
+                <li>G</li>
+                <li>H</li>
+                <li>I</li>
+                <li>J</li>
+                <li>K</li>
+                <li>L</li>
+                <li>M</li>
+                <li>N</li>
+                <li>O</li>
+                <li>P</li>
+                <li>Q</li>
+                <li>R</li>
+                <li>S</li>
+                <li>T</li>
+                <li>U</li>
+                <li>V</li>
+                <li>W</li>
+                <li>X</li>
+                <li>Y</li>
+                <li>Z</li>
+            </ul>
+            <div class="school-list">
+                <h3>A</h3>
+                <div class="school-names">
+            <span th:each="school,schoolStat : ${list}"
+                  th:text="${school.schoolName}"
+                  th:value="${school.schoolName}">
+            </span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <label for="institute">院系 :</label>
+        <select id="institute">
+            <option value="">请选择则</option>
+        </select>
+    </section>
+    <section>
+        <label for="specialty">专业 :</label>
+        <select id="specialty">
+            <option value="">请选择则</option>
+        </select>
+    </section>
+    <section>
+        <label for="grade">年级 :</label>
+        <select id="grade">
+            <option value="">请选择则</option>
+        </select>
+    </section>
+</div>
+<div class="ican-class">
+    <!--<section>
+        <label for="term">学期 :</label>
+        <select id="term">
+            <option value="">请选择则</option>
+        </select>-->
+    </section>
+    <table id="schoolTable" cellspacing="0" class="tableRequire">
+        <caption class="course_hide">课程表</caption>
+        <thead class="course_hide">
+        <tr>
+            <th>必修课表</th>
+            <th>星期一</th>
+            <th>星期二</th>
+            <th>星期三</th>
+            <th>星期四</th>
+            <th>星期五</th>
+            <th>星期六</th>
+            <th>星期日</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</div>
+<div class="ican-modal" id="editorModal">
+    <form method="post" id="form_data">
+        <span class="title"></span>
+        <span class="close">x</span>
+        <section>
+            <label for="">课程名称:</label>
+            <input name="course_name" type="text" class="must">
+        </section>
+        <section>
+            <label for="">教室:</label>
+            <input name=class_placce type="text" class="must">
+        </section>
+        <section>
+            <label for="">周数:</label>
+            <input name=weeks type="text" placeholder="1-20" class="must">
+        </section>
+        <!--   <section>
+            <label for="">节数:</label>
+            <input name=number type="text">
+             <select  name=number>
+                   <option value="1">上午1、2节</option>
+                   <option value="2">上午3、4节</option>
+                   <option value="3">下午1、2节</option>
+                   <option value="4">下午3、4节</option>
+                   <option value="5">晚上1、2节</option>
+             </select>
+          </section> -->
+        <section>
+            <label for="">老师:</label>
+            <input name=teacher type="text" class="must">
+        </section>
+        <section>
+            <label for="">能量值:</label>
+            <input name=powers type="text" class="must">
+        </section>
+        <section>
+            <label for="">课程标签:</label>
+            <input name=tag type="text" class="must">
+        </section>
+        <button type="button" onClick="deleteAction();">删除</button>
+        <button type="button" onClick="submitAction();">确定</button>
+        <input type="hidden" name="number_form" class="number_form">
+        <input type="hidden" name="weeks_form" class="weeks_form">
+        <input type="hidden" name="id">
+    </form>
+</div>
+<script>
+    //初始化表格(必修)
+    function initRequiredTable() {
+        var tdList = document.querySelectorAll('td')
+        for (var i = 0; i < tdList.length; i++) {
+            if (tdList[i].firstElementChild && tdList[i].firstElementChild.innerText) {
+                continue
+            } else {
+                tdList[i].classList.add('empty')
+            }
+        }
+
+    }
+    //初始化choose组件
+    function initChoose() {
+        document.querySelector('#choose').addEventListener("click", function (e) {
+            if (e.target.nodeName === "INPUT") {
+                $(".school-names span").each(function () {
+                    var fisrtName = $(this).text().substring(0, 1);
+                    console.log(fisrtName);
+                    var arrRslt = makePy(fisrtName);
+                    if (arrRslt[0] == 'A') {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+                document.querySelector('.dataWrapper').style.display = "block"
+            }
+            if (e.target.nodeName === "LI") {
+                document.querySelector('#choose h3').innerText = e.target.innerText
+                $(".school-names span").each(function () {
+                    var fisrtName = $(this).text().substring(0, 1);
+                    console.log(fisrtName);
+                    var arrRslt = makePy(fisrtName);
+                    if (arrRslt[0] == e.target.innerText) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+                Array.prototype.slice.apply(e.target.parentNode.children).forEach(function (element) {
+                    element.classList.remove('active')
+                })
+                e.target.classList.add('active')
+            }
+            if (e.target.nodeName === "SPAN") {
+                document.querySelector('.dataWrapper').style.display = "none"
+                document.querySelector('#chooseItem').value = e.target.innerText
+                getschool();
+            }
+        })
+    }
+    //监听表格点击事件
+    var clickType;
+    function openRequiredModal() {
+        document.querySelector('#schoolTable').addEventListener('click', function (e) {
+            if (e.target.nodeName === "TD") {
+                clickType = 'add'
+                console.log($(e.target).find(".weeks").val());
+                var weeks = $(e.target).find(".weeks").val();
+                var number = $(e.target).find(".number").val();
+                $(".number_form").val(number);
+                $(".weeks_form").val(weeks);
+                document.querySelector('#editorModal').style.display = "block"
+                document.querySelector('#editorModal .title').innerText = "添加课程"
+                $(e.target).addClass("click_on");
+            }
+            if (e.target.nodeName === "P") {
+                clickType = 'edit'
+                var p = $($(e.target))
+                var td = p.parent();
+                var id = td.find(".key_id").val()
+                var url = "/web/course/get/course"
+                var data = {id: id}
+                var list = ajax(url, data)
+                console.log(list)
+                $("input[name='course_name']").val(list[0].courseName)
+                $("input[name='class_placce']").val(list[0].classPlace)
+                $("input[name='weeks']").val(list[0].weeks)
+                $("input[name='teacher']").val(list[0].courseTeachr)
+                $("input[name='powers']").val(list[0].powerPoint)
+                var tags=eval("("+list[0].courseTags+")")
+                var arr=new Array()
+                for(p in tags){
+                  arr.push(tags[p])
+                }
+                var tg=arr.join(",")
+                $("input[name='tag']").val(tg)
+                $("input[name='id']").val(list[0].id)
+                td.addClass("click_on");
+                document.querySelector('#editorModal').style.display = "block"
+                document.querySelector('#editorModal .title').innerText = "编辑课程"
+                //  $(e.target).addClass("click_on");
+
+            }
+        })
+    }
+    window.onload = function () {
+        initRequiredTable()
+        initChoose()
+        openRequiredModal()
+    }
+    var option = $('<option value="">请选择则</option>');
+    function getschool() {
+        var url = "/web/course/get/college";
+        var data = {schoolName: $("#chooseItem").val()};
+        var list = ajax(url, data);
+        $("#institute").empty();
+        $("#institute").append(option)
+        for (p in list) {
+            var name = list[p].schoolCollege
+            $("#institute").append($('<option value="' + name + '">' + name + '</option>'))
+        }
+
+    }
+    $("#chooseItem").change(function () {
+        getschool();
+    });
+    $("#institute").change(function () {
+        var url = "/web/course/get/major";
+        var data = {schoolName: $("#chooseItem").val(), schoolCollege: $("#institute").val()};
+        var list = ajax(url, data);
+        $("#specialty").empty();
+        $("#specialty").append(option)
+        for (p in list) {
+            var name = list[p].schoolMajor
+            $("#specialty").append($('<option value="' + name + '">' + name + '</option>'))
+        }
+
+    });
+
+    $("#specialty").change(function () {
+        var url = "/web/course/get/grade";
+        var data = {
+            schoolName: $("#chooseItem").val(),
+            schoolCollege: $("#institute").val(),
+            schoolMajor: $("#specialty").val()
+        };
+        var list = ajax(url, data);
+        $("#grade").empty();
+        $("#grade").append(option)
+        console.log(list);
+        for (p in list) {
+            var name = list[p].schoolGrade
+            $("#grade").append($('<option value="' + list[p].schoolId + '">' + name + '</option>'))
+        }
+
+    });
+
+    $("#grade").change(function () {
+        getCourseTable()
+    });
+
+    function getCourseTable() {
+        var url = "/web/course/get/coursetable";
+        var data = {schoolId: $("#grade").val()};
+        $(".course_hide").show()
+        var list = ajax(url, data);
+        console.log(list);
+        var tr = "";
+        for (p in list) {
+            var c = list[p];
+            tr += '<tr> <td> <p>' + c.numberName + '</p></td>';
+            tr += getHtml(c.monday, c.number, 1);
+            tr += getHtml(c.tuesday, c.number, 2);
+            tr += getHtml(c.wednesday, c.number, 3);
+            tr += getHtml(c.thursday, c.number, 4);
+            tr += getHtml(c.friday, c.number, 5);
+            tr += getHtml(c.saturday, c.number, 6);
+            tr += getHtml(c.sunday, c.number, 7);
+        }
+        tr += "</tr>";
+        $("tbody").empty();
+        $("tbody").append($(tr));
+        
+    }
+    function getHtml(data, n, k) {
+        var html = "";
+        if (data) {
+            html = '<td>' +
+                '<p>' + data.courseName + '(' + data.weeks + '周)</p>' +
+                '<p>(' + data.teacher + ')</p>' +
+                '<input type="hidden" class="number" value="' + n + '">' +
+                '<input type="hidden" class="weeks" value="' + k + '">' +
+                '<input type="hidden" class="key_id" value="' + data.id + '">' +
+                '</td>';
+        } else {
+            html = '<td class="empty">' +
+                '<input type="hidden" class="number" value="' + n + '">' +
+                '<input type="hidden" class="weeks" value="' + k + '">' +
+                '</td>'
+        }
+        return html;
+    }
+    //添加课程
+    function submitAction() {
+        var formData = new FormData($("#form_data")[0]);
+        formData.append("schoolId", $("#grade").val());
+        var url = "/web/course/add/course";
+        var keep = true;
+        $(".must").each(function () {
+            if (!$(this).val()) {
+                keep = false;
+                return;
+            }
+        })
+        if (!keep) {
+            alert("请完善信息")
+            return
+        }
+        var re = /^[1-9]+[0-9]*]*$/;
+        if (!re.test($("input[name='powers']").val())) {
+            alert("能量值请输入正整数")
+            return;
+        }
+        //匹配周数
+        var reg = /^[0-9]{1,2}-[0-9]{1,2}$/;
+        var val = $("input[name='weeks']").val()
+        if (!reg.test(val)) {
+            alert("请输入正确周数格式")
+            return;
+        }
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: formData,
+            dataType: 'json',
+            async: false,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                console.log(data);
+                if (data.id) {
+                    getCourseTable();
+                    $("#form_data")[0].reset();
+                    document.querySelector('#editorModal').style.display = "none";
+                } else {
+                    alert("操作失败")
+                }
+            }
+        });
+
+    }
+    function deleteAction() {
+        var id = $("tbody .click_on").find(".key_id").val()
+        var url = "/web/course/delete"
+        var schoolId = $("#grade").val()
+        var data = {id: id, schoolId: schoolId}
+        var list = ajax(url, data)
+        if (list.state == true) {
+            $("tbody .click_on").empty()
+            $("tbody .click_on").addClass("empty")
+            $("tbody .click_on").removeClass("click_on");
+            $("#form_data")[0].reset();
+            document.querySelector('#editorModal').style.display = "none";
+        } else {
+            alert("删除失败！")
+        }
+
+    }
+    $(".close").click(function () {
+        $("tbody .click_on").removeClass("click_on");
+        $("#form_data")[0].reset();
+        document.querySelector('#editorModal').style.display = "none";
+    })
+    function ajax(url, data) {
+        var result;
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: data,
+            dataType: "json",
+            async: false,
+            success: function (data) {
+                result = data;
+            }
+        });
+        return result;
+    }
+</script>
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+package app.repository;
+
+import app.entity.user.PassKnowledge;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface PassKnowledgeRepository extends JpaRepository<PassKnowledge, String > {
+    PassKnowledge findByUserIdAndProfessionId(String user, String pro);
+
+    List<PassKnowledge> findByUserId(String user);
+}

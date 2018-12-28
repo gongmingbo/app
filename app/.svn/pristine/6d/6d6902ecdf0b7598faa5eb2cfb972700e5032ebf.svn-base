@@ -1,0 +1,7 @@
+package app.packet;
+
+public class Pagination {
+    int page;
+    int pageSize;
+    int totalPage;
+}

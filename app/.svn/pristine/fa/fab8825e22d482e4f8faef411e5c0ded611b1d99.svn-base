@@ -1,0 +1,19 @@
+package app.entity.json;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class ContentBaseView {
+    private String title;
+    private String id;
+    private int energy;
+    private String type;
+    public ContentBaseView(String id, String title){
+        this.title = title;
+        this.id = id;
+    }
+}

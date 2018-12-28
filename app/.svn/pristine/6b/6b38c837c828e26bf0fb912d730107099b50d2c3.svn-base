@@ -1,0 +1,15 @@
+package app.service;
+
+import app.entity.user.User;
+import app.packet.request.CommonPacket;
+
+public interface UserService {
+    User getUser(String username);
+    boolean validatePassword(String username, String password);
+    String getToken(String username, String deviceId);
+
+
+    String validateAndRefreshToken(String username, String deviceId, String token);
+
+    String validateAndRefreshToken(CommonPacket packet);
+}

@@ -1,0 +1,434 @@
+package app.apiservice;
+
+
+import app.entity.PageInfo;
+import app.entity.content.BaseContent;
+import app.entity.content.Tags;
+import app.entity.personcenter.AllTags;
+import app.entity.personcenter.MyCollectContent;
+import app.entity.personcenter.UserInfo;
+import app.entity.personcenter.UserPassWord;
+import app.entity.personcenter.*;
+import app.entity.smart.CourseBaseInfo;
+import app.entity.user.Collect;
+import app.entity.user.School;
+import app.entity.user.User;
+import app.packet.error.ErrorEnum;
+import app.packet.request.CommonPacket;
+import app.packet.request.CommonPagePacket;
+import app.packet.response.CommonMessage;
+import app.repository.*;
+import app.service.CourseService;
+import app.service.UserService;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.thymeleaf.util.StringUtils;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * 个人中心
+ */
+
+@RestController
+@ControllerAdvice
+@RequestMapping(path = "/api/person")
+public class PersonCenter {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass()) ;
+
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private PassKnowledgeRepository passKnowledgeRepository;
+    @Autowired
+    private CollectRepository collectRepository;
+    @Autowired
+    private CourseBaseInfoRepository courseBaseInfoRepository;
+    @Autowired
+    private ContentRepository contentRepository;
+
+    /*
+    * 获取个人信息
+    * */
+    @RequestMapping(path="/personcenter",method= RequestMethod.POST)
+    public CommonMessage personcenter(@RequestBody CommonPacket packet){
+        logger.info("userId is: " + packet.getUsername());
+        logger.info("deviceId is: " + packet.getDeviceId());
+        logger.info("token is: " + packet.getToken());
+        User user=userService.getUser(packet.getUsername());
+        CommonMessage message;
+        if(user==null){
+            message = CommonMessage.failure(ErrorEnum.COURSE_INVALID);
+        }else{
+            List<String> pros = passKnowledgeRepository.findProId(user.getUserId());
+            //查询用户的学校，学院专业和年级并赋值
+            UserInfo uInfo=userService.sendSchool(user);
+            uInfo.setPros(pros);
+            String term="";
+            if(uInfo.getGrade()==null||uInfo.getGrade().equals("")){
+                term="未设置";
+            }else{
+                term=userService.getTerm(uInfo.getGrade());
+            }
+            uInfo.setGrade(term);
+            message=CommonMessage.success(uInfo,null);
+        }
+        return message;
+    }
+    /*
+    * 用户添加或修改学校信息和性别
+    * */
+    @RequestMapping(path="/personSchoolEdit",method= RequestMethod.POST)
+    public CommonMessage personSchoolEdit(@RequestBody CommonPacket<UserInfo> packet){
+        logger.info("userId is: " + packet.getUsername());
+        logger.info("deviceId is: " + packet.getDeviceId());
+        logger.info("token is: " + packet.getToken());
+        logger.info("data is: " + packet.getData());
+        User users=userService.getUser(packet.getUsername());
+        UserInfo user=packet.getData();
+        CommonMessage message;
+        if(user==null||user.equals("")){
+            message = CommonMessage.failure(ErrorEnum.PERSON_INVALID);
+        }else{
+            int a=0;
+            if(user.getSex()==null||StringUtils.isEmpty(user.getSex())){
+                a+=1;
+            }else if(user.getSex().equals("男")||user.getSex().equals("女")){
+                users.setUserSex(user.getSex());
+            }else{
+                a+=1;
+            }
+            if(user.getGradeId()==null||user.getGradeId().equals("")||StringUtils.isEmpty(user.getGradeId())){
+                a+=1;
+            }else{
+                users.setShoolId(user.getGradeId());
+            }
+            if(a==2){
+                message=CommonMessage.failure(ErrorEnum.PERSON_INVALID);
+            }else{
+                userRepository.saveAndFlush(users);
+                message=CommonMessage.success(null,null);
+            }
+        }
+        return message;
+    }
+
+    /*
+     * 用户修改密码
+     * */
+    @RequestMapping(path="/personPasswordEdit",method= RequestMethod.POST)
+    public CommonMessage personPasswordEdit(@RequestBody CommonPacket<UserPassWord> packet){
+        logger.info("userId is: " + packet.getUsername());
+        logger.info("deviceId is: " + packet.getDeviceId());
+        logger.info("token is: " + packet.getToken());
+        logger.info("data is: " + packet.getData());
+        User user=userService.getUser(packet.getUsername());
+        UserPassWord pwd=packet.getData();
+        CommonMessage message;
+        if(pwd==null||pwd.equals("")){
+            message = CommonMessage.failure(ErrorEnum.PERSON_INVALID);
+        }else{
+            if(user.getUserPassword().equals(pwd.getOldPWD())){
+                user.setUserPassword(pwd.getNewPWD());
+                userRepository.saveAndFlush(user);
+                message=CommonMessage.success(null,null);
+            }else{
+                message=CommonMessage.failure(ErrorEnum.PERSON_PASSWORD_INVALID);
+            }
+        }
+        return message;
+    }
+
+    /*
+     * 头像上传
+     * */
+    @RequestMapping(path="/imageUpdate",method= RequestMethod.POST)
+    public CommonMessage imageUpdate(@RequestParam(value = "file", required = false) MultipartFile file){
+        logger.info("file is: " + file);
+        CommonMessage message;
+
+        if(file==null||file.isEmpty()){
+            message = CommonMessage.failure(ErrorEnum.PERSON_INVALID);
+        }else{
+            //保存图片地址
+            String result=userService.userImageUpload(file);
+            if(result.equals("")){
+                 message = CommonMessage.failure(ErrorEnum.PERSON_IMAGE_INVALID);
+            }else{
+                message=CommonMessage.success(result,null);
+            }
+        }
+        return message;
+    }
+    /*
+     * 用户修改或添加头像和用户名和标签
+     * */
+    @RequestMapping(path="/personUserNameEdit",method= RequestMethod.POST)
+    public CommonMessage personUserNameEdit(@RequestBody CommonPacket<UserUpdate> packet){
+        logger.info("userId is: " + packet.getUsername());
+        logger.info("deviceId is: " + packet.getDeviceId());
+        logger.info("token is: " + packet.getToken());
+        logger.info("data is: " + packet.getData());
+        User user=userService.getUser(packet.getUsername());
+        UserUpdate userName=packet.getData();
+        CommonMessage message;
+        if(userName==null||userName.equals("")){
+            message = CommonMessage.failure(ErrorEnum.PERSON_INVALID);
+        }else{
+            int a=0;
+            if(userName.getUserName()==null||userName.getUserName().equals("")){
+                a+=1;
+            }else{
+                user.setUserName(userName.getUserName());
+            }
+
+            if(userName.getUserImage()==null||userName.getUserImage().isEmpty()){
+                a+=1;
+            }else{
+                //保存已上传的图片地址
+                String result=userName.getUserImage();
+                if(result.equals("")){
+                    message = CommonMessage.failure(ErrorEnum.PERSON_IMAGE_INVALID);
+                    return message;
+                }else{
+                    user.setUserImage(result);
+                }
+            }
+            if(userName.getTag()==null||userName.getTag().size()==0){
+                a+=1;
+            }else{
+                user.setUserInterest(JSON.toJSONString(userName.getTag()));
+            }
+            if(a==3){
+                message = CommonMessage.failure(ErrorEnum.PERSON_INVALID);
+            }else{
+                userRepository.saveAndFlush(user);
+                message=CommonMessage.success(null,null);
+            }
+        }
+        return message;
+    }
+
+    /*
+     * 查询所有标签(分页)返回选中标签
+     * */
+    @RequestMapping(path="/personTags",method= RequestMethod.POST)
+    public CommonMessage personTags(@RequestBody CommonPagePacket<List<Tags>> packet){
+        logger.info("userId is: " + packet.getUsername());
+        logger.info("deviceId is: " + packet.getDeviceId());
+        logger.info("token is: " + packet.getToken());
+        logger.info("page is: " + packet.getPage());
+        logger.info("size is: " + packet.getSize());
+        logger.info("data is: " + packet.getData());
+        //分页查询标签集合
+        List<Tags> list=null;
+        /*//查询总页数
+        int total=0;*/
+
+        //获取是否已选中标签
+        List<Tags> choose=packet.getData();
+
+        PageInfo<AllTags> pageTags=new PageInfo<>();
+
+        pageTags.setSize(packet.getSize());
+        /*pageTags.setPage(packet.getPage());*/
+
+        //回传选中的标签
+        AllTags tags=new AllTags();
+        tags.setChoose(choose);
+
+        CommonMessage message;
+        if(choose==null||choose.size()==0){
+            list=userService.allTags1(packet.getSize());
+            if(list==null||list.size()==0){
+                message = CommonMessage.failure(ErrorEnum.TAGS_INVALID);
+            }else{
+                //total=userService.total(packet.getSize());
+                //pageTags.setTotalPage(total);
+                tags.setTags(list);
+                pageTags.setData(tags);
+                message=CommonMessage.success(pageTags,null);
+            }
+        }else{
+            //int[] ids=new int[choose.size()];
+            List<String> ids=new ArrayList<>();
+            for(int i=0;i<choose.size();i++){
+                Tags t=choose.get(i);
+                System.out.println(t.getId());
+                ids.add(t.getId());
+            }
+            int size=packet.getSize()-ids.size();
+            list=userService.allTags2(size,ids);
+            if(list==null||list.size()==0){
+                message = CommonMessage.failure(ErrorEnum.TAGS_INVALID);
+            }else{
+                tags.setTags(list);
+                pageTags.setData(tags);
+                message=CommonMessage.success(pageTags,null);
+            }
+        }
+        return message;
+    }
+
+    /*
+     * 查询用户收藏（分页）
+     * */
+    @RequestMapping(path="/personMyCollect",method= RequestMethod.POST)
+    @Transactional(readOnly = true)
+    public CommonMessage personMyCollect(@RequestBody CommonPagePacket packet){
+        logger.info("userId is: " + packet.getUsername());
+        logger.info("deviceId is: " + packet.getDeviceId());
+        logger.info("token is: " + packet.getToken());
+        logger.info("page is: " + packet.getPage());
+        logger.info("size is: " + packet.getSize());
+        //List<BaseContent> list=userService.userMyCollect(packet.getUsername(),packet.getPage(),packet.getSize());
+        Pageable page=new PageRequest((packet.getPage()-1),packet.getSize());
+        Page<Collect> collects=collectRepository.findByUserIdAndStateOrderByTimeDesc(page,packet.getUsername(),"t");
+        CommonMessage message;
+        if(collects==null||collects.getContent()==null||collects.getContent().size()==0){
+            message = CommonMessage.failure(ErrorEnum.CONTENT_COLLECT_INVALID);
+        }else{
+            List<Collect> collect=collects.getContent();
+            List<Object> myCollect=new ArrayList<>();
+            for(Collect c:collect){
+                if(c.getType().equals("course")){
+                    CourseBaseInfo course=courseBaseInfoRepository.findOne(Long.parseLong(c.getResourcesId()));
+                    if(course==null){
+                        course=new CourseBaseInfo();
+                        course.setId(Long.parseLong(c.getResourcesId()));
+                        course.setCourseName("该课程已被删除！");
+                        //courseBaseInfoRepository.delete(Long.parseLong(c.getResourcesId()));
+                    }
+                    course.setRemark("课程");
+                    Map<String,Object> map=new HashMap<>();
+                    map.put("base",course);
+                    myCollect.add(map);
+                }else if(c.getType().equals("content")){
+                    BaseContent content=contentRepository.findByResourcesId(c.getResourcesId());
+                    MyCollectContent collectContent=new MyCollectContent();
+                    User user=null;
+                    if(content==null){
+                        content=new BaseContent();
+                        content.setResourcesId(c.getResourcesId());
+                        content.setRemark("该内容已被删除！");
+                        content.setContentTitle("该内容已被删除！");
+                        //contentRepository.delete(c.getResourcesId());
+                    }else{
+                        if(content.getPublisherId()==null){
+                            user=new User();
+                        }else{
+                            user=userService.getUser(content.getPublisherId());
+                            if(user==null){ }else{
+                                collectContent.setPublisherName(user.getUserName());
+                            }
+                        }
+                        List<Map<String,Object>> l=new ArrayList<>();
+                        for (int i=0;i<3;i++){
+                            Map<String,Object> m=new HashMap<>();
+                            m.put("url","");
+                            l.add(m);
+                        }
+                        collectContent.setTitleImage(l);
+                    }
+                    content.setContenBody("");
+                    content.setRemark("资源");
+                    collectContent.setBase(content);
+                    myCollect.add(collectContent);
+                }
+            }
+            PageInfo<List<Object>> basePage=new PageInfo<>();
+            basePage.setData(myCollect);
+            basePage.setPage(packet.getPage());
+            basePage.setSize(packet.getSize());
+            basePage.setTotalNumber(collects.getTotalElements());
+            basePage.setTotalPage(collects.getTotalPages());
+            message=CommonMessage.success(basePage,null);
+        }
+        return message;
+    }
+
+    /*
+     * 查询所有学校信息
+     * */
+    @RequestMapping(path="/personAllSchool",method= RequestMethod.POST)
+    public CommonMessage personAllSchool(@RequestBody CommonPacket packet){
+        logger.info("userId is: " + packet.getUsername());
+        logger.info("deviceId is: " + packet.getDeviceId());
+        logger.info("token is: " + packet.getToken());
+        List<Map<String,String>> list=userService.allSchool();
+        CommonMessage message;
+        if(list==null||list.size()==0){
+            message = CommonMessage.failure(ErrorEnum.SCHOOL_INVALID);
+        }else{
+            message=CommonMessage.success(list,null);
+        }
+        return message;
+    }
+    /*
+     * 查询所有学院或专业或年级信息
+     * */
+    @RequestMapping(path="/personAllCollege",method= RequestMethod.POST)
+    public CommonMessage personAllCollege(@RequestBody CommonPacket<UserInfo> packet){
+        logger.info("userId is: " + packet.getUsername());
+        logger.info("deviceId is: " + packet.getDeviceId());
+        logger.info("token is: " + packet.getToken());
+        logger.info("data is"+packet.getData());
+        UserInfo user=packet.getData();
+        CommonMessage message;
+        if(user==null||user.equals("")){
+            message = CommonMessage.failure(ErrorEnum.SCHOOL_GRADE_INVALID);
+        }else{
+            String id="";
+            int a=0;
+            if(user.getSchoolId()==null){
+                user.setSchoolId("");
+            }
+            if(user.getCollegeId()==null){
+                user.setCollegeId("");
+            }
+            //查询学院
+            if(!user.getSchoolId().equals("")&&!StringUtils.isEmpty(user.getSchoolId())){
+                id=user.getSchoolId();
+             //查询专业
+            }else if(!user.getCollegeId().equals("")&&!StringUtils.isEmpty(user.getCollegeId())){
+                id=user.getCollegeId();
+            //查询年级
+            }else if(!user.getMajorId().equals("")&&!StringUtils.isEmpty(user.getMajorId())){
+                id=user.getMajorId();
+                a=1;
+            }
+            if(id.equals("")){
+                message = CommonMessage.failure(ErrorEnum.SCHOOL_GRADE_INVALID);
+            }else{
+                List<School> list=userService.allCollege(id);
+                if(a==1){
+                    //查询匹配年份获取年级（最多上下5年）
+                    list=userService.getGrate(list,id);
+                }
+                message=CommonMessage.success(list,null);
+            }
+        }
+        return message;
+    }
+
+    @ExceptionHandler(value = Exception.class)
+    public CommonMessage errorHandler(Exception ex) {
+        ex.printStackTrace();
+        return CommonMessage.failure(ErrorEnum.SERVER_INTERNAL_ERROR);
+    }
+}

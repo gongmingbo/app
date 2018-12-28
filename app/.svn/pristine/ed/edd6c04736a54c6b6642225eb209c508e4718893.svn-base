@@ -1,0 +1,9 @@
+package app.service;
+
+import app.entity.user.CourseTimeTable;
+/*
+* 学生课程表查询接口
+* */
+public interface CourseService {
+    CourseTimeTable getCourseTemplate(String username);
+}

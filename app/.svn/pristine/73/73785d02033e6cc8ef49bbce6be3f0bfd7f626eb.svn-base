@@ -1,0 +1,22 @@
+package app.service.impl;
+
+import app.entity.user.CourseTimeTable;
+import app.repository.CourseSyllabusRepository;
+import app.service.CourseService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class CourseServiceImpl implements CourseService {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass()) ;
+
+    @Autowired
+    private  CourseSyllabusRepository couseSyllabusRepository;
+
+    @Override
+    public CourseTimeTable getCourseTemplate(String username) {
+        return couseSyllabusRepository.findByUserId(username);
+    }
+}

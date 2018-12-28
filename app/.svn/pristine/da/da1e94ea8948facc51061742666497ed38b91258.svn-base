@@ -1,0 +1,284 @@
+package app.apiservice;
+
+import app.entity.PageInfo;
+import app.entity.content.BaseContent;
+import app.entity.content.Comment;
+import app.entity.json.ContentBaseView;
+import app.entity.json.KnowledgeContent;
+import app.entity.json.wt.WisdomTreeView;
+import app.entity.personcenter.MyCollectContent;
+import app.entity.smart.Knowledge;
+import app.entity.user.Collect;
+import app.entity.user.Learnt;
+import app.entity.user.PassKnowledge;
+import app.entity.user.User;
+import app.packet.request.CommonPacket;
+import app.repository.*;
+import app.service.UserService;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import org.springframework.data.domain.Page;
+import app.packet.Pagination;
+import app.packet.error.ErrorEnum;
+import app.packet.request.CommonPagePacket;
+import app.packet.response.CommonMessage;
+import com.alibaba.fastjson.JSON;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.web.bind.annotation.*;
+
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+/**
+ * Created by gongmingbo on 2018/11/12.
+ * 课程推荐
+ */
+@RestController
+@ControllerAdvice
+@RequestMapping(path = "/api/recommend")
+public class Recommend {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass()) ;
+    private Gson gson=new Gson();
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private ContentRepository contentRepository;
+    @Autowired
+    private PassKnowledgeRepository passKnowledgeRepository;
+    @Autowired
+    private KnowledgeRepository knowledgeRepository;
+    @Autowired
+    private LearntRepository learntRepository;
+    @Autowired
+    private CollectRepository collectRepository;
+    @Autowired
+    private CommentRepository commentRepository;
+
+    /**
+     * 查看所有推荐课程
+     * */
+    @RequestMapping(path = "/courseProfession",method = RequestMethod.POST)
+    public CommonMessage recommend(@RequestBody CommonPagePacket packet){
+        logger.info("userId is: " + packet.getUsername());
+        logger.info("deviceId is: " + packet.getDeviceId());
+        logger.info("token is: " + packet.getToken());
+        logger.info("page is: " + packet.getPage());
+        logger.info("size is: " + packet.getSize());
+        //保存baseContent需要的id
+        List<String> ids=new ArrayList<>();
+        //查询profession_id职业编号
+        List<PassKnowledge> pros = passKnowledgeRepository.findByUserId(packet.getUsername());
+        //通过职业查找具体的知识点
+        for (PassKnowledge p:pros){
+            List<Knowledge> knowledge=knowledgeRepository.findByProfessionId(p.getProfessionId());
+            for (Knowledge k:knowledge){
+                logger.info(k.getContents());
+                String contents=k.getContents();
+                KnowledgeContent content=gson.fromJson(contents,KnowledgeContent.class);
+                for (ContentBaseView c:content.getContents()){
+                    if(c.getId()==null||c.getId().equals("")){}else{
+                        ids.add(c.getId());
+                    }
+                }
+            }
+        }
+        //查看已读记录
+        /*List<Learnt> learnt=learntRepository.findByUserIdAndTypeNotIn(packet.getUsername(),"course");
+        List<String> idss=new ArrayList<>();
+        if(learnt==null||learnt.equals("")){}else{
+            for(Learnt l:learnt){
+                idss.add(l.getLearntId());
+            }
+        }*/
+        List<String> listNew=new ArrayList<>(new TreeSet<>(ids));
+        System.out.println("listNew = [" + listNew + "]");
+        Sort sort = new Sort(Sort.Direction.DESC, "publishTime");
+        Pageable pageable = new PageRequest(packet.getPage() - 1, packet.getSize());
+        Page<BaseContent>  listPage= contentRepository.findByIdInAndState(pageable,listNew,"t");
+        CommonMessage message;
+        if(listPage==null||listPage.getContent()==null){
+            message = CommonMessage.failure(ErrorEnum.CONTENT_KNOWLEDGE_INVALID);
+        }else{
+            PageInfo<List<MyCollectContent>> basePage=new PageInfo<>();
+            //分页数据集合
+            List<BaseContent> listBaseContent = listPage.getContent();
+            if(listBaseContent==null||listBaseContent.size()==0){
+                message = CommonMessage.failure(ErrorEnum.CONTENT_KNOWLEDGE_INVALID);
+            }else {
+                List<MyCollectContent> baseContents = new ArrayList<>();
+                for (BaseContent B : listBaseContent) {
+                    MyCollectContent collect = new MyCollectContent();
+                    collect.setBase(B);
+                    User user = null;
+                    if (B.getPublisherId() == null) {
+                        user = new User();
+                    } else {
+                        user = userService.getUser(B.getPublisherId());
+                        if (user == null) {
+                        } else {
+                            collect.setPublisherName(user.getUserName());
+                        }
+                    }
+                    if (B.getPublishTime() == null || B.getPublishTime().equals("")) {
+                    } else {
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        collect.setPublishTime(sdf.format(B.getPublishTime()));
+                    }
+                    String images = B.getContentTitleImage();
+                    List<String> list = gson.fromJson(images, new TypeToken<List<String>>() {
+                    }.getType());
+                    List<Map<String, Object>> l = new ArrayList<>();
+                    for (int i = 0; i < list.size(); i++) {
+                        Map<String, Object> m = new HashMap<>();
+                        m.put("url", list.get(i));
+                        l.add(m);
+                    }
+                    collect.setTitleImage(l);
+                    baseContents.add(collect);
+                }
+
+                basePage.setData(baseContents);//每一页数据
+                basePage.setPage(packet.getPage());//当前页
+                basePage.setSize(packet.getSize());//每页显示条数
+                basePage.setTotalPage(listPage.getTotalPages());//总页数
+                message = CommonMessage.success(basePage, null);
+            }
+        }
+        return message;
+    }
+
+    /**
+     * 添加收藏或取消收藏
+     * */
+    @RequestMapping(path = "/editCollect",method = RequestMethod.POST)
+    public CommonMessage addCollect(@RequestBody CommonPacket<Map<String,Object>> packet){
+        logger.info("userId is: " + packet.getUsername());
+        logger.info("deviceId is: " + packet.getDeviceId());
+        logger.info("token is: " + packet.getToken());
+        logger.info("data is: " + packet.getData());
+        CommonMessage message;
+        //接收收藏的资源id，收藏人delete：false
+        String userId=packet.getUsername();
+        Map<String,Object> data=packet.getData();
+        String resourceId=data.get("resourceId").toString();
+        boolean delete=(boolean)data.get("delete");
+        Collect collect=collectRepository.findByUserIdAndResourcesId(userId,resourceId);
+        //如果是删除在资源id后添加对象delete：true
+        if(delete){
+            //修改state状态未false
+            if(collect==null||collect.equals("")){
+                //传值错误，没有该条收藏
+                message = CommonMessage.failure(ErrorEnum.CONTENT_COLLECT_INVALID);
+            }else{
+                collect.setState("f");
+                message = CommonMessage.success("取消收藏成功!", null);
+            }
+        }else{
+            if(collect==null||collect.equals("")){
+                collect=new Collect();
+                //在我的收藏表中添加收藏
+                collect.setState("t");
+                collect.setResourcesId(resourceId);
+                collect.setUserId(userId);
+            }else{
+                collect.setState("t");
+            }
+            message = CommonMessage.success("收藏成功!", null);
+        }
+        collectRepository.saveAndFlush(collect);
+        return message;
+    }
+
+    /**
+     * 添加评论和删除评论
+     * */
+    @RequestMapping(path = "/editContent",method = RequestMethod.POST)
+    public CommonMessage editContent(@RequestBody CommonPacket<Map<String,Object>> packet){
+        logger.info("userId is: " + packet.getUsername());
+        logger.info("deviceId is: " + packet.getDeviceId());
+        logger.info("token is: " + packet.getToken());
+        logger.info("data is: " + packet.getData());
+        CommonMessage message;
+        //接收评论的资源id，评论人，评论内容，评论时间delete：false
+        String userId=packet.getUsername();
+        Map<String,Object> data=packet.getData();
+        Long id;
+
+        Comment comment=new Comment();
+        //如果是删除在资源id后添加对象delete：true
+        if(data.get("id")==null||data.get("id").equals("")){
+            Date date=new Date();
+            SimpleDateFormat sdf=new SimpleDateFormat("yyyy:MM:dd HH:mm:ss");
+            String commentTime=sdf.format(date);
+            String resourceId=data.get("resourceId").toString();
+            String commentContent=data.get("commentContent").toString();
+            //在我的收藏表中添加收藏
+            comment.setState("t");
+            comment.setCommentContent(commentContent);
+            comment.setCommentUserId(userId);
+            comment.setResourceId(resourceId);
+            BaseContent base=contentRepository.findByResourcesId(resourceId);
+            comment.setResource(base);
+            comment.setCommentTime(commentTime);
+            message = CommonMessage.success("评论成功!", null);
+        }else{
+            id=Long.parseLong(data.get("id").toString());
+            //修改state状态未false
+            comment=commentRepository.findById(id);
+            if(comment==null||comment.equals("")){
+                //传值错误，没有该条收藏
+                message = CommonMessage.failure(ErrorEnum.COMMENT_MY_INVALID);
+            }else{
+                comment.setState("f");
+                message = CommonMessage.success("删除成功!", null);
+            }
+        }
+        commentRepository.saveAndFlush(comment);
+        return message;
+    }
+
+    /**
+     * 查看评论
+     * */
+    @RequestMapping(path = "/Content",method = RequestMethod.POST)
+    public CommonMessage Content(@RequestBody CommonPagePacket<Map<String,Object>> packet){
+        logger.info("userId is: " + packet.getUsername());
+        logger.info("deviceId is: " + packet.getDeviceId());
+        logger.info("token is: " + packet.getToken());
+        logger.info("page is: " + packet.getPage());
+        logger.info("size is: " + packet.getSize());
+        logger.info("data is: " + packet.getData());
+        CommonMessage message;
+        //接收资源id
+        String userId=packet.getUsername();
+        Map<String,Object> data=packet.getData();
+        String resourceId=data.get("resourceId").toString();
+        BaseContent base=contentRepository.findByResourcesId(resourceId);
+
+        List<Comment> collect=new ArrayList<>();
+        if(base==null||base.equals("")){
+            message = CommonMessage.failure(ErrorEnum.CONTENT_RESOURCE_INVALID);
+        }else{
+            Pageable page=new PageRequest(packet.getPage() - 1, packet.getSize());
+            Page<Comment> pageComment=commentRepository.findByResourceIdAndStateInOrderByCommentTime(page,resourceId,"t");
+            PageInfo<List<Comment>> basePage=new PageInfo<>();
+            //分页数据集合
+            List<Comment> listComment = pageComment.getContent();
+            if(listComment==null||listComment.size()==0){
+                message = CommonMessage.failure(ErrorEnum.COMMENT_INVALID);
+            }else {
+                basePage.setData(listComment);//每一页数据
+                basePage.setPage(packet.getPage());//当前页
+                basePage.setSize(packet.getSize());//每页显示条数
+                basePage.setTotalPage(pageComment.getTotalPages());//总页数
+                message = CommonMessage.success(basePage, null);
+            }
+        }
+        return message;
+    }
+}

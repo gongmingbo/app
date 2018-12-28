@@ -1,0 +1,214 @@
+package app.entity.content;
+
+import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.List;
+
+import javax.persistence.*;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+
+import app.config.JsonDataUserType;
+
+/**
+ * 基础类容表（如文章，视频）
+ *
+ * @author gongmingbo
+ */
+@Entity
+@Table(name = "app_content_info")
+@TypeDef(name = "JsonDataUserType", typeClass = JsonDataUserType.class)
+public class BaseContent implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String resourcesId;
+    private String contentTitle;
+    private String contentType;
+    private String contentDescription;
+    @Column(columnDefinition = "text")
+    private String contenBody;
+    private String contentOrigin;
+    private String publisherId;
+    private Timestamp publishTime;
+    @Type(type = "JsonDataUserType")
+    @Column(columnDefinition = "jsonb")
+    private String contentTag;
+    private String contentTitleImage;
+    private boolean contentAttachment;
+    private Integer readCounts;
+    private String contentTop;
+    private String remark;
+    @OneToMany
+    @JoinColumn(name = "resourcesId", nullable = false, referencedColumnName = "resourcesId" , insertable=false ,updatable=false)
+  //  @Cascade({org.hibernate.annotations.CascadeType.MERGE, org.hibernate.annotations.CascadeType.PERSIST})
+    private List<Attachment> attachments;
+    private String professionId;
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    private String state;
+
+    public String getProfessionId() {
+        return professionId;
+    }
+
+    public void setProfessionId(String professionId) {
+        this.professionId = professionId;
+    }
+    @Override
+    public String toString() {
+        return "BaseContent [id=" + id + ", resourcesId=" + resourcesId + ", contentTitle=" + contentTitle
+                + ", contentType=" + contentType + ", contentDescription=" + contentDescription + ", contenBody="
+                + contenBody + ", contentOrigin=" + contentOrigin + ", publisherId=" + publisherId + ", publishTime="
+                + publishTime + ", contentTag=" + contentTag + ", ccontentTitleImage=" + contentTitleImage
+                + ", contentAttachment=" + contentAttachment + ", ReadCounts=" + readCounts + ", ContentTop="
+                + contentTop + ", remark=" + remark + "]";
+    }
+
+    public List<Attachment> getAttachments() {
+        return attachments;
+    }
+
+    public void setAttachments(List<Attachment> attachments) {
+        this.attachments = attachments;
+    }
+
+    public String getContentTitleImage() {
+        return contentTitleImage;
+    }
+
+    public void setContentTitleImage(String contentTitleImage) {
+        this.contentTitleImage = contentTitleImage;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getResourcesId() {
+        return resourcesId;
+    }
+
+    public void setResourcesId(String resourcesId) {
+        this.resourcesId = resourcesId;
+    }
+
+    public String getContentTitle() {
+        return contentTitle;
+    }
+
+    public void setContentTitle(String contentTitle) {
+        this.contentTitle = contentTitle;
+    }
+
+    public String getContentType() {
+        return contentType;
+    }
+
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
+    }
+
+    public String getContentDescription() {
+        return contentDescription;
+    }
+
+    public void setContentDescription(String contentDescription) {
+        this.contentDescription = contentDescription;
+    }
+
+    public String getContenBody() {
+        return contenBody;
+    }
+
+    public void setContenBody(String contenBody) {
+        this.contenBody = contenBody;
+    }
+
+    public String getContentOrigin() {
+        return contentOrigin;
+    }
+
+    public void setContentOrigin(String contentOrigin) {
+        this.contentOrigin = contentOrigin;
+    }
+
+    public String getPublisherId() {
+        return publisherId;
+    }
+
+    public void setPublisherId(String publisherId) {
+        this.publisherId = publisherId;
+    }
+
+    public Timestamp getPublishTime() {
+        return publishTime;
+    }
+
+    public void setPublishTime(Timestamp publishTime) {
+        this.publishTime = publishTime;
+    }
+
+    public String getContentTag() {
+        return contentTag;
+    }
+
+    public void setContentTag(String contentTag) {
+        this.contentTag = contentTag;
+    }
+
+    public String getCcontentTitleImage() {
+        return contentTitleImage;
+    }
+
+    public void setCcontentTitleImage(String ccontentTitleImage) {
+        this.contentTitleImage = ccontentTitleImage;
+    }
+
+    public boolean isContentAttachment() {
+        return contentAttachment;
+    }
+
+    public void setContentAttachment(boolean contentAttachment) {
+        this.contentAttachment = contentAttachment;
+    }
+
+    public Integer getReadCounts() {
+        return readCounts;
+    }
+
+    public void setReadCounts(Integer readCounts) {
+        this.readCounts = readCounts;
+    }
+
+    public String getContentTop() {
+        return contentTop;
+    }
+
+    public void setContentTop(String contentTop) {
+        contentTop = contentTop;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+
+}

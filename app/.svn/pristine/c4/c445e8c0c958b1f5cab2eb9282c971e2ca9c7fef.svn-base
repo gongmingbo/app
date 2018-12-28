@@ -1,0 +1,13 @@
+package app.entity.json;
+
+import app.entity.personcenter.MyCollectContent;
+import app.entity.smart.CourseBaseInfo;
+import lombok.Data;
+
+import java.util.List;
+
+@Data
+public class ContentRecommend {
+    private List<CourseBaseInfo> course;
+    private List<MyCollectContent> collect;
+}

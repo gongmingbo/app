@@ -1,0 +1,58 @@
+package app.repository;
+
+import app.entity.json.SearchResultView;
+import app.entity.smart.CourseBaseInfo;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import java.util.Collection;
+import java.util.List;
+
+@Repository
+public interface CourseBaseInfoRepository extends JpaRepository<CourseBaseInfo, Long> {
+    Page<CourseBaseInfo> findByOrgIdAndCourseTypeAndState(Pageable pageable, String schoolId, String courseType, String state);
+    Page<CourseBaseInfo> findByOrgIdAndCourseTypeAndStateAndCourseNameLike(Pageable pageable, String schoolId, String courseType, String state,String courseName);
+
+    List<CourseBaseInfo> findByCourseTypeAndState(String courseType, String state);
+    List<CourseBaseInfo> findByCourseCode(String courseCode);
+
+    List<CourseBaseInfo> findById(long id);
+
+
+    //通过用户id查询专业课程
+    @Query(value = "SELECT *from app_course_base_info where org_id=(SELECT pid from app_school_base_info where org_id=(SELECT pid from app_school_base_info where org_id=(SELECT shool_id from app_users_base_info where user_id=:username))) and course_type='必修课' and state='t' and course_name LIKE :name",nativeQuery = true)
+    List<CourseBaseInfo> majorCourses(@Param("username") String username,@Param("name")String name);
+
+    //查询选修课程
+    @Query(value = "SELECT *from app_course_base_info where org_id=(SELECT org_id from app_school_base_info where org_id=(SELECT pid from app_school_base_info where org_id=(SELECT pid from app_school_base_info where org_id=(SELECT pid from app_school_base_info where org_id=(SELECT shool_id from app_users_base_info where user_id=:username))))  and pid is null) and course_type='选修课' and state='t' and course_name like :name",nativeQuery = true)
+    List<CourseBaseInfo> elective(@Param("username")String username,@Param("name")String name);
+
+    @Query(value = "select new app.entity.json.SearchResultView(c.courseName, c.id) from CourseBaseInfo c where (c.courseName like :keyword or c.CourseIntroduction like :keyword) and c.id in :ids")
+    List<SearchResultView> search(@Param("keyword") String keyword, @Param("ids") Collection<Long> ids);
+
+
+    //查询学习推荐的选修课程（历史学习记录排在后面）
+    /*@Query(value = "(select*from app_course_base_info where id in :ids " +
+            "AND id not in :idss " +
+            *//*"(select cast((select learnt_id from app_users_learnt WHERE user_id=:userId and type in('course')) as int)) " +*//*
+            "and state='t') " +
+            "UNION ALL " +
+            "(select*from app_course_base_info where id in  " +
+            "(select cast((select learnt_id from app_users_learnt WHERE user_id=:userId and learnt_id in :id and type in('course') ORDER BY end_time) as int)) " +
+            "and state='t') LIMIT :size OFFSET :page",nativeQuery = true)
+    List<CourseBaseInfo> courseSearch(@Param("ids") List<Long> ids,@Param("idss") List<Long> idss,@Param("id") List<String> id,@Param("userId") String userId,@Param("size")int size,@Param("page") int page);
+*/
+    @Query(value = "select*from app_course_base_info where id in :ids "+
+            "and state='t' and course_name like :name LIMIT :size OFFSET :page",nativeQuery = true)
+    List<CourseBaseInfo> courseSearch(@Param("ids") List<Long> ids,@Param("name")String name,@Param("size")int size,@Param("page") int page);
+
+    CourseBaseInfo findByIdAndStateAndCourseNameLike(Long id,String state,String name);
+    //查询推荐学习选修课程总条数
+    @Query(value = "select * from app_course_base_info where id in :ids " +
+            "and state='t' and course_name like :name",nativeQuery = true)
+    List<CourseBaseInfo> countCourse(@Param("ids") List<Long> ids,@Param("name")String name);
+}

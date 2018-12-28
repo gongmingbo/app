@@ -1,0 +1,97 @@
+package app.entity.coursetime;
+
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+
+public class CourseTemplate {
+	private  String id;
+	private  String name;
+	private  String teacher;
+
+	@Override
+	public String toString() {
+		return "CourseTemplate{" +
+				"id='" + id + '\'' +
+				", name='" + name + '\'' +
+				", teacher='" + teacher + '\'' +
+				", classNo=" + Arrays.toString(classNo) +
+				", dayOfWeek=" + Arrays.toString(dayOfWeek) +
+				", weeks=" + Arrays.toString(weeks) +
+				", classroom='" + classroom + '\'' +
+				", dates=" + dates +
+				", reminder=" + reminder +
+				'}';
+	}
+
+	private  int [] classNo;
+	private  int [] dayOfWeek;
+	private  int [] weeks;
+	private  String classroom;
+	private List<String> dates ;
+	private  int reminder;
+	private  String type;
+
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getTeacher() {
+		return teacher;
+	}
+	public void setTeacher(String teacher) {
+		this.teacher = teacher;
+	}
+	public int[] getClassNo() {
+		return classNo;
+	}
+	public void setClassNo(int[] classNo) {
+		this.classNo = classNo;
+	}
+	public int[] getDayOfWeek() {
+		return dayOfWeek;
+	}
+	public void setDayOfWeek(int[] dayOfWeek) {
+		this.dayOfWeek = dayOfWeek;
+	}
+	public int[] getWeeks() {
+		return weeks;
+	}
+	public void setWeeks(int[] weeks) {
+		this.weeks = weeks;
+	}
+	public String getClassroom() {
+		return classroom;
+	}
+	public void setClassroom(String classroom) {
+		this.classroom = classroom;
+	}
+	public List<String> getDates() {
+		return dates;
+	}
+	public void setDates( List<String> dates) {
+		this.dates = dates;
+	}
+	public int getReminder() {
+		return reminder;
+	}
+	public void setReminder(int reminder) {
+		this.reminder = reminder;
+	}
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+	
+}

@@ -1,0 +1,24 @@
+package app.repository;
+
+import java.util.List;
+
+import app.bankview.ConstantsKey;
+import app.entity.content.BaseContent;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import app.entity.smart.CourseBaseInfo;
+
+@Repository
+public interface CourseBaseInfoRepository extends JpaRepository<CourseBaseInfo, Long> {
+    Page<CourseBaseInfo> findByOrgIdAndCourseTypeAndState(Pageable pageable, String schoolId, String courseType, String state);
+    Page<CourseBaseInfo> findByOrgIdAndCourseTypeAndStateAndCourseNameLike(Pageable pageable, String schoolId, String courseType, String state,String courseName);
+
+    List<CourseBaseInfo> findByCourseTypeAndState(String courseType, String state);
+    List<CourseBaseInfo> findByCourseCode(String courseCode);
+
+
+    List<CourseBaseInfo> findById(long id);
+}

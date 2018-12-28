@@ -1,0 +1,50 @@
+package app.apiservice;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import app.entity.DeviceEntity;
+import app.entity.user.User;
+import app.packet.error.ErrorEnum;
+import app.packet.request.CommonPacket;
+import app.packet.request.LoginPacket;
+import app.packet.response.CommonMessage;
+import app.packet.Pagination;
+import app.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@ControllerAdvice
+@RequestMapping(path = "/api")
+public class Login {
+	private final Logger logger = LoggerFactory.getLogger(this.getClass()) ;
+
+	@Autowired
+	private UserService userService;
+
+	@RequestMapping(path="/login",method=RequestMethod.POST)
+	public CommonMessage login(@RequestBody LoginPacket packet){
+		logger.info("username is: " + packet.getDeviceId());
+		logger.info("password is: " + packet.getPassword());
+		User user = userService.getUser(packet.getUsername());
+		CommonMessage message;
+		if (user == null ){
+			message = CommonMessage.failure(ErrorEnum.USER_NOT_EXISTS);
+		}else if (!userService.validatePassword(packet.getUsername(), packet.getPassword())){
+			message = CommonMessage.failure(ErrorEnum.USER_PASSWORD_INVALID);
+		}else {
+			String token = userService.getToken(packet.getUsername(), packet.getDeviceId());
+			message = CommonMessage.success(null, token);
+		}
+
+		return message;
+	}
+    @ExceptionHandler(value = Exception.class)
+    public CommonMessage errorHandler(Exception ex) {
+		return CommonMessage.failure(ErrorEnum.SERVER_INTERNAL_ERROR);
+   }
+}

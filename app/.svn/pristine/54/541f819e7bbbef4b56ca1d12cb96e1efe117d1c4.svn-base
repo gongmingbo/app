@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery-3.2.1.min.js"></script>
+</head>
+<body>
+<table border="1" cellspacing="0"></table>
+
+</body>
+<script>
+    var res = {
+        "登录": {
+            "request": {
+                "username": "xxxx",
+                "deviceId": "xxxx",
+                "password": "hash()"
+            },
+            "response": {
+                "success": true,
+                "errorCode": 0,
+                "errorMessage": "success",
+                "data": {
+                    "sessionCode": "random string or uuid"
+                }
+            }
+        },
+        "业务接口模板":{
+            "request": {
+                "username": "xxxx",
+                "deviceId": "xxxx",
+                "authCode": "hash(username + deviceId + sessionCode)", // sessionCode 是登录接口返回
+                "data": {
+
+                }
+            },
+            "response": {
+                "success": true,
+                "errorCode": 0,
+                "errorMessage": "success",
+                "data": {
+
+                }
+            }
+        },
+        "分页部分模板": {
+            "request":{
+                "page": 1,
+                "size": 10
+            },
+            "response": {
+                "page": 1,
+                "size": 10,
+                "totalPage": 5
+            }
+        },
+        "首页推荐": {
+            "request":{
+                // 省略通用部分，只定义专用部分
+                "data": {
+                    // 省略分页部分
+                }
+            },
+            "response": {
+                "data": {
+                    "articles": [
+                        {
+                            "title": "xxx",
+                            "bref": "xxxx",
+                            "link": "http://",
+                            "mediaType": "picture or video",
+                            "resources": [
+                                {
+                                    "url": "http://",
+                                    "thumb": "http://"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        },
+        "文章详情": {
+            "request": {
+                "data": {
+                    "articleID": "uuid"
+                }
+            },
+            "response": {
+                "data": {
+                    "title": "xxx",
+                    "subtitle": "xxx",
+                    "pubTime": "2018-10-09 10:30:33",
+                    "collected": false,
+                    "content": "rich text, contains media resources",
+                    "tag": ["编程", "计算机科学"]
+                }
+            }
+        },
+        "获取我的课程表": {
+            "request": {
+
+            },
+            "response": {
+                "data": {
+                    "firstday": "2018-10-09",
+                    "courses": {
+                        "id1":{
+                            "id": "id1",
+                            "name": "xxx",
+                            "teacher": "xxx",
+                            "classNo": [1, 2],
+                            "dayOfWeek": [1],
+                            "weeks": [4, 5, 6],
+                            "classroom": "xx",
+                            "dates": ["2018-10-22", "2018-10-29", "2018-11-5"],
+                            "reminder": 15
+                        },
+                        "id2":{
+                            "id": "id2",
+                            "name": "xxx",
+                            "teacher": "xxx",
+                            "classNo": [1, 2],
+                            "dayOfWeek": [1],
+                            "weeks": [4, 5, 6],
+                            "classroom": "xx",
+                            "dates": ["2018-10-22", "2018-10-29", "2018-11-5"],
+                            "reminder": 15
+                        }
+                    }
+                }
+            }
+        },
+        "新增/编辑课程": {
+            "request": {
+                "data": {
+                    "course": "uuid 或者 null 如果是新增",
+                    "name": "xxx",
+                    "teacher": "xxx",
+                    "classNo": [1, 2],
+                    "dayOfWeek": [1],
+                    "weeks": [4, 5, 6],
+                    "classroom": "xx",
+                    "reminder": 15
+                }
+            },
+            "response": {
+                "data": {
+                    "id": "id2",
+                    "name": "xxx",
+                    "teacher": "xxx",
+                    "classNo": [1, 2],
+                    "dayOfWeek": [1],
+                    "weeks": [4, 5, 6],
+                    "classroom": "xx",
+                    "dates": ["2018-10-22", "2018-10-29", "2018-11-5"],
+                    "reminder": 15
+                }
+            }
+        },
+        "删除课程": {
+            "request": {
+                "data": {
+                    "id": "uuid"
+                }
+            },
+            "response": {
+
+            }
+        },
+        "阅读历史": {
+            "request": {
+                "data":{
+                    "pagination": {
+
+                    },
+                    "isConcerned": true,
+                    "user": "userid"
+                }
+            },
+            "response": {
+                "data": {
+                    "pagination": {
+
+                    },
+                    "articles":[
+                        {
+                            "title": "xxx",
+                            "bref": "xxxx",
+                            "link": "http://",
+                            "mediaType": "picture or video",
+                            "energy": "5g",
+                            "during": "80",
+                            "resources": [
+                                {
+                                    "url": "http://",
+                                    "thumb": "http://"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        },
+        "收藏文章": {
+            "request": {
+                "data":{
+                    "pagination": {
+
+                    }
+                }
+            },
+            "response": {
+                "data": {
+                    "pagination": {
+
+                    },
+                    "articles":[
+                        {
+                            "title": "xxx",
+                            "bref": "xxxx",
+                            "link": "http://",
+                            "mediaType": "picture or video",
+                            "resources": [
+                                {
+                                    "url": "http://",
+                                    "thumb": "http://"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        },
+        "智慧树": {
+            "request": {
+                "data": {
+                    "user": "userid"
+                }
+            },
+            "response": {
+                "data": {
+                    "bref": "xxx",
+                    "energy": "10kg",
+                    "tree": [
+                        {
+                            "name": "xxx",
+                            "energy": "5g",
+                            "resource": [
+                                {
+                                    "id": "uuid",
+                                    "name": "",
+                                    "energy": "5g"
+                                }
+
+                            ],
+                            "children": [
+
+                            ]
+                        }
+                    ]
+                }
+            }
+        },
+        "目标树": {
+            "request": {
+                "data": {
+                    "career": "careerid"
+                }
+            },
+            "response": {
+                "data": {
+                    "tree": [
+                        {
+                            "name": "xxx",
+                            "energy": "5g",
+                            "resource": [
+                                {
+                                    "id": "uuid",
+                                    "name": "",
+                                    "energy": "5g"
+                                }
+                            ],
+                            "children": [
+
+                            ]
+                        }
+                    ]
+                }
+            }
+        },
+        "排行榜": {
+            "request": {
+                "data": {
+                    "pagination": {
+
+                    },
+                    "scope": "全校 或 全年级"
+                }
+            },
+            "response": {
+                "data": {
+                    "pagination": {
+
+                    },
+                    "myRank": 2,
+                    "myEnergy": 3,
+                    "rankList": [
+                        {
+                            "user": "userID",
+                            "name": "xxx",
+                            "bref": "总结",
+                            "avator": "http://xxxx"
+                        }
+                    ]
+                }
+            }
+        },
+        "我的职业选择": {
+            "request": {
+
+            },
+            "response": {
+                "data": {
+                    "myCareer": ["id1", "id2"],
+                    "careers": [
+                        {
+                            "id": "uuid",
+                            "name": "计算机/软件/互联网",
+                            "children": [
+                                {
+                                    "id": "uuid",
+                                    "name": "软件",
+                                    "children": [
+                                        {
+                                            "id": "uuid",
+                                            "name": "产品经理"
+                                        },
+                                        {
+                                            "id": "uuid",
+                                            "name": "软件工程师"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        },
+        "选择我的职业": {
+            "request": {
+                "data": {
+                    "id": ["id1", "id2"]
+                }
+            },
+            "response": {
+            }
+        },
+        "个人资料": {
+            "request": {
+
+            },
+            "response": {
+                "data": {
+                    "name": "xxx",
+                    "avator": "http://xxxx",
+                    "school": "西南大学",
+                    "gradeAndClass": "软件工程2016级1班",
+                    "birthday": "1995-10-11",
+                    "department": "计算机科学",
+                    "tag": [""]
+                }
+            }
+        },
+        "修改个人资料": {
+            "request": {
+                "data": {
+                    "name": "xxx",
+                    "avator": "http://xxxx",
+                    "school": "西南大学",
+                    "gradeAndClass": "软件工程2016级1班",
+                    "birthday": "1995-10-11",
+                    "department": "计算机科学",
+                    "tag": [""]
+                }
+            },
+            "response": {
+
+            }
+        }
+    };
+
+
+    var regEnter = /[\r\n]+/g;
+    var regSpace = / /g;
+    var html = "<tr><td>接口名</td><td>请求</td><td>响应</td></tr>";
+    for(var k in res){
+        var v = res[k];
+        var req = v['request'];
+        var response = v['response'];
+        html += "<tr><td>" + k + "</td><td>" + JSON.stringify(req, null, 4).replace(regEnter, "<br>").replace(regSpace, "&nbsp;") + "</td>" + "<td>" + JSON.stringify(response, null, 4).replace(regEnter, "<br>").replace(regSpace, "&nbsp;") + "</td></tr>";
+    }
+    $('table').html(html);
+
+</script>
+</html>

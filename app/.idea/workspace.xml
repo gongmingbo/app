@@ -1,0 +1,2419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" readonly="true" id="dc02a2b0-e069-4d42-907c-67fe7d3ec263" name="Default" comment="Failed commit: Default">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/fileTypeImages/icon_chm.gif" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/fileTypeImages/icon_chm.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/fileTypeImages/icon_default.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/fileTypeImages/icon_default.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/fileTypeImages/icon_doc.gif" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/fileTypeImages/icon_doc.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/fileTypeImages/icon_exe.gif" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/fileTypeImages/icon_exe.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/fileTypeImages/icon_jpg.gif" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/fileTypeImages/icon_jpg.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/fileTypeImages/icon_mp3.gif" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/fileTypeImages/icon_mp3.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/fileTypeImages/icon_mv.gif" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/fileTypeImages/icon_mv.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/fileTypeImages/icon_pdf.gif" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/fileTypeImages/icon_pdf.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/fileTypeImages/icon_ppt.gif" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/fileTypeImages/icon_ppt.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/fileTypeImages/icon_psd.gif" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/fileTypeImages/icon_psd.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/fileTypeImages/icon_rar.gif" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/fileTypeImages/icon_rar.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/fileTypeImages/icon_txt.gif" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/fileTypeImages/icon_txt.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/fileTypeImages/icon_xls.gif" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/fileTypeImages/icon_xls.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/images/alignicon.gif" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/images/alignicon.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/images/alignicon.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/images/alignicon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/images/bg.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/images/bg.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/images/file-icons.gif" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/images/file-icons.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/images/file-icons.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/images/file-icons.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/images/icons.gif" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/images/icons.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/images/icons.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/images/icons.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/images/image.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/images/image.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/images/progress.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/images/progress.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/images/success.gif" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/images/success.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/images/success.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/attachment/images/success.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/background/images/bg.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/background/images/bg.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/background/images/success.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/background/images/success.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/charts/images/charts0.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/charts/images/charts0.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/charts/images/charts1.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/charts/images/charts1.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/charts/images/charts2.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/charts/images/charts2.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/charts/images/charts3.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/charts/images/charts3.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/charts/images/charts4.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/charts/images/charts4.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/charts/images/charts5.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/charts/images/charts5.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/emotion/images/0.gif" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/emotion/images/0.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/emotion/images/bface.gif" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/emotion/images/bface.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/emotion/images/cface.gif" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/emotion/images/cface.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/emotion/images/fface.gif" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/emotion/images/fface.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/emotion/images/jxface2.gif" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/emotion/images/jxface2.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/emotion/images/neweditor-tab-bg.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/emotion/images/neweditor-tab-bg.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/emotion/images/tface.gif" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/emotion/images/tface.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/emotion/images/wface.gif" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/emotion/images/wface.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/emotion/images/yface.gif" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/emotion/images/yface.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/image/images/alignicon.jpg" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/image/images/alignicon.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/image/images/bg.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/image/images/bg.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/image/images/icons.gif" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/image/images/icons.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/image/images/icons.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/image/images/icons.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/image/images/image.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/image/images/image.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/image/images/progress.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/image/images/progress.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/image/images/success.gif" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/image/images/success.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/image/images/success.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/image/images/success.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/scrawl/images/addimg.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/scrawl/images/addimg.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/scrawl/images/brush.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/scrawl/images/brush.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/scrawl/images/delimg.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/scrawl/images/delimg.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/scrawl/images/delimgH.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/scrawl/images/delimgH.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/scrawl/images/empty.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/scrawl/images/empty.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/scrawl/images/emptyH.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/scrawl/images/emptyH.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/scrawl/images/eraser.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/scrawl/images/eraser.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/scrawl/images/redo.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/scrawl/images/redo.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/scrawl/images/redoH.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/scrawl/images/redoH.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/scrawl/images/scale.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/scrawl/images/scale.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/scrawl/images/scaleH.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/scrawl/images/scaleH.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/scrawl/images/size.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/scrawl/images/size.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/scrawl/images/undo.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/scrawl/images/undo.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/scrawl/images/undoH.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/scrawl/images/undoH.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/table/dragicon.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/table/dragicon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/template/images/bg.gif" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/template/images/bg.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/template/images/pre0.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/template/images/pre0.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/template/images/pre1.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/template/images/pre1.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/template/images/pre2.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/template/images/pre2.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/template/images/pre3.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/template/images/pre3.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/template/images/pre4.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/template/images/pre4.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/video/images/bg.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/video/images/bg.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/video/images/center_focus.jpg" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/video/images/center_focus.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/video/images/file-icons.gif" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/video/images/file-icons.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/video/images/file-icons.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/video/images/file-icons.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/video/images/icons.gif" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/video/images/icons.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/video/images/icons.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/video/images/icons.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/video/images/image.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/video/images/image.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/video/images/left_focus.jpg" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/video/images/left_focus.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/video/images/none_focus.jpg" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/video/images/none_focus.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/video/images/progress.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/video/images/progress.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/video/images/right_focus.jpg" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/video/images/right_focus.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/video/images/success.gif" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/video/images/success.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/video/images/success.png" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/video/images/success.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/wordimage/fClipboard_ueditor.swf" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/wordimage/fClipboard_ueditor.swf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dialogs/wordimage/imageUploader.swf" afterPath="$PROJECT_DIR$/src/main/resources/dialogs/wordimage/imageUploader.swf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/jsp/lib/commons-codec-1.9.jar" afterPath="$PROJECT_DIR$/src/main/resources/jsp/lib/commons-codec-1.9.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/jsp/lib/commons-fileupload-1.3.1.jar" afterPath="$PROJECT_DIR$/src/main/resources/jsp/lib/commons-fileupload-1.3.1.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/jsp/lib/commons-io-2.4.jar" afterPath="$PROJECT_DIR$/src/main/resources/jsp/lib/commons-io-2.4.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/jsp/lib/json.jar" afterPath="$PROJECT_DIR$/src/main/resources/jsp/lib/json.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/jsp/lib/ueditor-1.1.2.jar" afterPath="$PROJECT_DIR$/src/main/resources/jsp/lib/ueditor-1.1.2.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/lang/en/images/addimage.png" afterPath="$PROJECT_DIR$/src/main/resources/lang/en/images/addimage.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/lang/en/images/alldeletebtnhoverskin.png" afterPath="$PROJECT_DIR$/src/main/resources/lang/en/images/alldeletebtnhoverskin.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/lang/en/images/alldeletebtnupskin.png" afterPath="$PROJECT_DIR$/src/main/resources/lang/en/images/alldeletebtnupskin.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/lang/en/images/background.png" afterPath="$PROJECT_DIR$/src/main/resources/lang/en/images/background.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/lang/en/images/button.png" afterPath="$PROJECT_DIR$/src/main/resources/lang/en/images/button.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/lang/en/images/copy.png" afterPath="$PROJECT_DIR$/src/main/resources/lang/en/images/copy.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/lang/en/images/deletedisable.png" afterPath="$PROJECT_DIR$/src/main/resources/lang/en/images/deletedisable.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/lang/en/images/deleteenable.png" afterPath="$PROJECT_DIR$/src/main/resources/lang/en/images/deleteenable.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/lang/en/images/listbackground.png" afterPath="$PROJECT_DIR$/src/main/resources/lang/en/images/listbackground.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/lang/en/images/localimage.png" afterPath="$PROJECT_DIR$/src/main/resources/lang/en/images/localimage.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/lang/en/images/music.png" afterPath="$PROJECT_DIR$/src/main/resources/lang/en/images/music.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/lang/en/images/rotateleftdisable.png" afterPath="$PROJECT_DIR$/src/main/resources/lang/en/images/rotateleftdisable.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/lang/en/images/rotateleftenable.png" afterPath="$PROJECT_DIR$/src/main/resources/lang/en/images/rotateleftenable.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/lang/en/images/rotaterightdisable.png" afterPath="$PROJECT_DIR$/src/main/resources/lang/en/images/rotaterightdisable.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/lang/en/images/rotaterightenable.png" afterPath="$PROJECT_DIR$/src/main/resources/lang/en/images/rotaterightenable.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/lang/en/images/upload.png" afterPath="$PROJECT_DIR$/src/main/resources/lang/en/images/upload.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/lang/zh-cn/images/copy.png" afterPath="$PROJECT_DIR$/src/main/resources/lang/zh-cn/images/copy.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/lang/zh-cn/images/localimage.png" afterPath="$PROJECT_DIR$/src/main/resources/lang/zh-cn/images/localimage.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/lang/zh-cn/images/music.png" afterPath="$PROJECT_DIR$/src/main/resources/lang/zh-cn/images/music.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/lang/zh-cn/images/upload.png" afterPath="$PROJECT_DIR$/src/main/resources/lang/zh-cn/images/upload.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/dialogs/attachment/fileTypeImages/icon_chm.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/dialogs/attachment/fileTypeImages/icon_chm.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/dialogs/charts/images/charts2.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/dialogs/charts/images/charts2.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/dialogs/charts/images/charts5.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/dialogs/charts/images/charts5.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/dialogs/emotion/images/fface.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/dialogs/emotion/images/fface.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/dialogs/emotion/images/jxface2.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/dialogs/emotion/images/jxface2.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/dialogs/image/images/icons.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/dialogs/image/images/icons.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/dialogs/image/images/image.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/dialogs/image/images/image.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/dialogs/image/images/progress.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/dialogs/image/images/progress.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/dialogs/image/images/success.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/dialogs/image/images/success.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/dialogs/scrawl/images/addimg.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/dialogs/scrawl/images/addimg.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/dialogs/scrawl/images/brush.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/dialogs/scrawl/images/brush.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/dialogs/scrawl/images/eraser.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/dialogs/scrawl/images/eraser.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/dialogs/scrawl/images/size.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/dialogs/scrawl/images/size.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/dialogs/video/images/left_focus.jpg" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/dialogs/video/images/left_focus.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/jsp/lib/commons-codec-1.9.jar" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/jsp/lib/commons-codec-1.9.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/lang/en/images/alldeletebtnhoverskin.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/lang/en/images/alldeletebtnhoverskin.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/themes/default/images/cancelbutton.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/themes/default/images/cancelbutton.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/themes/default/images/cursor_v.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/themes/default/images/cursor_v.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/themes/default/images/icons.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/themes/default/images/icons.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/themes/default/images/lock.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/themes/default/images/lock.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/themes/default/images/scale.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/themes/default/images/scale.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/themes/default/images/videologo.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/themes/default/images/videologo.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/themes/default/images/word.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/themes/default/images/word.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/third-party/video-js/font/vjs.eot" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/third-party/video-js/font/vjs.eot" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/third-party/webuploader/Uploader.swf" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/third-party/webuploader/Uploader.swf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/fileTypeImages/icon_default.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/fileTypeImages/icon_default.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/fileTypeImages/icon_doc.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/fileTypeImages/icon_doc.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/fileTypeImages/icon_exe.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/fileTypeImages/icon_exe.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/fileTypeImages/icon_jpg.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/fileTypeImages/icon_jpg.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/fileTypeImages/icon_mp3.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/fileTypeImages/icon_mp3.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/fileTypeImages/icon_mv.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/fileTypeImages/icon_mv.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/fileTypeImages/icon_pdf.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/fileTypeImages/icon_pdf.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/fileTypeImages/icon_ppt.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/fileTypeImages/icon_ppt.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/fileTypeImages/icon_psd.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/fileTypeImages/icon_psd.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/fileTypeImages/icon_rar.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/fileTypeImages/icon_rar.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/fileTypeImages/icon_txt.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/fileTypeImages/icon_txt.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/fileTypeImages/icon_xls.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/fileTypeImages/icon_xls.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/images/alignicon.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/images/alignicon.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/images/alignicon.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/images/alignicon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/images/bg.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/images/bg.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/images/file-icons.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/images/file-icons.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/images/file-icons.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/images/file-icons.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/images/icons.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/images/icons.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/images/icons.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/images/icons.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/images/image.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/images/image.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/images/progress.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/images/progress.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/images/success.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/images/success.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/images/success.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/attachment/images/success.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/background/images/bg.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/background/images/bg.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/background/images/success.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/background/images/success.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/charts/images/charts0.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/charts/images/charts0.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/charts/images/charts1.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/charts/images/charts1.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/charts/images/charts3.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/charts/images/charts3.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/charts/images/charts4.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/charts/images/charts4.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/emotion/images/0.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/emotion/images/0.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/emotion/images/bface.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/emotion/images/bface.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/emotion/images/cface.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/emotion/images/cface.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/emotion/images/neweditor-tab-bg.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/emotion/images/neweditor-tab-bg.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/emotion/images/tface.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/emotion/images/tface.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/emotion/images/wface.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/emotion/images/wface.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/emotion/images/yface.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/emotion/images/yface.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/image/images/alignicon.jpg" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/image/images/alignicon.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/image/images/bg.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/image/images/bg.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/image/images/icons.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/image/images/icons.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/image/images/success.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/image/images/success.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/scrawl/images/delimg.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/scrawl/images/delimg.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/scrawl/images/delimgH.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/scrawl/images/delimgH.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/scrawl/images/empty.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/scrawl/images/empty.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/scrawl/images/emptyH.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/scrawl/images/emptyH.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/scrawl/images/redo.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/scrawl/images/redo.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/scrawl/images/redoH.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/scrawl/images/redoH.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/scrawl/images/scale.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/scrawl/images/scale.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/scrawl/images/scaleH.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/scrawl/images/scaleH.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/scrawl/images/undo.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/scrawl/images/undo.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/scrawl/images/undoH.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/scrawl/images/undoH.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/table/dragicon.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/table/dragicon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/template/images/bg.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/template/images/bg.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/template/images/pre0.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/template/images/pre0.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/template/images/pre1.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/template/images/pre1.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/template/images/pre2.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/template/images/pre2.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/template/images/pre3.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/template/images/pre3.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/template/images/pre4.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/template/images/pre4.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/video/images/bg.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/video/images/bg.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/video/images/center_focus.jpg" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/video/images/center_focus.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/video/images/file-icons.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/video/images/file-icons.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/video/images/file-icons.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/video/images/file-icons.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/video/images/icons.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/video/images/icons.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/video/images/icons.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/video/images/icons.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/video/images/image.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/video/images/image.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/video/images/none_focus.jpg" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/video/images/none_focus.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/video/images/progress.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/video/images/progress.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/video/images/right_focus.jpg" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/video/images/right_focus.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/video/images/success.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/video/images/success.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/video/images/success.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/video/images/success.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/wordimage/fClipboard_ueditor.swf" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/wordimage/fClipboard_ueditor.swf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/wordimage/imageUploader.swf" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/dialogs/wordimage/imageUploader.swf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/jsp/lib/commons-fileupload-1.3.1.jar" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/jsp/lib/commons-fileupload-1.3.1.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/jsp/lib/commons-io-2.4.jar" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/jsp/lib/commons-io-2.4.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/jsp/lib/json.jar" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/jsp/lib/json.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/jsp/lib/ueditor-1.1.2.jar" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/jsp/lib/ueditor-1.1.2.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/lang/en/images/addimage.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/lang/en/images/addimage.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/lang/en/images/alldeletebtnupskin.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/lang/en/images/alldeletebtnupskin.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/lang/en/images/background.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/lang/en/images/background.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/lang/en/images/button.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/lang/en/images/button.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/lang/en/images/copy.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/lang/en/images/copy.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/lang/en/images/deletedisable.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/lang/en/images/deletedisable.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/lang/en/images/deleteenable.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/lang/en/images/deleteenable.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/lang/en/images/listbackground.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/lang/en/images/listbackground.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/lang/en/images/localimage.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/lang/en/images/localimage.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/lang/en/images/music.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/lang/en/images/music.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/lang/en/images/rotateleftdisable.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/lang/en/images/rotateleftdisable.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/lang/en/images/rotateleftenable.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/lang/en/images/rotateleftenable.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/lang/en/images/rotaterightdisable.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/lang/en/images/rotaterightdisable.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/lang/en/images/rotaterightenable.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/lang/en/images/rotaterightenable.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/lang/en/images/upload.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/lang/en/images/upload.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/lang/zh-cn/images/copy.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/lang/zh-cn/images/copy.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/lang/zh-cn/images/localimage.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/lang/zh-cn/images/localimage.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/lang/zh-cn/images/music.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/lang/zh-cn/images/music.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/lang/zh-cn/images/upload.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/lang/zh-cn/images/upload.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/anchor.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/anchor.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/arrow.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/arrow.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/arrow_down.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/arrow_down.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/arrow_up.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/arrow_up.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/button-bg.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/button-bg.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/charts.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/charts.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/cursor_h.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/cursor_h.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/cursor_h.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/cursor_h.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/cursor_v.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/cursor_v.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/dialog-title-bg.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/dialog-title-bg.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/filescan.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/filescan.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/highlighted.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/highlighted.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/icons-all.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/icons-all.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/icons.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/icons.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/loaderror.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/loaderror.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/loading.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/loading.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/neweditor-tab-bg.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/neweditor-tab-bg.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/pagebreak.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/pagebreak.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/sortable.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/sortable.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/spacer.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/spacer.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/sparator_v.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/sparator_v.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/table-cell-align.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/table-cell-align.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/tangram-colorpicker.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/tangram-colorpicker.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/toolbar_bg.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/toolbar_bg.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/unhighlighted.gif" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/unhighlighted.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/upload.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/upload.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/wordpaste.png" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/themes/default/images/wordpaste.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/third-party/snapscreen/UEditorSnapscreen.exe" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/third-party/snapscreen/UEditorSnapscreen.exe" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/third-party/video-js/font/vjs.ttf" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/third-party/video-js/font/vjs.ttf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/third-party/video-js/font/vjs.woff" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/third-party/video-js/font/vjs.woff" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/third-party/video-js/video-js.swf" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/third-party/video-js/video-js.swf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/third-party/zeroclipboard/ZeroClipboard.swf" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/utf8-jsp/third-party/zeroclipboard/ZeroClipboard.swf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/themes/default/images/anchor.gif" afterPath="$PROJECT_DIR$/src/main/resources/themes/default/images/anchor.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/themes/default/images/arrow.png" afterPath="$PROJECT_DIR$/src/main/resources/themes/default/images/arrow.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/themes/default/images/arrow_down.png" afterPath="$PROJECT_DIR$/src/main/resources/themes/default/images/arrow_down.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/themes/default/images/arrow_up.png" afterPath="$PROJECT_DIR$/src/main/resources/themes/default/images/arrow_up.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/themes/default/images/button-bg.gif" afterPath="$PROJECT_DIR$/src/main/resources/themes/default/images/button-bg.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/themes/default/images/cancelbutton.gif" afterPath="$PROJECT_DIR$/src/main/resources/themes/default/images/cancelbutton.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/themes/default/images/charts.png" afterPath="$PROJECT_DIR$/src/main/resources/themes/default/images/charts.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/themes/default/images/cursor_h.gif" afterPath="$PROJECT_DIR$/src/main/resources/themes/default/images/cursor_h.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/themes/default/images/cursor_h.png" afterPath="$PROJECT_DIR$/src/main/resources/themes/default/images/cursor_h.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/themes/default/images/cursor_v.gif" afterPath="$PROJECT_DIR$/src/main/resources/themes/default/images/cursor_v.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/themes/default/images/cursor_v.png" afterPath="$PROJECT_DIR$/src/main/resources/themes/default/images/cursor_v.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/themes/default/images/dialog-title-bg.png" afterPath="$PROJECT_DIR$/src/main/resources/themes/default/images/dialog-title-bg.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/themes/default/images/filescan.png" afterPath="$PROJECT_DIR$/src/main/resources/themes/default/images/filescan.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/themes/default/images/highlighted.gif" afterPath="$PROJECT_DIR$/src/main/resources/themes/default/images/highlighted.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/themes/default/images/icons-all.gif" afterPath="$PROJECT_DIR$/src/main/resources/themes/default/images/icons-all.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/themes/default/images/icons.gif" afterPath="$PROJECT_DIR$/src/main/resources/themes/default/images/icons.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/themes/default/images/icons.png" afterPath="$PROJECT_DIR$/src/main/resources/themes/default/images/icons.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/themes/default/images/loaderror.png" afterPath="$PROJECT_DIR$/src/main/resources/themes/default/images/loaderror.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/themes/default/images/loading.gif" afterPath="$PROJECT_DIR$/src/main/resources/themes/default/images/loading.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/themes/default/images/lock.gif" afterPath="$PROJECT_DIR$/src/main/resources/themes/default/images/lock.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/themes/default/images/neweditor-tab-bg.png" afterPath="$PROJECT_DIR$/src/main/resources/themes/default/images/neweditor-tab-bg.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/themes/default/images/pagebreak.gif" afterPath="$PROJECT_DIR$/src/main/resources/themes/default/images/pagebreak.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/themes/default/images/scale.png" afterPath="$PROJECT_DIR$/src/main/resources/themes/default/images/scale.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/themes/default/images/sortable.png" afterPath="$PROJECT_DIR$/src/main/resources/themes/default/images/sortable.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/themes/default/images/spacer.gif" afterPath="$PROJECT_DIR$/src/main/resources/themes/default/images/spacer.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/themes/default/images/sparator_v.png" afterPath="$PROJECT_DIR$/src/main/resources/themes/default/images/sparator_v.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/themes/default/images/table-cell-align.png" afterPath="$PROJECT_DIR$/src/main/resources/themes/default/images/table-cell-align.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/themes/default/images/tangram-colorpicker.png" afterPath="$PROJECT_DIR$/src/main/resources/themes/default/images/tangram-colorpicker.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/themes/default/images/toolbar_bg.png" afterPath="$PROJECT_DIR$/src/main/resources/themes/default/images/toolbar_bg.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/themes/default/images/unhighlighted.gif" afterPath="$PROJECT_DIR$/src/main/resources/themes/default/images/unhighlighted.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/themes/default/images/upload.png" afterPath="$PROJECT_DIR$/src/main/resources/themes/default/images/upload.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/themes/default/images/videologo.gif" afterPath="$PROJECT_DIR$/src/main/resources/themes/default/images/videologo.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/themes/default/images/word.gif" afterPath="$PROJECT_DIR$/src/main/resources/themes/default/images/word.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/themes/default/images/wordpaste.png" afterPath="$PROJECT_DIR$/src/main/resources/themes/default/images/wordpaste.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/third-party/snapscreen/UEditorSnapscreen.exe" afterPath="$PROJECT_DIR$/src/main/resources/third-party/snapscreen/UEditorSnapscreen.exe" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/third-party/video-js/font/vjs.eot" afterPath="$PROJECT_DIR$/src/main/resources/third-party/video-js/font/vjs.eot" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/third-party/video-js/font/vjs.ttf" afterPath="$PROJECT_DIR$/src/main/resources/third-party/video-js/font/vjs.ttf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/third-party/video-js/font/vjs.woff" afterPath="$PROJECT_DIR$/src/main/resources/third-party/video-js/font/vjs.woff" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/third-party/video-js/video-js.swf" afterPath="$PROJECT_DIR$/src/main/resources/third-party/video-js/video-js.swf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/third-party/webuploader/Uploader.swf" afterPath="$PROJECT_DIR$/src/main/resources/third-party/webuploader/Uploader.swf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/third-party/zeroclipboard/ZeroClipboard.swf" afterPath="$PROJECT_DIR$/src/main/resources/third-party/zeroclipboard/ZeroClipboard.swf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/application.properties" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/index.html" afterPath="$PROJECT_DIR$/src/main/resources/static/index.html" />
+    </list>
+    <list id="b84d8add-c7ef-4e51-a924-32612c01a8a3" name="Failed commit: Default" comment="Failed commit: Default" />
+    <list id="b73fb96e-434e-4546-9eed-25f9dd0e5781" name="Failed commit: Failed commit: Default" comment="Failed commit: Default" />
+    <list id="b74f7d08-b93b-4723-ae43-12fc4a23ad98" name="Failed commit: Default (2)" comment="Failed commit: Default" />
+    <list id="06f54029-e07d-43c9-bf62-01548095b4b6" name="Failed commit: Default (3)" comment="Failed commit: Default" />
+    <list id="6416db1e-dc3d-4522-a61d-130eaa30e24a" name="Failed commit: Default (4)" comment="Failed commit: Default" />
+    <list id="1bbaa5db-2488-4b77-9654-deaa2f309873" name="Failed commit: Default (5)" comment="Failed commit: Default" />
+    <list id="cd15b253-c12c-4ccb-b902-18a17e56acd4" name="Failed commit: Default (6)" comment="Failed commit: Default" />
+    <list id="0551cf1c-f0a5-4491-80a9-062d3bd3dc77" name="Failed commit: Default (7)" comment="Failed commit: Default" />
+    <list id="4e00cb07-675b-4fdb-9ce6-1f597678ac2d" name="Failed commit: Default (8)" comment="Failed commit: Default" />
+    <list id="28b66288-4032-4188-bc1f-ac2469d1ab2a" name="Failed commit: Default (9)" comment="Failed commit: Default" />
+    <list id="a3beca2d-ac46-453e-bee1-0b0255b7d4f0" name="Failed commit: Default (10)" comment="Failed commit: Default" />
+    <list id="5c762449-b2ec-4d1a-b7eb-fb46492b8d92" name="Failed commit: Default (11)" comment="Failed commit: Default" />
+    <list id="a1f5fbc0-a962-4c86-8db7-0053168574ce" name="Failed commit: Default (12)" comment="Failed commit: Default" />
+    <list id="ea2ce562-f32c-4e37-8099-8cc395b59bba" name="Failed commit: Default (13)" comment="Failed commit: Default" />
+    <list id="6a159fc1-7d90-43f5-82c6-a77095df9341" name="Failed commit: Default (14)" comment="Failed commit: Default" />
+    <list id="3b77fe28-5b58-4f8e-afde-cceab4b4386d" name="Failed commit: Default (15)" comment="Failed commit: Default" />
+    <list id="75ee7351-02e0-45dc-8228-51e7ffb94c54" name="Failed commit: Default (16)" comment="Failed commit: Default" />
+    <list id="a4f03157-e7c0-4d83-a63b-64cb19bc0670" name="Failed commit: Default (17)" comment="Failed commit: Default" />
+    <list id="b7f9c34d-5cc1-4184-85a9-06bacfefaa3b" name="Rejected commit: Default" comment="Failed commit: Default" />
+    <list id="4ed5fd3d-5599-4dea-aa48-4b081a9c620f" name="Failed commit: Default (18)" comment="Failed commit: Default" />
+    <list id="b836e135-6268-40c5-a2a5-2a169c15ffdb" name="Failed commit: Default (19)" comment="Failed commit: Default" />
+    <list id="9b0e003a-2bd2-4e43-8e45-501c8423b29f" name="Failed commit: Default (20)" comment="Failed commit: Default" />
+    <list id="a13f0726-cc04-418c-ac01-a72de920e0e1" name="Failed commit: Default (21)" comment="Failed commit: Default" />
+    <list id="f8a0df65-11c2-4d79-99d5-c5eb137c2119" name="Failed commit: Default (22)" comment="Failed commit: Default" />
+    <list id="083cfa67-d300-4846-b4b3-6c44c3ee2660" name="Failed commit: Default (23)" comment="Failed commit: Default" />
+    <ignored path="$PROJECT_DIR$/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/app$Application.coverage" NAME="Application Coverage Results" MODIFIED="1545039594331" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DatabaseView">
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_TABLE_DETAILS" value="true" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="postgres@localhost" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+    </PATH>
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="app" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+      <file leaf-file-name="FileUploadController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/app/bankview/FileUploadController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="797">
+              <caret line="42" column="59" lean-forward="false" selection-start-line="42" selection-start-column="59" selection-end-line="42" selection-end-column="59" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CourseView.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/app/bankview/CourseView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="47" column="63" lean-forward="false" selection-start-line="47" selection-start-column="49" selection-end-line="47" selection-end-column="63" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ContentCotroller.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/app/bankview/ContentCotroller.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="274">
+              <caret line="129" column="51" lean-forward="false" selection-start-line="129" selection-start-column="51" selection-end-line="129" selection-end-column="51" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ConstantsKey.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/app/bankview/ConstantsKey.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="108">
+              <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ChangPasswordController.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/app/bankview/ChangPasswordController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="311">
+              <caret line="31" column="21" lean-forward="false" selection-start-line="31" selection-start-column="21" selection-end-line="31" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ContentRepository.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/app/repository/ContentRepository.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-257">
+              <caret line="30" column="111" lean-forward="false" selection-start-line="30" selection-start-column="105" selection-end-line="30" selection-end-column="111" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LoginContrller.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/app/bankview/LoginContrller.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="797">
+              <caret line="47" column="44" lean-forward="false" selection-start-line="47" selection-start-column="44" selection-end-line="47" selection-end-column="44" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="KnowledgeController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/app/bankview/KnowledgeController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="797">
+              <caret line="55" column="23" lean-forward="false" selection-start-line="55" selection-start-column="17" selection-end-line="55" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LabelController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/app/bankview/LabelController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="756">
+              <caret line="44" column="28" lean-forward="false" selection-start-line="44" selection-start-column="28" selection-end-line="44" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IconContrller.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/app/bankview/IconContrller.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="513">
+              <caret line="40" column="61" lean-forward="false" selection-start-line="40" selection-start-column="61" selection-end-line="40" selection-end-column="61" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="HTML File" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>$(&quot;#form_data&quot;)[0].reset();</find>
+      <find>tbody</find>
+      <find>&lt;Map&lt;String, Object&gt;</find>
+      <find>Map&lt;String, Object&gt;</find>
+      <find>makePy</find>
+      <find>addCourse</find>
+      <find>serchAction()</find>
+      <find>addTable</find>
+      <find>courseCode</find>
+      <find>no_results_text</find>
+      <find>chosen-select</find>
+      <find>prev</find>
+      <find>imgDelete</find>
+      <find>cancel</find>
+      <find>profession_more_add</find>
+      <find>save-row</find>
+      <find>close</find>
+      <find>ser</find>
+      <find>请选</find>
+      <find>选</find>
+      <find>chang</find>
+      <find>attchent</find>
+      <find>#lists.size(list)</find>
+      <find>该标签名称不能为空</find>
+      <find>_</find>
+      <find>该标题已经存在</find>
+      <find>创建</find>
+      <find>new-option-button</find>
+      <find>noData</find>
+      <find>delete</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>/web/course/</replace>
+      <replace>List&lt;Map&lt;String, Object&gt;&gt;</replace>
+      <replace>CourseBaseInfo</replace>
+    </replaceStrings>
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="externalProjectsViewState">
+      <projects_view />
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/resources/templates/profession_more.html" />
+        <option value="$PROJECT_DIR$/src/main/java/app/bankview/LableController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/packet/error/ErrorEnum.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/bankview/ChangPasswordController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/profession.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/pagination.js" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/css/icon_management.css" />
+        <option value="$PROJECT_DIR$/src/main/resources/data.sql" />
+        <option value="$PROJECT_DIR$/src/main/java/app/entity/content/IconManagement.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/entity/content/Tags.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/repository/TagRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/bankview/LabelController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/repository/IconRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/entity/user/User.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/entity/content/BaseContent.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/entity/content/Comment.java" />
+        <option value="$PROJECT_DIR$/src/test/java/UnitTest.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/navi.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/css/need.css" />
+        <option value="$PROJECT_DIR$/src/main/java/app/service/impl/CareerServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/bankview/ConstantsKey.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/profession_more_add.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/css/label_management.css" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/login.html" />
+        <option value="$PROJECT_DIR$/src/main/java/app/config/config.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/css/reset.css" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/label_management.html" />
+        <option value="$PROJECT_DIR$/src/main/java/app/bankview/LoginContrller.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/index.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/index.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/ueditor.all.js" />
+        <option value="$PROJECT_DIR$/src/main/java/app/bankview/ProfessionController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/config/WebInterceptor.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/config/SessionListener.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/service/CareerService.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/app/repository/ContentRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/bankview/ContentCotroller.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/bankview/CourseView.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/repository/AttachmentRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/repository/KnowledgeRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/bankview/UeditorConfig.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/config.json" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/ueditor.config.js" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/recommend.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/changePwd.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/required2.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/elective.html" />
+        <option value="$PROJECT_DIR$/src/main/java/app/bankview/FileUploadController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/icon_management.html" />
+        <option value="$PROJECT_DIR$/src/main/java/app/bankview/IconContrller.java" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="app" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="app" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Lifecycle" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$LifecycleNode" />
+        </PATH_ELEMENT>
+      </PATH>
+    </treeState>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-9" />
+    <option name="y" value="-9" />
+    <option name="width" value="1938" />
+    <option name="height" value="1048" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scratches" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="target" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bankview" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
+    <property name="nodejs_interpreter_path" value="C:/Program Files/nodejs/node" />
+    <property name="js.eslint.eslintPackage" value="" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
+    <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
+    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.20508982" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://D:/workspace/app/src/main/java/app/entity/smart/ProfessionClassification.java" />
+    <property name="com.intellij.database.dataSource.DataSourceTemplate" value="PostgreSQL" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="app.entity.content" />
+      <recent name="app.repository" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\workspace\app\src\main\resources\static" />
+      <recent name="D:\workspace\app\src\main\resources" />
+      <recent name="D:\workspace\app\src\main\resources\static\imgs" />
+      <recent name="D:\workspace\app\src\main\resources\static\css" />
+      <recent name="D:\workspace\app\src\main\resources\templates" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.Application">
+    <configuration default="false" name="UnitTest.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="app" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="UnitTest" />
+      <option name="METHOD_NAME" value="test" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="CourseTemplateService" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="app.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="app.service.CourseTemplateService" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="app" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="CourseView" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="app.bankview.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="app.bankview.CourseView" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="app" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="UnitTest.commentTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="app" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="UnitTest" />
+      <option name="METHOD_NAME" value="commentTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="UnitTest.PassKnowledgeRepositoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="app" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="UnitTest" />
+      <option name="METHOD_NAME" value="PassKnowledgeRepositoryTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <predefined_log_file id="idea.log" enabled="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android App">
+      <module name="" />
+      <option name="DEPLOY" value="true" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="DEBUGGER_TYPE" value="Java" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <Java />
+      <Profilers>
+        <option name="ENABLE_ADVANCED_PROFILING" value="true" />
+        <option name="GAPID_ENABLED" value="false" />
+        <option name="GAPID_DISABLE_PCS" value="false" />
+        <option name="SUPPORT_LIB_ENABLED" value="true" />
+        <option name="INSTRUMENTATION_ENABLED" value="true" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="EXTRA_OPTIONS" value="" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="DEBUGGER_TYPE" value="Java" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <Java />
+      <Profilers>
+        <option name="ENABLE_ADVANCED_PROFILING" value="true" />
+        <option name="GAPID_ENABLED" value="false" />
+        <option name="GAPID_DISABLE_PCS" value="false" />
+        <option name="SUPPORT_LIB_ENABLED" value="true" />
+        <option name="INSTRUMENTATION_ENABLED" value="true" />
+      </Profilers>
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <module />
+      <method />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Cold Fusion runner description" factoryName="Cold Fusion" custom_browser="" web_path="">
+      <method />
+    </configuration>
+    <configuration default="true" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="myFilePath" />
+      <option name="GLUE" />
+      <option name="myNameFilter" />
+      <option name="myGeneratedName" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="FlashRunConfigurationType" factoryName="Flash App">
+      <option name="BCName" value="" />
+      <option name="IOSSimulatorSdkPath" value="" />
+      <option name="adlOptions" value="" />
+      <option name="airProgramParameters" value="" />
+      <option name="appDescriptorForEmulator" value="Android" />
+      <option name="debugTransport" value="USB" />
+      <option name="debuggerSdkRaw" value="BC SDK" />
+      <option name="emulator" value="NexusOne" />
+      <option name="emulatorAdlOptions" value="" />
+      <option name="fastPackaging" value="true" />
+      <option name="fullScreenHeight" value="0" />
+      <option name="fullScreenWidth" value="0" />
+      <option name="launchUrl" value="false" />
+      <option name="launcherParameters">
+        <LauncherParameters>
+          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+          <option name="launcherType" value="OSDefault" />
+          <option name="newPlayerInstance" value="false" />
+          <option name="playerPath" value="FlashPlayerDebugger.exe" />
+        </LauncherParameters>
+      </option>
+      <option name="mobileRunTarget" value="Emulator" />
+      <option name="moduleName" value="" />
+      <option name="overriddenMainClass" value="" />
+      <option name="overriddenOutputFileName" value="" />
+      <option name="overrideMainClass" value="false" />
+      <option name="runTrusted" value="true" />
+      <option name="screenDpi" value="0" />
+      <option name="screenHeight" value="0" />
+      <option name="screenWidth" value="0" />
+      <option name="url" value="http://" />
+      <option name="usbDebugPort" value="7936" />
+      <method />
+    </configuration>
+    <configuration default="true" type="FlexUnitRunConfigurationType" factoryName="FlexUnit" appDescriptorForEmulator="Android" class_name="" emulatorAdlOptions="" method_name="" package_name="" scope="Class">
+      <option name="BCName" value="" />
+      <option name="launcherParameters">
+        <LauncherParameters>
+          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+          <option name="launcherType" value="OSDefault" />
+          <option name="newPlayerInstance" value="false" />
+          <option name="playerPath" value="FlashPlayerDebugger.exe" />
+        </LauncherParameters>
+      </option>
+      <option name="moduleName" value="" />
+      <option name="trusted" value="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails">
+      <setting name="vmparams" value="" />
+      <setting name="cmdLine" value="run-app" />
+      <setting name="passParentEnv" value="true" />
+      <setting name="launchBrowser" value="true" />
+      <setting name="launchBrowserUrl" value="" />
+      <setting name="depsClasspath" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="JarApplication" factoryName="JAR Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="Java Scratch" factoryName="Java Scratch">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="SCRATCH_FILE_ID" value="0" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerProtractor" factoryName="Protractor">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="app" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType" factoryName="Kotlin script">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="filePath" />
+      <option name="vmParameters" />
+      <option name="alternativeJrePath" />
+      <option name="programParameters" />
+      <option name="passParentEnvs" value="true" />
+      <option name="workingDirectory" />
+      <option name="isAlternativeJrePathEnabled" value="false" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list />
+            </option>
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run" />
+      <scripts />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="osgi.bnd.run" factoryName="Run Launcher">
+      <method />
+    </configuration>
+    <configuration default="true" type="osgi.bnd.run" factoryName="Test Launcher (JUnit)">
+      <method />
+    </configuration>
+    <configuration default="false" name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="app.Application" />
+      <module name="app" />
+      <envs />
+      <method />
+    </configuration>
+    <list size="6">
+      <item index="0" class="java.lang.String" itemvalue="Spring Boot.Application" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.UnitTest.test" />
+      <item index="2" class="java.lang.String" itemvalue="Application.CourseTemplateService" />
+      <item index="3" class="java.lang.String" itemvalue="Application.CourseView" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.UnitTest.commentTest" />
+      <item index="5" class="java.lang.String" itemvalue="JUnit.UnitTest.PassKnowledgeRepositoryTest" />
+    </list>
+    <recent_temporary>
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="JUnit.UnitTest.PassKnowledgeRepositoryTest" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.UnitTest.commentTest" />
+        <item index="2" class="java.lang.String" itemvalue="Application.CourseView" />
+        <item index="3" class="java.lang.String" itemvalue="Application.CourseTemplateService" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.UnitTest.test" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration" myUseAcceleration="nothing" cleanupOnStartRun="true">
+    <configuration useDefault="false">C:\Users\gongmingbo\AppData\Roaming\Subversion</configuration>
+    <supportedVersion>125</supportedVersion>
+  </component>
+  <component name="SvnFileUrlMappingImpl">
+    <option name="myMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="D:\workspace\app" />
+          <option name="myCopyRoot" value="D:\workspace\app" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+    <option name="myMoreRealMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="D:\workspace\app" />
+          <option name="myCopyRoot" value="D:\workspace\app" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="dc02a2b0-e069-4d42-907c-67fe7d3ec263" name="Default" comment="" />
+      <created>1541671483142</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1541671483142</updated>
+      <workItem from="1541671488319" duration="336000" />
+      <workItem from="1541671869205" duration="38357000" />
+      <workItem from="1542001618409" duration="11699000" />
+      <workItem from="1542013414126" duration="549000" />
+      <workItem from="1542013990321" duration="184000" />
+      <workItem from="1542014199529" duration="2908000" />
+      <workItem from="1542071641374" duration="3051000" />
+      <workItem from="1542087585569" duration="14887000" />
+      <workItem from="1542158365015" duration="11008000" />
+      <workItem from="1542176287162" duration="30524000" />
+      <workItem from="1542330961287" duration="23855000" />
+      <workItem from="1542366326375" duration="5000" />
+      <workItem from="1542366375135" duration="5000" />
+      <workItem from="1542366435979" duration="3466000" />
+      <workItem from="1542679403162" duration="9187000" />
+      <workItem from="1542700284585" duration="14140000" />
+      <workItem from="1542776211794" duration="16797000" />
+      <workItem from="1542849091615" duration="36178000" />
+      <workItem from="1543197985836" duration="31738000" />
+      <workItem from="1543368444746" duration="6185000" />
+      <workItem from="1543384122490" duration="44104000" />
+      <workItem from="1543558712110" duration="9926000" />
+      <workItem from="1543799989751" duration="19129000" />
+      <workItem from="1543886458410" duration="125000" />
+      <workItem from="1543886964396" duration="20859000" />
+      <workItem from="1543915711220" duration="17540000" />
+      <workItem from="1543996676679" duration="4256000" />
+      <workItem from="1544058667225" duration="11761000" />
+      <workItem from="1544071695614" duration="1027000" />
+      <workItem from="1544072785454" duration="24457000" />
+      <workItem from="1544152896840" duration="7770000" />
+      <workItem from="1544168851866" duration="2087000" />
+      <workItem from="1544172203961" duration="917000" />
+      <workItem from="1544173294288" duration="3520000" />
+      <workItem from="1544404979597" duration="8899000" />
+      <workItem from="1544424901912" duration="8241000" />
+      <workItem from="1544433715786" duration="1842000" />
+      <workItem from="1544435687684" duration="188000" />
+      <workItem from="1544491430720" duration="8215000" />
+      <workItem from="1544507934261" duration="12003000" />
+      <workItem from="1544577738518" duration="16319000" />
+      <workItem from="1544663560365" duration="236000" />
+      <workItem from="1544663970959" duration="13345000" />
+      <workItem from="1544750127286" duration="3719000" />
+      <workItem from="1544766693863" duration="11146000" />
+      <workItem from="1545009149927" duration="26822000" />
+      <workItem from="1545120841901" duration="938000" />
+      <workItem from="1545183717423" duration="6702000" />
+      <workItem from="1545204246253" duration="6782000" />
+      <workItem from="1545292395875" duration="4686000" />
+      <workItem from="1545362639111" duration="1284000" />
+      <workItem from="1545371197598" duration="3305000" />
+      <workItem from="1545620297864" duration="5018000" />
+      <workItem from="1545721389185" duration="1214000" />
+      <workItem from="1545722882357" duration="21235000" />
+      <workItem from="1545873360371" duration="18661000" />
+      <workItem from="1545976983487" duration="1233000" />
+    </task>
+    <task id="LOCAL-00064" summary="Failed commit: Default">
+      <created>1544435858149</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1544435858150</updated>
+    </task>
+    <task id="LOCAL-00065" summary="Failed commit: Default">
+      <created>1544435870255</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1544435870255</updated>
+    </task>
+    <task id="LOCAL-00066" summary="Failed commit: Default">
+      <created>1544494378123</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1544494378123</updated>
+    </task>
+    <task id="LOCAL-00067" summary="Failed commit: Default">
+      <created>1544494421118</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1544494421118</updated>
+    </task>
+    <task id="LOCAL-00068" summary="Failed commit: Default">
+      <created>1544494431147</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1544494431147</updated>
+    </task>
+    <task id="LOCAL-00069" summary="Failed commit: Default">
+      <created>1544508544140</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1544508544141</updated>
+    </task>
+    <task id="LOCAL-00070" summary="Failed commit: Default">
+      <created>1544509482124</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1544509482124</updated>
+    </task>
+    <task id="LOCAL-00071" summary="Failed commit: Default">
+      <created>1544578849164</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1544578849165</updated>
+    </task>
+    <task id="LOCAL-00072" summary="Failed commit: Default">
+      <created>1544583432128</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1544583432128</updated>
+    </task>
+    <task id="LOCAL-00073" summary="Failed commit: Default">
+      <created>1544595273158</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1544595273158</updated>
+    </task>
+    <task id="LOCAL-00074" summary="Failed commit: Default">
+      <created>1544597129139</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1544597129139</updated>
+    </task>
+    <task id="LOCAL-00075" summary="Failed commit: Default">
+      <created>1544597422147</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1544597422147</updated>
+    </task>
+    <task id="LOCAL-00076" summary="Failed commit: Default">
+      <created>1544598631122</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1544598631122</updated>
+    </task>
+    <task id="LOCAL-00077" summary="Failed commit: Default">
+      <created>1544770856158</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1544770856159</updated>
+    </task>
+    <task id="LOCAL-00078" summary="Failed commit: Default">
+      <created>1544773995140</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1544773995140</updated>
+    </task>
+    <task id="LOCAL-00079" summary="Failed commit: Default">
+      <created>1544774006168</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1544774006168</updated>
+    </task>
+    <task id="LOCAL-00080" summary="Failed commit: Default">
+      <created>1544774611137</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1544774611137</updated>
+    </task>
+    <task id="LOCAL-00081" summary="Failed commit: Default">
+      <created>1545011813147</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1545011813148</updated>
+    </task>
+    <task id="LOCAL-00082" summary="Failed commit: Default">
+      <created>1545013095167</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1545013095167</updated>
+    </task>
+    <task id="LOCAL-00083" summary="Failed commit: Default">
+      <created>1545013109169</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1545013109169</updated>
+    </task>
+    <task id="LOCAL-00084" summary="Failed commit: Default">
+      <created>1545016644141</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1545016644141</updated>
+    </task>
+    <task id="LOCAL-00085" summary="Failed commit: Default">
+      <created>1545016654136</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1545016654136</updated>
+    </task>
+    <task id="LOCAL-00086" summary="Failed commit: Default">
+      <created>1545016666162</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1545016666162</updated>
+    </task>
+    <task id="LOCAL-00087" summary="Failed commit: Default">
+      <created>1545017119151</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1545017119151</updated>
+    </task>
+    <task id="LOCAL-00088" summary="Failed commit: Default">
+      <created>1545017130120</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1545017130120</updated>
+    </task>
+    <task id="LOCAL-00089" summary="Failed commit: Default">
+      <created>1545028262140</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1545028262140</updated>
+    </task>
+    <task id="LOCAL-00090" summary="Failed commit: Default">
+      <created>1545028279149</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1545028279149</updated>
+    </task>
+    <task id="LOCAL-00091" summary="Failed commit: Default">
+      <created>1545028290139</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1545028290139</updated>
+    </task>
+    <task id="LOCAL-00092" summary="Failed commit: Default">
+      <created>1545028299139</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1545028299139</updated>
+    </task>
+    <task id="LOCAL-00093" summary="Failed commit: Default">
+      <created>1545029360118</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1545029360118</updated>
+    </task>
+    <task id="LOCAL-00094" summary="Failed commit: Default">
+      <created>1545031694136</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1545031694136</updated>
+    </task>
+    <task id="LOCAL-00095" summary="Failed commit: Default">
+      <created>1545031866138</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1545031866138</updated>
+    </task>
+    <task id="LOCAL-00096" summary="Failed commit: Default">
+      <created>1545031986157</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1545031986157</updated>
+    </task>
+    <task id="LOCAL-00097" summary="Failed commit: Default">
+      <created>1545103839126</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1545103839126</updated>
+    </task>
+    <task id="LOCAL-00098" summary="Failed commit: Default">
+      <created>1545103881121</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1545103881121</updated>
+    </task>
+    <task id="LOCAL-00099" summary="Failed commit: Default">
+      <created>1545104021126</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1545104021126</updated>
+    </task>
+    <task id="LOCAL-00100" summary="Failed commit: Default">
+      <created>1545113088132</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1545113088133</updated>
+    </task>
+    <task id="LOCAL-00101" summary="Failed commit: Default">
+      <created>1545722777141</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1545722777142</updated>
+    </task>
+    <task id="LOCAL-00102" summary="Failed commit: Default">
+      <created>1545810601131</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1545810601132</updated>
+    </task>
+    <task id="LOCAL-00103" summary="Failed commit: Default">
+      <created>1545810614141</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1545810614141</updated>
+    </task>
+    <task id="LOCAL-00104" summary="Failed commit: Default">
+      <created>1545810740163</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1545810740163</updated>
+    </task>
+    <task id="LOCAL-00105" summary="Failed commit: Default">
+      <created>1545964226126</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1545964226127</updated>
+    </task>
+    <task id="LOCAL-00106" summary="Failed commit: Default">
+      <created>1545964238127</created>
+      <option name="number" value="00106" />
+      <option name="presentableId" value="LOCAL-00106" />
+      <option name="project" value="LOCAL" />
+      <updated>1545964238127</updated>
+    </task>
+    <task id="LOCAL-00107" summary="Failed commit: Default">
+      <created>1545964248128</created>
+      <option name="number" value="00107" />
+      <option name="presentableId" value="LOCAL-00107" />
+      <option name="project" value="LOCAL" />
+      <updated>1545964248128</updated>
+    </task>
+    <task id="LOCAL-00108" summary="Failed commit: Default">
+      <created>1545964400134</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1545964400134</updated>
+    </task>
+    <task id="LOCAL-00109" summary="Failed commit: Default">
+      <created>1545964416129</created>
+      <option name="number" value="00109" />
+      <option name="presentableId" value="LOCAL-00109" />
+      <option name="project" value="LOCAL" />
+      <updated>1545964416129</updated>
+    </task>
+    <task id="LOCAL-00110" summary="Failed commit: Default">
+      <created>1545964775113</created>
+      <option name="number" value="00110" />
+      <option name="presentableId" value="LOCAL-00110" />
+      <option name="project" value="LOCAL" />
+      <updated>1545964775113</updated>
+    </task>
+    <task id="LOCAL-00111" summary="Failed commit: Default">
+      <created>1545964881137</created>
+      <option name="number" value="00111" />
+      <option name="presentableId" value="LOCAL-00111" />
+      <option name="project" value="LOCAL" />
+      <updated>1545964881138</updated>
+    </task>
+    <task id="LOCAL-00112" summary="Failed commit: Default">
+      <created>1545964917122</created>
+      <option name="number" value="00112" />
+      <option name="presentableId" value="LOCAL-00112" />
+      <option name="project" value="LOCAL" />
+      <updated>1545964917122</updated>
+    </task>
+    <option name="localTasksCounter" value="113" />
+    <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="UnitTest_PassKnowledgeRepositoryTest - 2018.12.24 at 17h 42m 35s.xml">
+      <configuration name="UnitTest.PassKnowledgeRepositoryTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="UnitTest_commentTest - 2018.12.11 at 15h 21m 13s.xml">
+      <configuration name="UnitTest.commentTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="UnitTest_commentTest - 2018.12.11 at 15h 21m 59s.xml">
+      <configuration name="UnitTest.commentTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="UnitTest_commentTest - 2018.12.11 at 15h 22m 54s.xml">
+      <configuration name="UnitTest.commentTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="UnitTest_commentTest - 2018.12.11 at 15h 24m 37s.xml">
+      <configuration name="UnitTest.commentTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="UnitTest_commentTest - 2018.12.11 at 15h 25m 10s.xml">
+      <configuration name="UnitTest.commentTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="UnitTest_commentTest - 2018.12.11 at 15h 26m 19s.xml">
+      <configuration name="UnitTest.commentTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="UnitTest_commentTest - 2018.12.11 at 15h 29m 12s.xml">
+      <configuration name="UnitTest.commentTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="UnitTest_commentTest - 2018.12.11 at 15h 55m 05s.xml">
+      <configuration name="UnitTest.commentTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="UnitTest_commentTest - 2018.12.11 at 16h 18m 09s.xml">
+      <configuration name="UnitTest.commentTest" configurationId="JUnit" />
+    </history-entry>
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="604570000" />
+  </component>
+  <component name="TodoView" selected-index="3">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-9" y="-9" width="1938" height="1048" extended-state="7" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.0" sideWeight="0.2387339" order="11" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15933476" sideWeight="0.4946401" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32939914" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.030577576" sideWeight="0.7612661" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.185567" sideWeight="0.7438238" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32760596" sideWeight="0.4699248" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42038947" sideWeight="0.7330827" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32760596" sideWeight="0.47207305" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32760596" sideWeight="0.46562836" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24678111" sideWeight="0.4892412" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32760596" sideWeight="0.8968851" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32886267" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20118026" sideWeight="0.51075876" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32842582" sideWeight="0.63036484" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15933476" sideWeight="0.5053599" order="11" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.0" sideWeight="0.2387339" order="11" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15933476" sideWeight="0.4946401" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32939914" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0" sideWeight="0.7612661" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.185567" sideWeight="0.7438238" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32842582" sideWeight="0.63036484" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42038947" sideWeight="0.7330827" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32760596" sideWeight="0.4699248" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15933476" sideWeight="0.5053599" order="11" side_tool="true" content_ui="tabs" />
+      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32760596" sideWeight="0.47207305" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32760596" sideWeight="0.46562836" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20118026" sideWeight="0.49415204" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32760596" sideWeight="0.8968851" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32886267" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24195279" sideWeight="0.50584793" order="6" side_tool="true" content_ui="tabs" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="processedProjectFiles" value="true" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Failed commit: Default" />
+    <option name="LAST_COMMIT_MESSAGE" value="Failed commit: Default" />
+    <option name="CHANGE_BROWSER_SETTINGS">
+      <map>
+        <entry key="svn">
+          <value>
+            <ChangeBrowserSettings>
+              <option name="DATE_BEFORE" />
+              <option name="DATE_AFTER" />
+            </ChangeBrowserSettings>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="257" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/repository/UserRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="5" column="17" lean-forward="false" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/repository/CollectRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="10" column="17" lean-forward="false" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/repository/CommentRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="12" column="17" lean-forward="false" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-commons/1.13.3.RELEASE/spring-data-commons-1.13.3.RELEASE-sources.jar!/org/springframework/data/repository/CrudRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="64" column="7" lean-forward="true" selection-start-line="64" selection-start-column="7" selection-end-line="64" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/repository/CourseSyllabusRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="8" column="17" lean-forward="false" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/repository/CourseBaseInfoRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="15" column="17" lean-forward="false" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-jpa/1.11.3.RELEASE/spring-data-jpa-1.11.3.RELEASE-sources.jar!/org/springframework/data/jpa/repository/support/SimpleJpaRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="298">
+          <caret line="233" column="24" lean-forward="false" selection-start-line="233" selection-start-column="24" selection-end-line="233" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/hibernate/javax/persistence/hibernate-jpa-2.1-api/1.0.0.Final/hibernate-jpa-2.1-api-1.0.0.Final-sources.jar!/javax/persistence/EntityManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="283">
+          <caret line="103" column="17" lean-forward="false" selection-start-line="103" selection-start-column="17" selection-end-line="103" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/entity/content/Attachment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="283">
+          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/repository/AttachmentRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="9" column="56" lean-forward="false" selection-start-line="9" selection-start-column="56" selection-end-line="9" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-jpa/1.11.3.RELEASE/spring-data-jpa-1.11.3.RELEASE-sources.jar!/org/springframework/data/jpa/repository/JpaRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="35" column="17" lean-forward="false" selection-start-line="35" selection-start-column="17" selection-end-line="35" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/repository/KnowledgeRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="27" column="1" lean-forward="false" selection-start-line="27" selection-start-column="1" selection-end-line="27" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/src.zip!/java/lang/Math.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-536">
+          <caret line="771" column="25" lean-forward="false" selection-start-line="771" selection-start-column="25" selection-end-line="771" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/fastjson/1.2.49/fastjson-1.2.49.jar!/com/alibaba/fastjson/serializer/JSONSerializer.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="31" column="44" lean-forward="true" selection-start-line="31" selection-start-column="44" selection-end-line="31" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/fastjson/1.2.49/fastjson-1.2.49.jar!/com/alibaba/fastjson/serializer/SerializeFilterable.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6257">
+          <caret line="25" column="35" lean-forward="false" selection-start-line="25" selection-start-column="35" selection-end-line="25" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/Application.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="11" column="27" lean-forward="true" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
+          <folding>
+            <element signature="e#311#312#0" expanded="false" />
+            <element signature="e#364#365#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot/1.5.3.RELEASE/spring-boot-1.5.3.RELEASE-sources.jar!/org/springframework/boot/SpringApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="274">
+          <caret line="1149" column="49" lean-forward="false" selection-start-line="1149" selection-start-column="49" selection-end-line="1149" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/jsp/controller.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application1.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/jquery-3.2.1.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/src.zip!/java/io/InputStreamReader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="274">
+          <caret line="70" column="11" lean-forward="false" selection-start-line="70" selection-start-column="11" selection-end-line="70" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/repository/TagRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="17" column="15" lean-forward="false" selection-start-line="17" selection-start-column="15" selection-end-line="17" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/idea.jar!/resources/html5-schema/html5/phrase.rnc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="38" column="22" lean-forward="true" selection-start-line="38" selection-start-column="22" selection-end-line="38" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/config.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="13" column="25" lean-forward="false" selection-start-line="3" selection-start-column="2" selection-end-line="13" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/jsp/config.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-243">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/ueditor.config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="427">
+          <caret line="428" column="9" lean-forward="true" selection-start-line="428" selection-start-column="9" selection-end-line="428" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/share.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/changePwd.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="54" column="18" lean-forward="true" selection-start-line="54" selection-start-column="18" selection-end-line="54" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/required2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="213" column="101" lean-forward="false" selection-start-line="213" selection-start-column="77" selection-end-line="213" selection-end-column="101" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/elective.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="218" column="18" lean-forward="true" selection-start-line="218" selection-start-column="18" selection-end-line="218" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/recommend.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="581">
+          <caret line="46" column="54" lean-forward="true" selection-start-line="46" selection-start-column="54" selection-end-line="46" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/required.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/label_management.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/icon_management.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7155">
+          <caret line="265" column="36" lean-forward="false" selection-start-line="265" selection-start-column="36" selection-end-line="265" selection-end-column="36" />
+          <folding>
+            <marker date="1545964809353" expanded="true" signature="6959:6993" ph="..." />
+            <marker date="1545964809353" expanded="true" signature="7316:7329" ph="..." />
+            <marker date="1545964809353" expanded="true" signature="9975:9987" ph="..." />
+            <marker date="1545964809353" expanded="true" signature="11096:11108" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/entity/content/IconManagement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="25" column="32" lean-forward="false" selection-start-line="25" selection-start-column="32" selection-end-line="25" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/bankview/ShareApp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#357#358#0" expanded="false" />
+            <element signature="e#387#388#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/bankview/ProfessionController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="945">
+          <caret line="51" column="43" lean-forward="false" selection-start-line="51" selection-start-column="33" selection-end-line="51" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/bankview/UeditorConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="571">
+          <caret line="134" column="34" lean-forward="true" selection-start-line="134" selection-start-column="34" selection-end-line="134" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/fastjson/1.2.49/fastjson-1.2.49.jar!/com/alibaba/fastjson/JSON.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3199">
+          <caret line="417" column="23" lean-forward="false" selection-start-line="417" selection-start-column="8" selection-end-line="417" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/bankview/LoginContrller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="797">
+          <caret line="47" column="44" lean-forward="false" selection-start-line="47" selection-start-column="44" selection-end-line="47" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/bankview/LabelController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="756">
+          <caret line="44" column="28" lean-forward="false" selection-start-line="44" selection-start-column="28" selection-end-line="44" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/bankview/KnowledgeController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="797">
+          <caret line="55" column="23" lean-forward="false" selection-start-line="55" selection-start-column="17" selection-end-line="55" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/repository/ContentRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-257">
+          <caret line="30" column="111" lean-forward="false" selection-start-line="30" selection-start-column="105" selection-end-line="30" selection-end-column="111" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/bankview/IconContrller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="513">
+          <caret line="40" column="61" lean-forward="false" selection-start-line="40" selection-start-column="61" selection-end-line="40" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/bankview/FileUploadController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="797">
+          <caret line="42" column="59" lean-forward="false" selection-start-line="42" selection-start-column="59" selection-end-line="42" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/bankview/CourseView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="47" column="63" lean-forward="false" selection-start-line="47" selection-start-column="49" selection-end-line="47" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/bankview/ContentCotroller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="274">
+          <caret line="129" column="51" lean-forward="false" selection-start-line="129" selection-start-column="51" selection-end-line="129" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/bankview/ConstantsKey.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/bankview/ChangPasswordController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="31" column="21" lean-forward="false" selection-start-line="31" selection-start-column="21" selection-end-line="31" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArquillianSettingsConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.20508982" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.20508982" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>app</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.20508982" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Maven: antlr:antlr:2.7.7</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

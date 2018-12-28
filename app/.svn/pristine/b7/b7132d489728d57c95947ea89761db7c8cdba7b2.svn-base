@@ -1,0 +1,12 @@
+package app.repository;
+
+import app.entity.content.Attachment;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+/**
+ * Created by gongmingbo on 2018/11/14.
+ */
+@Repository
+public interface AttachmentRepository extends JpaRepository<Attachment,Long>{
+}

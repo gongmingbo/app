@@ -1,0 +1,12 @@
+package app.repository;
+
+import app.entity.smart.Knowledge;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface KnowledgeRepository extends JpaRepository<Knowledge, String > {
+    List<Knowledge> findByProfessionId(String id);
+
+    List<Knowledge> findByProfessionIdAndKnowledgeIdIsNot(String id, String knowledgeId);
+}

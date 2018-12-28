@@ -1,0 +1,104 @@
+package app.entity.user;
+
+import javax.persistence.*;
+
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+
+import app.config.JsonDataUserType;
+/**
+ * 学校专业信息表
+ * @author gongmingbo
+ *
+ */
+@Entity
+@Table(name="app_school_base_info")
+@TypeDef(name = "JsonDataUserType", typeClass = JsonDataUserType.class)
+public class School {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+	private String schoolId;
+	private String schoolName;
+	private String schoolCollege;//院
+	private String schoolDepartment;//系
+	private String schoolMajor;//专业
+	private String schoolGrade;//年级
+	private String schoolClass;//班级
+	@Type(type = "JsonDataUserType")
+	@Column(columnDefinition = "jsonb")
+	private String CourseTemplate;//课程表模板上学期
+	@Type(type = "JsonDataUserType")
+	@Column(columnDefinition = "jsonb")
+	private String CourseTemplateDown;//课程表模板下学期
+	public String getCourseTemplateDown() {
+		return CourseTemplateDown;
+	}
+	public void setCourseTemplateDown(String courseTemplateDown) {
+		CourseTemplateDown = courseTemplateDown;
+	}
+
+	@Override
+	public String toString() {
+		return "School [id=" + id + ", schoolId=" + schoolId + ", schoolName=" + schoolName + ", schoolCollege="
+				+ schoolCollege + ", schoolDepartment=" + schoolDepartment + ", schoolMajor=" + schoolMajor
+				+ ", schoolGrade=" + schoolGrade + ", schoolClass=" + schoolClass + ", CourseTemplate=" + CourseTemplate
+				+ "]";
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getSchoolId() {
+		return schoolId;
+	}
+	public void setSchoolId(String schoolId) {
+		this.schoolId = schoolId;
+	}
+	public String getSchoolName() {
+		return schoolName;
+	}
+	public void setSchoolName(String schoolName) {
+		this.schoolName = schoolName;
+	}
+	public String getSchoolCollege() {
+		return schoolCollege;
+	}
+	public void setSchoolCollege(String schoolCollege) {
+		this.schoolCollege = schoolCollege;
+	}
+	public String getSchoolDepartment() {
+		return schoolDepartment;
+	}
+	public void setSchoolDepartment(String schoolDepartment) {
+		this.schoolDepartment = schoolDepartment;
+	}
+	public String getSchoolMajor() {
+		return schoolMajor;
+	}
+	public void setSchoolMajor(String schoolMajor) {
+		this.schoolMajor = schoolMajor;
+	}
+	public String getSchoolGrade() {
+		return schoolGrade;
+	}
+	public void setSchoolGrade(String schoolGrade) {
+		this.schoolGrade = schoolGrade;
+	}
+	public String getSchoolClass() {
+		return schoolClass;
+	}
+	public void setSchoolClass(String schoolClass) {
+		this.schoolClass = schoolClass;
+	}
+	public String getCourseTemplate() {
+		return CourseTemplate;
+	}
+	public void setCourseTemplate(String courseTemplate) {
+		CourseTemplate = courseTemplate;
+	}
+	  
+	
+}

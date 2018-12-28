@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>推荐学习录入</title>
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/need.css">
+    <link rel="stylesheet" href="/css/pageation.css">
+    <script type="text/javascript" src="/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/pagination.js"></script>
+<style>
+    .font_color{
+        color: white;
+    }
+    .course_introduction {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 420px;
+    }
+</style>
+</head>
+
+<body>
+<div th:replace="navi :: myNavi(${dir})"></div>
+
+<!--<div class="ican-select">
+  <section class="choose" id="choose">
+     <label for="schools">学校 :</label>
+     <input type="text" id="chooseItem">
+     <div id="schools" class="dataWrapper">
+       <p>支持中文/拼音/简拼输入</p>
+       <ul>
+         <li class="active">常用</li>
+         <li>A</li>
+         <li>B</li>
+         <li>C</li>
+         <li>D</li>
+         <li>E</li>
+         <li>F</li>
+         <li>G</li>
+         <li>H</li>
+         <li>I</li>
+         <li>J</li>
+         <li>K</li>
+         <li>L</li>
+         <li>M</li>
+         <li>N</li>
+         <li>O</li>
+         <li>P</li>
+         <li>Q</li>
+         <li>R</li>
+         <li>S</li>
+         <li>T</li>
+         <li>U</li>
+         <li>V</li>
+         <li>W</li>
+         <li>X</li>
+         <li>Y</li>
+         <li>Z</li>
+       </ul>
+       <div class="school-list">
+         <h3>A</h3>
+         <div class="school-names">
+           <span>安庆大学</span>
+           <span>澳门f大学</span>
+           <span>澳门大学</span>
+           <span>澳门大dfdf学</span>
+           <span>澳门大学</span>
+           <span>澳门大学sfsdfsdf</span>
+           <span>澳门大学</span>
+           <span>澳门大学ffdf</span>
+           <span>澳门大学</span>
+           <span>澳门大学</span>
+           <span>澳门大学</span>
+           <span>澳门大dfd学</span>
+           <span>澳门大学</span>
+           <span>澳门大学</span>
+         </div>
+       </div>
+     </div>
+   </section>
+   <section>
+     <label for="institute">院系 :</label>
+     <select id="institute">
+       <option value="">计算机学院</option>
+       <option value="">建筑学院</option>
+       <option value="">物理学院</option>
+     </select>
+   </section>
+   <section>
+   <label for="job">岗位 :</label>
+   <select id="job">
+       <option value="">请选择</option>
+       <option th:each="profession ,professionStat : ${list}"
+                th:text="${profession.professionName}"
+                th:value="${profession.professionId}">
+       </option>
+   </select>
+   </section>
+</div>-->
+<div class="ican-class">
+    <table cellspacing="0" class="tableElective">
+        <caption>推荐学习列表</caption>
+        <thead>
+        <tr>
+            <th colspan="8">
+                <button onclick="checkedAll()">全选</button>
+                <button onclick="checkeOthers()">反选</button>
+                <button onclick="removeClass()">删除</button>
+                <!--<button onclick="uploadClass()">上传</button>-->
+                <button onclick="addAction();">新增</button>
+               <!-- <button onclick="editAction();">编辑</button>-->
+                <button onclick="closeCommentAction();">关闭评论</button>
+                <button onclick="openCommentAction();">开启评论</button>
+            </th>
+        </tr>
+            <tr>
+                <td>标题</td>
+                <td>类型</td>
+                <td>评论</td>
+                <td>发布日期</td>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    <!--    分页              -->
+    <div class="pagination_container">
+        <ul class="pagination" id="page"></ul>
+        <div class="pageJump">
+           <!-- <input class='current_page' type="hidden" value="${pageNo}"/>-->
+          <!--  <p>共<span class="total_page">2</span>页</p>-->
+            <form action="" id="getPageNo" method="post">
+                <input type="hidden" id="pageNo" name="pageNo" value=""/>
+                <input type="hidden" id="total_page_" name="total_page_" value=""/>
+               <!-- <span>跳转到第</span>
+                <input type="text" id="jumpPageNo" name="jumpPageNo"/>
+                <span>页</span>
+                <input label="站点id" name="Site" value="${Site }" type="hidden"/>
+                <input label="栏目id" name="Column" value="${Column }" type="hidden"/>
+                <input type="hidden" id="date_date" name="date" value="${date }"/>
+                <button type="button" class="button">确定</button>-->
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            page();
+        });
+        function page() {
+            Page({
+                num: $("#total_page_").val(), //页码数
+                startnum: $("#pageNo").val(), //指定页码
+                elem: $('#page'), //指定的元素
+                callback: function (n) { //回调函数
+                    $("input[name='pageNo']").val(n);
+                    // $("#getPageNo").submit();
+                    console.log(n)
+                    if (n == 1) {
+                        $('#page a').removeClass('not_allow');
+                        $('.page_prev').addClass('not_allow');
+                    } else if (n >= $('.total_page').html()) {
+                        $('#page a').removeClass('not_allow');
+                        $('.page_next').addClass('not_allow')
+                    } else {
+                        $('#page a').removeClass('not_allow');
+                    }
+                    getAticle(n)
+                }
+            });
+        }
+    </script>
+    <!-- 分页 -->
+</div>
+<div class="ican-modal" id="deleteModal">
+    <div class="delete-box">
+        <h3>确定删除该资料？</h3>
+        <!--   <div><span>资料名称:</span>
+             <span>人人都是产品经理</span>
+         </div>-->
+        <button onclick="closeAction();">取消</button>
+        <button type="submit" onclick="submitAction();">确定</button>
+    </div>
+</div>
+<script>
+    //初始化choose组件
+    function initChoose() {
+        /*    document.querySelector('#choose').addEventListener("click", function (e) {
+         if (e.target.nodeName === "INPUT") {
+         document.querySelector('.dataWrapper').style.display = "block"
+         }
+         if (e.target.nodeName === "LI") {
+         document.querySelector('#choose h3').innerText = e.target.innerText
+         Array.prototype.slice.apply(e.target.parentNode.children).forEach(element => {
+         element.classList.remove('active')
+         });
+         e.target.classList.add('active')
+         }
+         if (e.target.nodeName === "SPAN") {
+         document.querySelector('.dataWrapper').style.display = "none"
+         document.querySelector('#chooseItem').value = e.target.innerText
+         }
+         })*/
+        getAticle(1)
+    }
+
+    function getAticle(page) {
+        var url = "/web/getrecommend"
+        var data = {professionId: $("#job").val(), page: page}
+        var list = ajax(url, data)
+        console.log(list)
+        var tr = ""
+        for (n in list.data) {
+            tr += getTr(list.data[n])
+        }
+        $("#pageNo").val(list.page.page)
+        $("#total_page_").val(list.page.totalPage)
+        $("tbody").empty()
+        $("tbody").append($(tr))
+    }
+    function getTr(data) {
+        var date = new Date(data.publishTime)
+        date = dateFtt("yyyy-MM-dd", date)
+        var type;
+        if ("article"==data.contentType){
+             type="文章"
+        }else{
+            type="视频"
+        }
+        var comment=data.comment?"是":"否"
+        var tr = '<tr>' +
+            '<td style="text-align: left;">' +
+            '<input style="vertical-align: text-top;" type="checkbox">' +
+            '<input type="hidden" value="' + data.id + '">' +
+            '<a style="vertical-align: -webkit-baseline-middle;" class="font_color" href="/web/index?id='+data.id+'"><p class="course_introduction titleChoose" title='+data.contentTitle+'>' + data.contentTitle + '</p></a>' +
+            ' </td>' +
+            ' <td>' +
+            ' <p>' + type + '</p>' +
+            ' </td>' +
+            ' <td>' +
+            ' <p>' + comment + '</p>' +
+            ' </td>' +
+            '</td>' +
+            ' <td>' +
+            ' <p>' + date + '</p>' +
+            ' </td>' +
+            '</td>' +
+            ' </tr>';
+        return tr;
+    }
+    //新增
+    function addAction() {
+        location.href = "/web/index";
+    }
+
+    //显示模态框
+    function openRecommendModal() {
+        document.querySelector('#deleteModal').style.display = "block"
+    }
+    //判断是否选中checkbox
+    function isCheck() {
+        document.querySelector('.tableElective').addEventListener('click', function () {
+            Array.prototype.slice.call(document.querySelectorAll('input[type=checkbox]')).forEach(function (x) {
+                if (x.checked) {
+                    x.parentNode.parentNode.style.background = "#343D5F"
+                } else {
+                    x.parentNode.parentNode.style.background = "#48516F"
+                }
+            })
+        })
+    }
+    //全选
+    function checkedAll() {
+        Array.prototype.slice.call(document.querySelectorAll('input[type=checkbox]')).forEach(function (x) {
+            x.checked = true
+        })
+    }
+    //反选
+    function checkeOthers() {
+        Array.prototype.slice.call(document.querySelectorAll('input[type=checkbox]')).forEach(function (x) {
+            x.checked = !x.checked
+        })
+    }
+    //编辑
+    function editAction() {
+        if ($('input:checkbox:checked').length != 1) {
+            alert("请选择一项进行编辑")
+            return
+        }
+        location.href = "/web/index?id=" + $('input:checkbox:checked').next().val();
+    }
+
+    //删除
+    function removeClass() {
+        if ($('input:checkbox:checked').length <=0) {
+            alert("请选择删除数据")
+            return
+        }
+        openRecommendModal()
+    }
+    function closeAction() {
+        document.querySelector('#deleteModal').style.display = "none"
+    }
+    //关闭评论
+    function closeCommentAction() {
+        oopenAndCloseComment("close","关闭评论");
+    }
+    //开启评论
+    function openCommentAction(){
+        oopenAndCloseComment("open","开启评论");
+    }
+    function oopenAndCloseComment(type,title) {
+        if ($('input:checkbox:checked').length <=0) {
+            alert('请选择'+title+'数据')
+            return
+        }
+        var arr = new Array()
+        $('input:checkbox:checked').each(function () {
+            arr.push($(this).next().val())
+        })
+        var ids = arr.join(",")
+        var url = "/web/close/comment"
+        var data = {ids: ids,type:type}
+        var resuult= ajax(url, data)
+        console.log(resuult)
+        if (resuult.state ==true){
+            alert(title+"成功")
+            getAticle(1)
+        }else {
+            alert(title+"失败")
+        }
+    }
+    function submitAction() {
+        var arr = new Array()
+        $('input:checkbox:checked').each(function () {
+            arr.push($(this).next().val())
+        })
+        var ids = arr.join(",")
+        var url = "/web/delete"
+        var data = {ids: ids}
+        ajax(url, data)
+        console.log(ids)
+        getAticle(1);
+        page();
+        closeAction()
+    }
+    //上传
+    function uploadClass() {
+        Array.prototype.slice.call(document.querySelectorAll('input[type=checkbox]')).forEach(function (x) {
+            if (x.checked) {
+                // 上传文件业务逻辑
+            }
+        })
+    }
+    window.onload = function () {
+        initChoose()
+        isCheck()
+    }
+    function ajax(url, data) {
+        var result;
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: data,
+            dataType: "json",
+            async: false,
+            success: function (data) {
+                result = data;
+            }
+        });
+        return result;
+    }
+    function dateFtt(fmt, date) { //author: meizz
+        var o = {
+            "M+": date.getMonth() + 1,                 //月份
+            "d+": date.getDate(),                    //日
+            "h+": date.getHours(),                   //小时
+            "m+": date.getMinutes(),                 //分
+            "s+": date.getSeconds(),                 //秒
+            "q+": Math.floor((date.getMonth() + 3) / 3), //季度
+            "S": date.getMilliseconds()             //毫秒
+        };
+        if (/(y+)/.test(fmt))
+            fmt = fmt.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+            if (new RegExp("(" + k + ")").test(fmt))
+                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+    }
+</script>
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="ican-header font_color" th:fragment="myNavi(dir)">
+        <h1>
+            <img src="/imgs/logo.png" alt="">
+            知我
+        </h1>
+        <ul>
+            <li th:class="${dir} == 'compulsory' ? active " onclick="window.location.href='/web/course/required'">必修课程录入</li>
+            <li th:class="${dir} == 'elective' ? active " onclick="window.location.href='/web/course/elective'">选修课程录入</li>
+            <li th:class="${dir} == 'content' ? active " onclick="window.location.href='/web/recommend '">推荐学习录入</li>
+            <li th:class="${dir} == 'career' ? active " onclick="window.location.href='/web/pro'">职业选择</li>
+            <li th:class="${dir} == 'icon' ? active ">图标管理</li>
+        </ul>
+        <div class="login-state">
+            <span th:text="${session.userName}">小张</span>
+            <span>|</span>
+           <a href="/web/quit">
+               <span style="color: white;">退出</span>
+           </a>
+        </div>
+    </div>
+</body>
+</html>

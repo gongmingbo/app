@@ -1,0 +1,37 @@
+package app.entity.coursetime;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+public class CoursesTemplate {
+private	long firstday; //开始上课日期
+private String dayOfWeek;//开学日期是星期几
+private int weeks;		//学期总周数
+private String term;	//上课学期（如18-19学年 上学期）
+private List< CourseTemplate> courses;//所有课程
+
+public long getFirstday() {
+	return firstday;
+}
+public void setFirstday(long firstday) {
+	this.firstday = firstday;
+}
+public int getWeeks() { return weeks; }
+public void setWeeks(int weeks) { this.weeks = weeks; }
+public String getTerm() { return term; }
+public void setTerm(String term) { this.term = term; }
+public List< CourseTemplate> getCourses() {
+	return courses;
+}
+public void setCourses(List< CourseTemplate>courses) {
+	this.courses = courses;
+}
+public String getDayOfWeek() { return dayOfWeek; }
+public void setDayOfWeek(String dayOfWeek) { this.dayOfWeek = dayOfWeek; }
+
+	@Override
+public String toString() {
+	return "CoursesTemplate [firstday=" + firstday + ", courses=" + courses + ", term='" + term+ '\'' + ", dayOfWeek='" + dayOfWeek+ '\'' +", weeks='" + weeks+ "]";
+}
+	
+}

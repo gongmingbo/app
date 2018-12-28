@@ -1,0 +1,447 @@
+package app.apiservice;
+
+import app.bankview.ConstantsKey;
+import app.entity.coursetime.CourseTemplate;
+import app.entity.coursetime.CoursesTemplate;
+import app.entity.smart.CourseBaseInfo;
+import app.entity.user.CourseTimeTable;
+import app.entity.user.User;
+import app.packet.error.ErrorEnum;
+import app.packet.request.CommonPacket;
+import app.packet.response.CommonMessage;
+import app.repository.CourseSyllabusRepository;
+import app.service.CourseService;
+import app.service.UserService;
+import app.service.impl.CourseServiceImpl;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONException;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.support.hsf.HSFJSONUtils;
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.util.StringUtils;
+
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+
+/**
+ * 课程表显示
+ */
+@RestController
+@ControllerAdvice
+@RequestMapping(path = "/api/course")
+public class Syllabus {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    private CourseService courseService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private  CourseSyllabusRepository couseSyllabusRepository;
+
+    /**
+     * 个人课程表查询
+     * */
+    @RequestMapping(path = "/syllabus", method = RequestMethod.POST)
+    public CommonMessage syllabus(@RequestBody CommonPacket packet) {
+        logger.info("userId is: " + packet.getUsername());
+        logger.info("deviceId is: " + packet.getDeviceId());
+        logger.info("token is: " + packet.getToken());
+        CourseTimeTable course = courseService.getCourseTemplate(packet.getUsername());
+        CommonMessage message;
+        if (course == null) {
+            message = CommonMessage.failure(ErrorEnum.COURSE_INVALID);
+        } else {
+            //更新添课程表的学期（学期、周数、开学第一周星期一日期）
+            CoursesTemplate coursesTemplate=courseService.setTerm();
+
+            //查询课程
+            Gson gson=new Gson();
+            String data = course.getCourseTemplate();
+            CoursesTemplate coursesT=gson.fromJson(data,CoursesTemplate.class);
+
+            if(coursesTemplate.getFirstday()!=coursesT.getFirstday()){
+                course.setCourseTemplate(JSON.toJSONString(coursesTemplate));
+                couseSyllabusRepository.saveAndFlush(course);
+            }else{
+                coursesTemplate=coursesT;
+            }
+            message = CommonMessage.success(coursesTemplate, null);
+        }
+        return message;
+    }
+    /*
+    * 查询专业课程
+    * */
+    @RequestMapping(path = "/majorCourses", method = RequestMethod.POST)
+    public CommonMessage majorCourses(@RequestBody CommonPacket packet) {
+        logger.info("userId is: " + packet.getUsername());
+        logger.info("deviceId is: " + packet.getDeviceId());
+        logger.info("token is: " + packet.getToken());
+        List<CourseBaseInfo> course=courseService.getMajorCourses(packet.getUsername());
+        CommonMessage message;
+        if (course == null) {
+            message = CommonMessage.failure(ErrorEnum.COURSE_MAJOR_INVALID);
+        } else {
+            message = CommonMessage.success(course, null);
+        }
+        return message;
+    }
+    /*
+    * 查询选修课程
+    * */
+    @RequestMapping(path = "/elective", method = RequestMethod.POST)
+    public CommonMessage elective(@RequestBody CommonPacket packet) {
+        logger.info("userId is: " + packet.getUsername());
+        logger.info("deviceId is: " + packet.getDeviceId());
+        logger.info("token is: " + packet.getToken());
+        List<CourseBaseInfo> course=courseService.getElective(packet.getUsername());
+        CommonMessage message;
+        if (course == null) {
+            message = CommonMessage.failure(ErrorEnum.COURSE_ELECTIVE_INVALID);
+        } else {
+            message = CommonMessage.success(course, null);
+        }
+        return message;
+    }
+    /**
+     * 添加和编辑日程课程(包括课程提醒)
+     * */
+    @RequestMapping(path="/courseEdit",method=RequestMethod.POST)
+    public CommonMessage edit(@RequestBody CommonPacket<CourseTemplate> packet){
+        logger.info("userId is: " + packet.getUsername());
+        logger.info("deviceId is: " + packet.getDeviceId());
+        logger.info("token is: " + packet.getToken());
+        logger.info("data is: " + packet.getData());
+        CommonMessage message=null;
+        if( packet.getData()==null){
+            message = CommonMessage.failure(ErrorEnum.COURSE_SYLLABUS_INVALID);
+        }else{
+            CourseTemplate data=(CourseTemplate)packet.getData();
+            logger.info("数据"+data);
+            //判断data是否为空(type必须为空字符不能为null)
+            if(data.getName().isEmpty()||data.getName().equals("")||"".equals(data.getReminder()+"")|| data.getClassNo().equals(null)|| data.getClassNo().length==0
+                    ||data.getWeeks().equals(null)|| data.getWeeks().length==0||"".equals(data.getWeeks()+"")||data.getDayOfWeek()==0||"".equals(data.getDayOfWeek()+"")){
+                message = CommonMessage.failure(ErrorEnum.COURSE_SYLLABUS_INVALID);
+            }else{
+                //获取课程表
+                CourseTimeTable courseTT=courseService.getCourseTemplate(packet.getUsername());
+                if(courseTT==null){
+                    message = CommonMessage.failure(ErrorEnum.COURSE_INVALID);
+                }else{
+                    //json转CoursesTemplate
+                    Gson gson=new Gson();
+                    String template=courseTT.getCourseTemplate();
+                    CoursesTemplate coursesTemplate=gson.fromJson(template,CoursesTemplate.class);
+
+                    //判断是否存过课程表
+                    if(template.isEmpty()||template.equals("")){
+                        //更新添课程表的学期（学期、周数、开学第一周星期一日期）
+                        coursesTemplate=courseService.setTerm();
+                    }
+                    try {
+                        //判断是新增还是编辑
+                        if(StringUtils.isEmpty(data.getId())||data.getId().equals("")){
+                            //新增课程
+                            data.setId(getUUID());
+                            data.setState(0);
+                            data.setType("");
+                            List<CourseTemplate> ct=new ArrayList<>();
+                            if(coursesTemplate.getCourses()==null||coursesTemplate.getCourses().size()==0){
+                                ct.add(data);
+                                coursesTemplate.setCourses(ct);
+                            }else{
+                                ct=coursesTemplate.getCourses();
+                                ct.add(data);
+                            }
+                        }else{
+                            List<CourseTemplate> ctem=coursesTemplate.getCourses();
+                            for (int i=0;i<ctem.size();i++){
+                                CourseTemplate c=ctem.get(i);
+                                if(data.getId().equals(c.getId())){
+                                    c.setType("");
+                                    c.setState(0);
+                                    c.setName(data.getName());
+                                    c.setClassNo(data.getClassNo());
+                                    c.setClassroom(data.getClassroom());
+                                    c.setReminder(data.getReminder());
+                                    c.setTeacher(data.getTeacher());
+                                    c.setWeeks(data.getWeeks());
+                                    c.setDayOfWeek(data.getDayOfWeek());
+                                }
+                            }
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    courseTT.setCourseTemplate(JSON.toJSONString(coursesTemplate));
+                    couseSyllabusRepository.saveAndFlush(courseTT);
+                    message=CommonMessage.success(null,null);
+                }
+            }
+        }
+        return message;
+    }
+
+    /**
+     * 添加和编辑专业课程(包括课程提醒)
+     * */
+    @RequestMapping(path="/majorEdit",method=RequestMethod.POST)
+    public CommonMessage majorEdit(@RequestBody CommonPacket<CourseTemplate> packet){
+        logger.info("userId is: " + packet.getUsername());
+        logger.info("deviceId is: " + packet.getDeviceId());
+        logger.info("token is: " + packet.getToken());
+        logger.info("data is: " + packet.getData());
+        CommonMessage message=null;
+        if( packet.getData()==null){
+            message = CommonMessage.failure(ErrorEnum.COURSE_SYLLABUS_INVALID);
+        }else{
+            CourseTemplate data=(CourseTemplate)packet.getData();
+            if(data.getType().equals("必修")&&!StringUtils.isEmpty(data.getId())){
+                //判断data是否为空
+                if(data.getName().isEmpty()||data.getName().equals("")||"".equals(data.getReminder()+"")|| data.getClassNo().equals(null)|| data.getClassNo().length==0
+                        ||data.getWeeks().equals(null)|| data.getWeeks().length==0||"".equals(data.getWeeks()+"")||data.getDayOfWeek()==0||"".equals(data.getDayOfWeek()+"")){
+                    message = CommonMessage.failure(ErrorEnum.COURSE_SYLLABUS_INVALID);
+                }else{
+                    //获取课程表
+                    CourseTimeTable courseTT=courseService.getCourseTemplate(packet.getUsername());
+                    if(courseTT==null){
+                        message = CommonMessage.failure(ErrorEnum.COURSE_INVALID);
+                    }else{
+                        //json转CoursesTemplate
+                        Gson gson=new Gson();
+                        String template=courseTT.getCourseTemplate();
+                        CoursesTemplate coursesTemplate=gson.fromJson(template,CoursesTemplate.class);
+                        data.setState(0);
+                        //判断是否课程表是否为空
+                        if(template.equals("")||template.isEmpty()){
+                            //更新添课程表的学期（学期、周数、开学第一周星期一日期）
+                            coursesTemplate=courseService.setTerm();
+                        }
+                        try {
+                            //判断是新增还是编辑
+                            List<CourseTemplate> ct=new ArrayList<>();
+                            if(coursesTemplate.getCourses()==null||coursesTemplate.getCourses().size()==0){
+                                //新增课程 设置新的id
+                                String id=data.getId()+"("+getUUID()+")";
+                                data.setId(id);
+                                ct.add(data);
+                                coursesTemplate.setCourses(ct);
+                            }else{
+                                //新增或者修改
+                                int a=0;
+                                ct=coursesTemplate.getCourses();
+                                for (int i=0;i<ct.size();i++){
+                                    CourseTemplate c=ct.get(i);
+                                    if(data.getId().equals(c.getId())){
+                                        a=1;
+                                        c.setName(data.getName());
+                                        c.setClassNo(data.getClassNo());
+                                        c.setClassroom(data.getClassroom());
+                                        c.setReminder(data.getReminder());
+                                        c.setTeacher(data.getTeacher());
+                                        c.setWeeks(data.getWeeks());
+                                        c.setDayOfWeek(data.getDayOfWeek());
+                                    }
+                                }
+                                if(a==0){
+                                    //新增课程
+                                    String id=data.getId()+"("+getUUID()+")";
+                                    data.setId(id);
+                                    ct.add(data);
+                                }
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        courseTT.setCourseTemplate(JSON.toJSONString(coursesTemplate));
+                        couseSyllabusRepository.saveAndFlush(courseTT);
+                        message=CommonMessage.success(null,null);
+                    }
+                }
+            }else{
+                message = CommonMessage.failure(ErrorEnum.COURSE_MAJOR_TYPE_INVALID);
+            }
+        }
+        return message;
+    }
+
+    /**
+     * 添加和编辑选修课程(包括课程提醒)
+     * */
+    @RequestMapping(path="/electiveEdit",method=RequestMethod.POST)
+    public CommonMessage electiveEdit(@RequestBody CommonPacket<CourseTemplate> packet){
+        logger.info("userId is: " + packet.getUsername());
+        logger.info("deviceId is: " + packet.getDeviceId());
+        logger.info("token is: " + packet.getToken());
+        logger.info("data is: " + packet.getData());
+        CommonMessage message=null;
+        if( packet.getData()==null){
+            message = CommonMessage.failure(ErrorEnum.COURSE_SYLLABUS_INVALID);
+        }else{
+            CourseTemplate data=(CourseTemplate)packet.getData();
+            if(data.getType().equals("选修")&&!StringUtils.isEmpty(data.getId())){
+                //判断data是否为空
+                if(data.getName().isEmpty()||data.getName().equals("")||"".equals(data.getReminder()+"")|| data.getClassNo().equals(null)|| data.getClassNo().length==0
+                        ||data.getWeeks().equals(null)|| data.getWeeks().length==0||"".equals(data.getWeeks()+"")||data.getDayOfWeek()==0||"".equals(data.getDayOfWeek()+"")){
+                    message = CommonMessage.failure(ErrorEnum.COURSE_SYLLABUS_INVALID);
+                }else{
+                    //获取课程表
+                    CourseTimeTable courseTT=courseService.getCourseTemplate(packet.getUsername());
+                    if(courseTT==null){
+                        message = CommonMessage.failure(ErrorEnum.COURSE_INVALID);
+                    }else{
+                        //json转CoursesTemplate
+                        Gson gson=new Gson();
+                        String template=courseTT.getCourseTemplate();
+                        CoursesTemplate coursesTemplate=gson.fromJson(template,CoursesTemplate.class);
+                        data.setState(0);
+                        //判断是否课程表是否为空
+                        if(template.equals("")||template.isEmpty()){
+                            //更新添课程表的学期（学期、周数、开学第一周星期一日期）
+                            coursesTemplate=courseService.setTerm();
+                        }
+                        try {
+                            //判断是新增还是编辑
+                            List<CourseTemplate> ct=new ArrayList<>();
+                            if(coursesTemplate.getCourses()==null||coursesTemplate.getCourses().size()==0){
+                                //新增课程 设置新的id
+                                String id=data.getId()+"("+getUUID()+")";
+                                data.setId(id);
+                                ct.add(data);
+                                coursesTemplate.setCourses(ct);
+                            }else{
+                                //新增或者修改
+                                int a=0;
+                                ct=coursesTemplate.getCourses();
+                                for (int i=0;i<ct.size();i++){
+                                    CourseTemplate c=ct.get(i);
+                                    if(data.getId().equals(c.getId())){
+                                        a=1;
+                                        c.setName(data.getName());
+                                        c.setClassNo(data.getClassNo());
+                                        c.setClassroom(data.getClassroom());
+                                        c.setReminder(data.getReminder());
+                                        c.setTeacher(data.getTeacher());
+                                        c.setWeeks(data.getWeeks());
+                                        c.setDayOfWeek(data.getDayOfWeek());
+                                    }
+                                }
+                                if(a==0){
+                                    //新增课程
+                                    String id=data.getId()+"("+getUUID()+")";
+                                    data.setId(id);
+                                    ct.add(data);
+                                }
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        courseTT.setCourseTemplate(JSON.toJSONString(coursesTemplate));
+                        couseSyllabusRepository.saveAndFlush(courseTT);
+                        message=CommonMessage.success(null,null);
+                    }
+                }
+            }else{
+                message = CommonMessage.failure(ErrorEnum.COURSE_ELECTIVE_TYPE_INVALID);
+            }
+        }
+        return message;
+    }
+
+    /*
+    * 删除课程表中的课程
+    * */
+    @RequestMapping(path = "/coursesDelete", method = RequestMethod.POST)
+    public CommonMessage coursesDelete(@RequestBody CommonPacket<CourseTemplate> packet) {
+        logger.info("userId is: " + packet.getUsername());
+        logger.info("deviceId is: " + packet.getDeviceId());
+        logger.info("token is: " + packet.getToken());
+        logger.info("data is: " + packet.getData());
+        CommonMessage message=null;
+        if( packet.getData()==null){
+            message = CommonMessage.failure(ErrorEnum.COURSE_SYLLABUS_INVALID);
+        }else{
+            //获取课程表
+            CourseTimeTable courseTT=courseService.getCourseTemplate(packet.getUsername());
+            if(courseTT==null){
+                message = CommonMessage.failure(ErrorEnum.COURSE_INVALID);
+            }else{
+                CourseTemplate data=(CourseTemplate)packet.getData();
+                if(StringUtils.isEmpty(data.getId())||data.getId().equals("")){
+                    message = CommonMessage.failure(ErrorEnum.COURSE_ID_INVALID);
+                }else{
+                    //json转CoursesTemplate
+                    Gson gson=new Gson();
+                    String template=courseTT.getCourseTemplate();
+                    CoursesTemplate coursesTemplate=gson.fromJson(template,CoursesTemplate.class);
+                    int a=0;
+                    if(template!=null){
+                        try {
+                            List<CourseTemplate> ctem=coursesTemplate.getCourses();
+                            for (int i=0;i<ctem.size();i++){
+                                 CourseTemplate c=ctem.get(i);
+                                 if(data.getId().equals(c.getId())){
+                                     c.setState(1);
+                                     a=1;
+                                 }
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }else{
+                        message = CommonMessage.failure(ErrorEnum.COURSE_INVALID);
+                    }
+                    courseTT.setCourseTemplate(JSON.toJSONString(coursesTemplate));
+                    couseSyllabusRepository.saveAndFlush(courseTT);
+                    if(a==0){
+                        message = CommonMessage.failure(ErrorEnum.COURSE_ID_INVALID);
+                    }else{
+                        message=CommonMessage.success(null,null);
+                    }
+                }
+            }
+        }
+        return message;
+    }
+
+
+    //生成uuid
+    public static String getUUID(){
+        String uuid = UUID.randomUUID().toString().replace("-", "").toLowerCase();
+        return uuid;
+    }
+
+    public static void main(String[] args){
+        /*String template="{\"courses\": [{\"id\": \"377\", \"name\": \"管理学\", \"type\": \"必修课\", \"dates\": [\"2018-08-27\", \"2018-09-03\", \"2018-09-10\", \"2018-09-17\", \"2018-09-24\", \"2018-10-01\", \"2018-10-08\", \"2018-10-15\", \"2018-10-22\", \"2018-10-29\", \"2018-11-05\", \"2018-11-12\", \"2018-11-19\", \"2018-11-26\", \"2018-12-03\", \"2018-12-10\", \"2018-12-17\", \"2018-12-24\", \"2018-12-31\", \"2019-01-07\"], \"weeks\": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], \"classNo\": [1], \"teacher\": \"龚明波\", \"reminder\": 0, \"classroom\": \"3033\", \"dayOfWeek\": [1]}, {\"id\": \"2f120546329642ae8dd0f213968747d9\", \"name\": \"aaa\", \"term\": \"上学期\", \"type\": \"\", \"weeks\": [1, 2, 3], \"classNo\": [4], \"teacher\": \"李老师\", \"reminder\": 0, \"classroom\": \"sdf201\", \"dayOfWeek\": [1]}], \"firstday\": 1535731200000}";
+        Map<String,Object> resMap= (Map<String,Object>)JSON.parse(template);
+        List<CourseTemplate> tem =null;
+        tem =(List<CourseTemplate>)resMap.get("courses");
+        for (int i=0;i<tem.size();i++){
+            Map<String,Object> cc=(Map<String,Object>)tem.get(i);
+            //CourseTemplate c=(CourseTemplate)tem.get(i);
+            //CourseTemplate C=JSONObject.parseObject(tem.get(i));
+            *//*if(data.getId().equals(c.getId())){
+                c=data;
+            }*//*
+            System.out.println(cc.get("id"));
+        }*/
+
+    }
+
+    @ExceptionHandler(value = Exception.class)
+    public CommonMessage errorHandler(Exception ex) {
+        return CommonMessage.failure(ErrorEnum.SERVER_INTERNAL_ERROR);
+    }
+}

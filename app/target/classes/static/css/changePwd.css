@@ -1,0 +1,81 @@
+.ican-wrapper {
+  background-color: #48516F;
+}
+.ican-wrapper .box {
+  width: 1200px;
+  height: 100%;
+  margin: 0 auto;
+}
+.ican-wrapper .header {
+  height: 150px;
+  width: 100%;
+  position: relative;
+}
+.ican-wrapper .header h3 {
+  position: absolute;
+  left: 50px;
+  top: 42px;
+}
+.ican-wrapper .header span {
+  position: absolute;
+  right: 50px;
+  top: 63px;
+  cursor: pointer;
+  color: #13B5B1;
+}
+.ican-wrapper .content {
+  background-color: #fff;
+}
+.ican-wrapper .content h3 {
+  height: 80px;
+  background-color: #343D5F;
+  font-size: 24px;
+  color: #fff;
+  line-height: 80px;
+  text-align: center;
+  font-weight: 400;
+}
+.ican-wrapper .content form {
+  color: #333;
+  text-align: center;
+}
+.ican-wrapper form > input {
+  width: 80px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  text-indent: 0;
+  background-color: #fff;
+  cursor: pointer;
+  margin-top: 50px;
+  margin-bottom: 55px;
+}
+.ican-wrapper form > input:hover {
+  transform: scale(1.2);
+}
+.ican-wrapper form .input-cancel {
+  border: 1px solid #DCDCDC;
+  color: #999999;
+  margin-right: 16px;
+}
+.ican-wrapper form .input-sure {
+  border: 1px solid #13B5B1;
+  color: #13B5B1;
+}
+.ican-wrapper .content .section {
+  text-align: center;
+  margin-top: 20px;
+}
+.ican-wrapper .content .first {
+  margin-top: 55px;
+}
+.ican-wrapper .content label {
+  width: 90px;
+  display: inline-block;
+  text-align: left;
+}
+.ican-wrapper .section input {
+  height: 30px;
+  width: 300px;
+  border: 1px solid #13B5B1;
+}

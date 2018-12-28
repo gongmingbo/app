@@ -1,0 +1,11 @@
+package app.packet.request;
+
+import lombok.Data;
+
+@Data
+public class LoginPacket {
+    private String username;
+    private String password;
+    private String deviceId;
+
+}

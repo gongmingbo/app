@@ -1,0 +1,20 @@
+spring.jpa.database=POSTGRESQL
+spring.datasource.platform=postgres
+spring.jpa.show-sql=true
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.hibernate.naming-strategy =org.hibernate.cfg.ImprovedNamingStrategy
+spring.datasource.driverClassName=org.postgresql.Driver
+spring.datasource.url=jdbc:postgresql://localhost:5432/appdata
+spring.datasource.username=postgres
+spring.datasource.password=438793
+spring.jpa.properties.hibernate.dialect=app.config.CustomPostgreSqlDialect
+server.port=8085
+spring.thymeleaf.mode=LEGACYHTML5
+
+api.session.timeout=30
+api.session.encryptSeed=DG
+uploadpath=C:/upload/
+
+
+spring.http.multipart.maxFileSize=1024MB
+spring.http.multipart.maxRequestSize=1024MB

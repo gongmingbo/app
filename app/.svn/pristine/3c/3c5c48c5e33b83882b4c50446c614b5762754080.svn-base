@@ -1,0 +1,106 @@
+package app.entity.coursetime;
+
+import java.util.List;
+import java.util.Map;
+
+public class CourseTable {
+	public CourseTable() {
+
+	}
+	
+ public CourseTable(String number) {
+		super();
+		this.number = number;
+	}
+
+ private String number;
+ private String numberName;
+ private  List<Map<String, Object>> monday;
+ private  List<Map<String, Object>> tuesday;
+ private  List<Map<String, Object>> wednesday;
+ private  List<Map<String, Object>> thursday;
+ private  List<Map<String, Object>> friday;
+ private  List<Map<String, Object>> saturday;
+ private  List<Map<String, Object>> sunday;
+@Override
+public String toString() {
+	return "CourseTable [number=" + number + ", numberName=" + numberName + ", monday=" + monday + ", tuesday="
+			+ tuesday + ", wednesday=" + wednesday + ", thursday=" + thursday + ", friday=" + friday + ", saturday="
+			+ saturday + ", sunday=" + sunday + "]";
+}
+
+public String getNumber() {
+	return number;
+}
+
+public void setNumber(String number) {
+	this.number = number;
+}
+
+public String getNumberName() {
+	return numberName;
+}
+
+public void setNumberName(String numberName) {
+	this.numberName = numberName;
+}
+
+public  List<Map<String, Object>> getMonday() {
+	return monday;
+}
+
+public void setMonday( List<Map<String, Object>> monday) {
+	this.monday = monday;
+}
+
+public  List<Map<String, Object>> getTuesday() {
+	return tuesday;
+}
+
+public void setTuesday( List<Map<String, Object>> tuesday) {
+	this.tuesday = tuesday;
+}
+
+public  List<Map<String, Object>> getWednesday() {
+	return wednesday;
+}
+
+public void setWednesday( List<Map<String, Object>> wednesday) {
+	this.wednesday = wednesday;
+}
+
+public  List<Map<String, Object>> getThursday() {
+	return thursday;
+}
+
+public void setThursday( List<Map<String, Object>> thursday) {
+	this.thursday = thursday;
+}
+
+public  List<Map<String, Object>> getFriday() {
+	return friday;
+}
+
+public void setFriday( List<Map<String, Object>> friday) {
+	this.friday = friday;
+}
+
+public  List<Map<String, Object>> getSaturday() {
+	return saturday;
+}
+
+public void setSaturday( List<Map<String, Object>> saturday) {
+	this.saturday = saturday;
+}
+
+public  List<Map<String, Object>> getSunday() {
+	return sunday;
+}
+
+public void setSunday( List<Map<String, Object>> sunday) {
+	this.sunday = sunday;
+}
+
+ 
+ 
+}

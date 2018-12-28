@@ -1,0 +1,60 @@
+package app.apiservice;
+
+import app.entity.user.Learnt;
+import app.entity.user.PassKnowledge;
+import app.packet.error.ErrorEnum;
+import app.packet.request.CommonPacket;
+import app.packet.response.CommonMessage;
+import app.service.WisdomTreeService;
+import com.google.gson.Gson;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+@RestController
+@ControllerAdvice
+@RequestMapping(path = "/api")
+public class WisdomTree {
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass()) ;
+
+    @Autowired
+    private WisdomTreeService wisdomTreeService;
+
+    private Gson gson = new Gson();
+
+    @RequestMapping(path="/myTree",method= RequestMethod.POST)
+    public CommonMessage myTree(@RequestBody CommonPacket<Map<String ,String>> packet){
+        Map<String ,String > data = packet.getData();
+        String userId = data.getOrDefault("userId", packet.getUsername());
+        String proId = data.getOrDefault("proId", null);
+        List<PassKnowledge> passKnowledge = wisdomTreeService.getWisdomTree(userId, proId);
+        List<String > plans = passKnowledge.stream().map(PassKnowledge::getPlan).collect(Collectors.toList());
+        List<WisdomTree> wisdomTrees = new ArrayList<>();
+        for (String plan: plans){
+            wisdomTrees.add(gson.fromJson(plan, WisdomTree.class));
+        }
+        return CommonMessage.success(wisdomTrees);
+    }
+
+    @RequestMapping(path="/learnt",method= RequestMethod.POST)
+    public CommonMessage learnt(@RequestBody CommonPacket<Map<String ,String>> packet){
+        Map<String ,String > data = packet.getData();
+        String userId = data.getOrDefault("userId", packet.getUsername());
+        String proId = data.getOrDefault("proId", null);
+        if (proId == null){
+            return CommonMessage.failure(ErrorEnum.INVALID_PARAM);
+        }
+        List<Learnt> history = wisdomTreeService.learntHistory(userId, proId);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Map<String, List<Learnt>> learntMap = history.stream().collect(Collectors.groupingBy(p-> format.format(p.getLearntTime())));
+        return CommonMessage.success(learntMap);
+    }
+}

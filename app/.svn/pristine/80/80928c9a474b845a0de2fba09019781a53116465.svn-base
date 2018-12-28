@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>职业选择-更多</title>
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/need.css">
+</head>
+
+<body>
+  <div th:replace="navi :: myNavi(${dir})"></div>
+  <div class="ican-more">
+    <div class="top">
+      <span><<返回职业选择</span>
+    </div>
+    <div class="longCard">
+      <div class="left item">
+        <p th:text="${pro.professionName}"></p>
+      </div>
+      <div class="right item">
+        <p>目标值</p>
+        <p>
+          <section>
+              <span>知识体系:</span>
+              <span th:text="${#arrays.length(knowledgeList)} + '(实际)'"></span>
+              <span>/</span>
+              <span style="color: #333C5B" th:text="${pro.knowledgeNumber} + '(目标)'">4(目标)</span>
+          </section>
+          <section>
+              <span>能量值:</span>
+              <span th:text="${pro.energy} + 'J'">3.5J</span>
+              <span>/</span>
+              <span style="color: #333C5B" th:text="${pro.energy} + 'J'">10J</span>
+          </section>
+        </p>
+      </div>
+    </div>
+    <div class="bottom">
+      <div class="item edit" th:each="kn: ${knowledgeList}" th:id="${kn.knowledgeId}" th:text="${kn.knowledgeName}">编程语言</div>
+      <div class="item add" th:id="${pro.professionId}">+&nbsp;&nbsp;&nbsp;知识体系</div>
+    </div>
+  </div>
+</body>
+<script src="/jquery-3.3.1.min.js"></script>
+<script>
+    $('.add').on('click', function () {
+        window.location.href = "/web/pro/" + $(this).attr('id') + "/knowledge/add";
+    })
+    $('.edit').on('click',function () {
+        window.location.href = "/web/knowledge/" + $(this).attr('id');
+    })
+</script>
+</html>

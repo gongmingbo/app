@@ -1,0 +1,126 @@
+.ican-header {
+  height: 80px;
+  background-color: #343D5F;
+}
+.ican-header h1 {
+  font-size: 30px;
+  font-weight: 400;
+  margin-left: 100px;
+  line-height: 80px;
+  display: inline-block;
+}
+.ican-header h1 img {
+  vertical-align: middle;
+}
+.ican-header ul {
+  display: inline-block;
+  margin-left: 160px;
+  height: 100%;
+  vertical-align: top;
+}
+.ican-header ul li {
+  float: left;
+  font-size: 16px;
+  cursor: pointer;
+  line-height: 80px;
+  
+}
+.ican-header ul li.active {
+  position: relative;
+}
+.ican-header ul li.active::after {
+  content: '';
+  display: block;
+  height: 4px;
+  width: 60px;
+  background: #13B5B1;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%)
+}
+.ican-header ul li:hover {
+  color: #13B5B1;
+  font-weight: 700;
+}
+.ican-header ul li:not(:last-child) {
+  margin-right: 94px;
+}
+.ican-header .login-state {
+  float: right;
+  line-height: 80px;
+  margin-right: 97px;
+}
+.ican-header .login-state span {
+  font-size: 14px;
+  cursor: pointer;
+}
+.ican-header .login-state span:nth-child(2) {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+
+
+.ican-wrapper .content {
+  margin-left: 400px;
+  margin-top: 48px;
+}
+.ican-wrapper .content h3 {
+  font-size: 18px;
+  color: #13B5B1;
+  position: relative;
+}
+.ican-wrapper .content h3::before {
+  content: '';
+  display: block;
+  width: 3px;
+  height: 18px;
+  background-color: #13B5B1;
+  position: absolute;
+  top: 4px;
+  left: -10px;
+}
+.ican-wrapper .search > input {
+  width: 200px;
+  height: 30px;
+  box-sizing: border-box;
+  border: 1px solid #FFF;
+}
+.ican-wrapper .search > button {
+  width: 80px;
+  height: 30px;
+  background-color: #13B5B1;
+  color: #fff;
+  border-radius:4px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+.ican-wrapper .table {
+  margin-top: 37px;
+}
+.ican-wrapper .table table {
+  border-collapse: collapse;
+  min-width: 880px;
+}
+.table tr th, .table tr td { 
+  border:1px solid #FFF;
+  padding: 10px;
+  text-align: center; 
+}
+.table td .icon-wrapper {
+  width: 90px;
+  height: 60px;
+ /* background-color: #EBEBEB;*/
+  margin: 0 auto;
+}
+.table td > span:not(:nth-of-type(2)) {
+  cursor: pointer;
+  color: #13B5B1;
+}
+.table td > span:not(:nth-of-type(2)):hover {
+  text-decoration: underline;
+}
+.table td > p {
+  margin: 0;
+}

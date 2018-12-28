@@ -1,0 +1,124 @@
+package app.service.impl;
+
+import app.entity.content.Tags;
+import app.entity.json.KnowledgeContent;
+import app.entity.smart.Knowledge;
+import app.entity.smart.ProfessionClassification;
+import app.entity.user.PassKnowledge;
+import app.repository.KnowledgeRepository;
+import app.repository.PassKnowledgeRepository;
+import app.repository.ProfessionRepository;
+import app.repository.TagRepository;
+import app.service.CareerService;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+public class CareerServiceImpl implements CareerService {
+    @Autowired
+    private KnowledgeRepository knowledgeRepository;
+    @Autowired
+    private TagRepository tagRepository;
+
+    @Autowired
+    private ProfessionRepository professionRepository;
+
+    @Autowired
+    private PassKnowledgeRepository passKnowledgeRepository;
+
+    Gson gson = new Gson();
+
+    @Override
+    public List<ProfessionClassification> getProfessions(){
+        return professionRepository.findAllOrderBySalary();
+    }
+
+
+    @Override
+    public List<String> getMyProfessions(String user){
+        return passKnowledgeRepository.findProId(user);
+    }
+
+    @Override
+    public PassKnowledge getMyProfessions(String user, String pro){
+        return passKnowledgeRepository.findByUserIdAndProfessionId(user, pro);
+    }
+
+    @Override
+    public List<Knowledge> getKnowledgeOfProfession(String proId) {
+        List<Knowledge> knowledgeList = knowledgeRepository.findByProfessionId(proId);
+        knowledgeList.forEach(this::prepareKnowledge);
+        return knowledgeList;
+    }
+
+    @Override
+    public List<Knowledge> getOtherKnowledgeOfProfession(String proId, String knowId){
+        List<Knowledge> knowledgeList = knowledgeRepository.findByProfessionIdAndKnowledgeIdIsNot(proId, knowId);
+        knowledgeList.forEach(this::prepareKnowledge);
+        return knowledgeList;
+    }
+
+    private void prepareKnowledge(Knowledge knowledge){
+        List<String > tags = gson.fromJson(knowledge.getTag(), new TypeToken<List<String >>(){}.getType());
+        knowledge.setTags(tags);
+        KnowledgeContent knowledgeContent = gson.fromJson(knowledge.getContents(), KnowledgeContent.class);
+        knowledge.setKnowledgeContent(knowledgeContent);
+        knowledge.setPrereqs(gson.fromJson(knowledge.getPrerequisiteIds(), new TypeToken<List<List<String>>>(){}.getType()));
+    }
+
+    @Override
+    public Knowledge getKnowledge(String id) {
+        Knowledge knowledge = knowledgeRepository.findOne(id);
+        prepareKnowledge(knowledge);
+        return knowledge;
+    }
+
+    @Override
+    @Transactional
+    public int deleteKnowledge(String id) {
+        int count = knowledgeRepository.countByPre(id);
+        if (count > 0){
+            return 1;
+        }
+        knowledgeRepository.delete(id);
+        return 0;
+    }
+
+    @Override
+    public void saveKnowledge(Knowledge knowledge) {
+        Gson gson = new Gson();
+        String content = gson.toJson(knowledge.getKnowledgeContent());
+        List<List<String>> preIds = knowledge.getPrereqs();
+
+        List<String > allIds = new ArrayList<>();
+        if (preIds != null && preIds.size() > 0){
+            for (List<String> ids : preIds){
+                allIds.addAll(ids);
+            }
+        }
+        List<Knowledge> pres = knowledgeRepository.findAll(allIds);
+        knowledge.setPrerequisites(pres);
+        List<String> tags=knowledge.getTags();
+        for (String tag:tags){
+            List<Tags> list=tagRepository.findByTagNameAndState(tag,true);
+            if (list!=null&&list.size()>0){
+
+            }else {
+                Tags tags1=new Tags();
+                tags1.setTagName(tag);
+                tags1.setState(true);
+                tagRepository.saveAndFlush(tags1);
+            }
+        }
+        knowledge.setTag( gson.toJson(knowledge.getTags()));
+        knowledge.setPrerequisiteIds(gson.toJson(preIds));
+        knowledge.setContents(content);
+        knowledgeRepository.save(knowledge);
+    }
+}

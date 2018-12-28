@@ -1,0 +1,155 @@
+package app.entity.user;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+
+import app.config.JsonDataUserType;
+
+/**
+ * 用户基础信息表
+ *
+ * @author gongmingbo
+ */
+@Entity
+@Table(name = "app_users_base_info")
+@TypeDef(name = "JsonDataUserType", typeClass = JsonDataUserType.class)
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String userId;
+    private String userName;
+    private String userPassword;
+    private String userSex;
+    private String userTelephone;
+    private String shoolId;
+    private String userType;
+    private String userImage;
+    @Type(type = "JsonDataUserType")
+    @Column(columnDefinition = "jsonb")
+    private String userInterest;
+    private String userEmail;
+    private String weiChaId;
+    private String remark;
+
+    @Override
+    public String toString() {
+        return "User [id=" + id + ", userId=" + userId + ", userName=" + userName + ", userPassword=" + userPassword
+                + ", userSex=" + userSex + ", userTelephone=" + userTelephone + ", shoolId=" + shoolId + ", userType="
+                + userType + ", userImage=" + userImage + ", userInterest=" + userInterest + ", userEmail=" + userEmail
+                + ", WeiChaId=" + weiChaId + ", remark=" + remark + "]";
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserPassword() {
+        return userPassword;
+    }
+
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
+    }
+
+    public String getUserSex() {
+        return userSex;
+    }
+
+    public void setUserSex(String userSex) {
+        this.userSex = userSex;
+    }
+
+    public String getUserTelephone() {
+        return userTelephone;
+    }
+
+    public void setUserTelephone(String userTelephone) {
+        this.userTelephone = userTelephone;
+    }
+
+    public String getShoolId() {
+        return shoolId;
+    }
+
+    public void setShoolId(String shoolId) {
+        this.shoolId = shoolId;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
+
+    public String getUserImage() {
+        return userImage;
+    }
+
+    public void setUserImage(String userImage) {
+        this.userImage = userImage;
+    }
+
+    public String getUserInterest() {
+        return userInterest;
+    }
+
+    public void setUserInterest(String userInterest) {
+        this.userInterest = userInterest;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public String getWeiChaId() {
+        return weiChaId;
+    }
+
+    public void setWeiChaId(String weiChaId) {
+        weiChaId = weiChaId;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+
+}

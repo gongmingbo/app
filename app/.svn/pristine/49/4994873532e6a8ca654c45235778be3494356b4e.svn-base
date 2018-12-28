@@ -1,0 +1,103 @@
+package app.bankview;
+
+import app.entity.content.IconManagement;
+import app.packet.Pagination;
+import app.repository.IconRepository;
+import com.alibaba.fastjson.JSON;
+import javafx.scene.media.Media;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
+
+import javax.print.attribute.standard.PageRanges;
+import javax.servlet.http.HttpServletRequest;
+import javax.swing.*;
+import java.sql.Timestamp;
+import java.util.*;
+
+/**
+ * Created by gongmingbo on 2018/12/6.
+ */
+@Controller
+@RequestMapping("/web")
+public class IconContrller {
+    @Autowired
+    private IconRepository iconRepository;
+
+    @RequestMapping("/icon.html")
+    public String getIconHtml() {
+        return "icon_management";
+    }
+
+    @RequestMapping(path = "/icon", method = RequestMethod.GET)
+    @ResponseBody
+    public String getIcons(HttpServletRequest request, int pageNum, String name) {
+        Sort sort = new Sort(Sort.Direction.DESC, "id");
+        Pageable pageable = new PageRequest(pageNum - 1, 10, sort);
+        Page<IconManagement> list;
+        if (StringUtils.isEmpty(name)) {
+            list = iconRepository.findAll(pageable);
+        } else {
+            list = iconRepository.findByNameLike(pageable, "%" + name + "%");
+        }
+        Pagination pagination = new Pagination();
+        pagination.setPage(pageNum);
+        pagination.setPageSize(10);
+        pagination.setTotalPage(list.getTotalPages());
+        Map<String, Object> map = new HashMap<>();
+        map.put("data", list.getContent());
+        map.put("page", pagination);
+        return JSON.toJSONString(map);
+    }
+
+    @RequestMapping(path = "/icon", method = RequestMethod.POST)
+    @ResponseBody
+    public String saveIcon(@ModelAttribute IconManagement iconManagement) {
+        iconManagement.setCreateTime(new Timestamp(new Date().getTime()));
+        Map<String, Object> map = new HashMap<>();
+        List<IconManagement> list = iconRepository.findByName(iconManagement.getName());
+        if (!StringUtils.isEmpty(iconManagement.getId())) {
+            IconManagement iconManagementOld = iconRepository.findOne(iconManagement.getId());
+            if (!iconManagementOld.getName().equals(iconManagement.getName())) {
+                if (list != null && list.size() > 0) {
+                    map.put("msg", "该关键字已经存在");
+                } else {
+                    map.put("state", true);
+                    iconRepository.saveAndFlush(iconManagement);
+                }
+            } else {
+                map.put("state", true);
+                iconRepository.saveAndFlush(iconManagement);
+            }
+        } else {
+            if (list != null && list.size() > 0) {
+                map.put("msg", "该关键字已经存在");
+            } else {
+                map.put("state", true);
+                iconRepository.saveAndFlush(iconManagement);
+            }
+        }
+        return JSON.toJSONString(map);
+    }
+
+    @RequestMapping(path = "/delete", method = RequestMethod.POST)
+    @ResponseBody
+    public String getIconHtml(HttpServletRequest request, String id) {
+        IconManagement iconManagement = iconRepository.findOne(id);
+        iconRepository.delete(id);
+        return JSON.toJSONString(iconManagement);
+    }
+
+    @RequestMapping(path = "/edit", method = RequestMethod.GET)
+    @ResponseBody
+    public String getIcon(HttpServletRequest request, String id) {
+        IconManagement iconManagement = iconRepository.findOne(id);
+        return JSON.toJSONString(iconManagement);
+    }
+}

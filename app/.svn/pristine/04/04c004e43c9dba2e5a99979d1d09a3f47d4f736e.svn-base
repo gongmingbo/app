@@ -1,0 +1,20 @@
+package app.repository;
+
+import app.entity.TestEntity;
+import app.entity.content.Comment;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+
+@Repository
+public interface CommentRepository extends JpaRepository<Comment, Long> {
+    @Query( value = "select new app.entity.TestEntity(remark, commentTime) from Comment where id = :id")
+    Collection<TestEntity> findById(
+            @Param("id")
+                                            Long id);
+}

@@ -1,0 +1,16 @@
+package app.bankview;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+/**
+ * Created by gongmingbo on 2018/12/6.
+ */
+@Controller
+@RequestMapping("/web")
+public class ChangPasswordController {
+    @RequestMapping("/changpassword.html")
+    public  String changePwd(){
+        return "changePwd";
+    }
+}

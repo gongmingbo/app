@@ -1,0 +1,565 @@
+.ican-header {
+  height: 80px;
+  background-color: #343D5F;
+}
+.ican-header h1 {
+  font-size: 30px;
+  font-weight: 400;
+  margin-left: 100px;
+  line-height: 80px;
+  display: inline-block;
+}
+.ican-header h1 img {
+  vertical-align: middle;
+}
+.ican-header ul {
+  display: inline-block;
+  margin-left: 160px;
+  height: 100%;
+  vertical-align: top;
+}
+.ican-header ul li {
+  float: left;
+  font-size: 16px;
+  cursor: pointer;
+  line-height: 80px;
+  
+}
+.ican-header ul li.active {
+  position: relative;
+}
+.ican-header ul li.active::after {
+  content: '';
+  display: block;
+  height: 4px;
+  width: 60px;
+  background: #13B5B1;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%)
+}
+.ican-header ul li:hover {
+  color: #13B5B1;
+  font-weight: 700;
+}
+.ican-header ul li:not(:last-child) {
+  margin-right: 94px;
+}
+.ican-header .login-state {
+  float: right;
+  line-height: 80px;
+  margin-right: 97px;
+}
+.ican-header .login-state span {
+  font-size: 14px;
+  cursor: pointer;
+}
+.ican-header .login-state span:nth-child(2) {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.ican-select {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 64px;
+}
+.ican-select section:not(:last-child) {
+  margin-right: 80px;
+}
+.ican-select section.choose {
+  position: relative;
+}
+.ican-select section .dataWrapper {
+  width: 460px;
+  height: 240px;
+  position: absolute;
+  left: 45px;
+  background: #fff;
+  border: 1px solid #13B5B1;
+  color: #999;
+  box-sizing: border-box;
+  padding: 5px;
+  display: none;
+  overflow: auto;
+}
+.ican-select section .dataWrapper ul {
+  overflow: hidden;
+  border-bottom: 1px solid #999;
+}
+.ican-select section .dataWrapper li {
+  float: left;
+  cursor: pointer;
+  color: #13B5B1;
+}
+.ican-select section .dataWrapper li.active {
+  border-bottom: 2px solid#13B5B1;
+}
+.ican-select section .dataWrapper li:hover {
+  transform: scale(1.6);
+  color: #999;
+}
+.ican-select section .dataWrapper li:not(:last-child) {
+  margin-right: 5px;
+}
+.ican-select section .dataWrapper .school-list {
+  box-sizing: border-box;
+  padding: 20px;
+}
+.ican-select section .dataWrapper .school-list h3{
+  float: left;
+  font-size: 12px;
+  color: #F52F2F;
+}
+.ican-select section .dataWrapper .school-list .school-names {
+  margin-left: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.ican-select section .dataWrapper .school-list .school-names span {
+  margin-right: 30px;
+  font-size: 12px;
+  margin-bottom: 12px;
+  cursor: pointer;
+}
+.ican-select section input,
+.ican-select section select {
+  width: 220px;
+  height: 30px;
+}
+.ican-class .tableRequire{
+  border: 1px solid #13B5B1;
+  border-collapse:collapse;
+  margin: 0 auto;
+}
+.ican-class table caption {
+  height: 80px;
+  line-height: 80px;
+  border-top: 1px solid #333C5B;
+  margin-top: 30px;
+  text-align: left;
+}
+.ican-class .tableRequire td,
+.ican-class .tableRequire th {
+  border: 1px solid #13B5B1;
+  text-align: center;
+  padding: 10px;
+}
+.ican-class .tableRequire td:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  color: #13B5B1;
+}
+/* 表格没有内容样式 */
+.ican-class .tableRequire td.empty {
+  background: url('../imgs/more.png') no-repeat 50% 50%;
+} 
+.ican-class .tableRequire td.empty:hover {
+  transform: rotate(180deg) scale(1.3);
+  transition: transform 0.3s linear;
+}
+
+.ican-class .tableElective {
+  width: 900px;
+  margin: 0 auto;
+  border-collapse:collapse;
+}
+.ican-class .tableElective input[type=checkbox] {
+  margin: 0 25px;
+  cursor: pointer;
+}
+.ican-class .tableElective th {
+  height: 40px;
+  background:#13B5B1;
+  border: 1px solid #13B5B1;
+  text-align: left;
+}
+.ican-class .tableElective th button {
+  width:44px;
+  height:20px;
+  background:rgba(52,61,95,1);
+  border-radius:4px;
+  color: #fff;
+  margin-right: 10px;
+  cursor: pointer;
+}
+.ican-class .tableElective th button:nth-of-type(1) {
+  margin-left: 24px;
+}
+.ican-class .tableElective td {
+  border-top: 1px solid #13B5B1;
+  border-bottom: 1px solid #13B5B1;
+}
+.ican-class .tableElective tr td:first-of-type {
+  border-left: 1px solid #13B5B1;
+}
+.ican-class .tableElective tr td:last-of-type {
+  border-right: 1px solid #13B5B1;
+}
+.ican-class .tableElective td .titleChoose {
+  display: inline-block;
+}
+
+
+.ican-modal {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+}
+.ican-modal form,
+.ican-modal .delete-box {
+  width: 380px;
+  box-sizing: border-box;
+  padding: 18px 13px 32px;
+  background: #fff;
+  color: #333;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.ican-modal .delete-box span {
+  display: inline-block;
+  margin: 30px 0;
+}
+.ican-modal .title {
+  color: #13B5B1;
+  font-size: 18px;
+  border-bottom: 1px solid #999;
+  line-height: 36px;
+}
+.ican-modal form section {
+  display: flex;
+  margin-bottom: 20px;
+  padding: 0 6px;
+}
+.ican-modal form section:nth-of-type(1) {
+  margin-top: 36px;
+}
+.ican-modal form input {
+  width: 240px;
+  height: 30px;
+  border: 1px solid #DCDCDC;
+}
+.ican-modal form select {
+  width: 240px;
+  height: 30px;
+  border: 1px solid #DCDCDC;
+}
+.ican-modal form label {
+  flex: 1;
+  line-height: 30px;
+}
+.ican-modal  button {
+  width: 80px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  background: #fff;
+  cursor: pointer;
+  margin-top: 20px;
+}
+.ican-modal button:nth-of-type(1) {
+  border: 1px solid #DCDCDC;
+  color: #999;
+  margin-left: 106px;
+  margin-right: 18px;
+}
+.ican-modal .delete-box button:nth-of-type(1) {
+  margin-left: 0;
+}
+.ican-modal  button:nth-of-type(1):hover {
+  color: #000;
+  background: #DCDCDC;
+}
+.ican-modal button:last-child {
+  border: 1px solid #13B5B1;
+  color: #13B5B1;
+}
+.ican-modal button:last-child:hover {
+  color: #fff;
+  background: #13B5B1;
+}
+
+.ican-cards {
+  margin-top: 30px;
+  width: 1200px;
+  border-top: 1px solid #333C5B;
+  margin: 30px auto;
+}
+.ican-cards h3 {
+  height: 80px;
+  line-height: 80px; 
+  text-align: left;
+  font-size: 14px;
+}
+.ican-cards section {
+  width: 260px;
+  height: 160px;
+  border: 1px solid #13B5B1;
+  cursor: pointer;
+  margin-right: 30px;
+  margin-bottom: 30px;
+  position: relative;
+} 
+.ican-cards section:hover {
+  transform: scale(1.1);
+}
+.ican-cards section:nth-of-type(1) {
+  background: url('../imgs/more.png')no-repeat 50% 50%;
+}
+.ican-cards section:nth-of-type(1):hover {
+  transform: scale(1.1) rotate(180deg);
+  transition: transform 0.4s linear;
+}
+.ican-cards .cards-box {
+  display: flex;
+  flex-wrap: wrap;
+}
+.ican-cards section .top {
+  height: 40px;
+  position: relative;
+  box-sizing: border-box;
+  background: #343D5F;
+  padding-left: 23px;
+}
+.ican-cards section .top p {
+  line-height: 40px;
+  margin: 0;
+}
+.ican-cards section .top img:hover {
+  cursor: pointer;
+  transform: scale(1.2)
+}
+.ican-cards section .top img:nth-of-type(1) {
+  position: absolute;
+  left: 188px;
+  top: 12px;
+} 
+.ican-cards section .top img:nth-of-type(2) {
+  position: absolute;
+  left: 229px;
+  top: 13px;
+}
+.ican-cards section .content p {
+  margin-left: 23px;
+  margin-top: 12px;
+}
+.ican-cards section .more {
+  position: absolute;
+  bottom: 22px;
+  right: 15px;
+  font-size: 12px;
+  color: #13B5B1;
+}
+.ican-cards section .more:hover {
+  transform: scale(1.2);
+  text-decoration: underline;
+}
+
+.ican-more {
+  margin-top: 50px;
+  width: 1200px;
+  margin: 0 auto;
+}
+.ican-more .top {
+  border-bottom: 1px solid #333C5B;
+}
+.ican-more .top span {
+  line-height: 50px;
+}
+.ican-more .longCard {
+  margin-top: 26px;
+  height: 80px;
+  background: url('../imgs/background.png');
+  cursor: pointer;
+}
+.ican-more .longCard .item {
+  float: left;
+}
+.ican-more .longCard p {
+  margin: 0;
+}
+.ican-more .longCard .left {
+  margin-left: 150px;
+  line-height: 80px;
+}
+.ican-more .longCard .right {
+  margin-left: 45px;
+}
+.ican-more .longCard .right p:nth-of-type(1) {
+  margin-top: 10px;
+}
+.ican-more .longCard .right section {
+  float: left;
+}
+.ican-more .longCard .right section:not(:last-child) {
+  margin-right: 90px;
+}
+.ican-more .longCard .right p:nth-of-type(2) {
+  margin-top: 10px;
+} 
+.ican-more .bottom {
+  margin-top: 26px;
+  overflow: hidden;
+} 
+.ican-more .bottom .item {
+  width: 160px;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  float: left;
+  border: 1px solid #13B5B1;
+  cursor: pointer;
+}
+.ican-more .bottom .item:nth-of-type(1) {
+  background: #13B5B1;
+}
+.ican-more .bottom .item:not(:last-child) {
+  margin-right: 20px;
+}
+.ican-more .contain h3 {
+  font-size: 18px;
+  color: #13B5B1;
+  font-weight: 400;
+  text-indent: 12px;
+  position: relative;
+  margin-top: 37px;
+}
+.ican-more .contain h3::before {
+  content: '';
+  display: inline-block;
+  width: 3px;
+  height: 18px;
+  background: #13B5B1;
+  position: absolute;
+  top: 4px;
+  left: 0;
+}
+.ican-more .contain form {
+  margin-top: 38px;
+}
+.ican-more .contain section {
+  margin-bottom: 20px;
+}
+.ican-more .contain section label {
+  vertical-align: middle;
+}
+.ican-more .contain section input {
+  background: transparent;
+  color: #fff;
+  border: 1px solid #DCDCDC;
+  vertical-align: middle;
+  margin-left:6px;
+  text-indent: 0;
+}
+.ican-more .contain section input[type=text] {
+  width: 360px;
+  height: 30px;
+}
+.ican-more .contain section input[type=button] {
+  width: 80px;
+  height: 30px;
+  cursor: pointer;
+}
+.ican-more .contain section input[type=radio] {
+  margin-left: 22px;
+}
+.ican-more .contain section input[type=file] {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 30px;
+  width: 80px;
+  cursor: pointer;
+}
+.ican-more .contain section a {
+  border: 1px solid #13B5B1;
+  display: inline-block;
+  height: 30px;
+  width: 80px;
+  position: relative;
+  text-align: center;
+  line-height: 30px;
+  color: #13B5B1;
+  cursor: pointer;
+  margin-left: 6px;
+}
+.ican-more .contain section input[type=button]:last-of-type {
+  border: 1px solid #13B5B1;
+  color: #13B5B1;
+}
+.ican-more .contain section.buttons {
+  margin-left: 93px;
+  margin-top: 66px;
+}
+.ican-more .contain section.build input:hover {
+  transform: scale(1.2);
+}
+.ican-more .contain section.build input:last-of-type {
+  content: '+';
+  font-size: 20px;
+}
+.ican-more .contain section.buttons input:nth-of-type(1) {
+  color: #999;
+  border: 1px solid #DCDCDC;
+}
+.ican-more .contain section.buttons input:nth-of-type(1):hover {
+  color: #000;
+  background: #DCDCDC;
+}
+.ican-more .contain section.buttons input:nth-of-type(2):hover {
+  color: #fff;
+  background: #13B5B1;
+}
+.ican-more .contain section.drop {
+  width: 340px;
+  height: 120px;
+  border: 1px solid #DCDCDC;
+  overflow: auto;
+  margin-right: 15px;
+  margin-left: 15px;
+  display: inline-block;
+}
+.ican-more .contain section.line {
+  display:inline-block;
+  height: 160px;
+  width: 1px;
+  border-left: 1px dashed #fff;
+  position: absolute;
+  top: -38px;
+  left: 458px;
+}
+.ican-more .contain .drop-box {
+  position: relative;
+}
+.ican-more .contain section.drop:nth-of-type(1) {
+  margin-left: 100px;
+}
+.ican-more .contain section.drop p {
+  font-weight: 400;
+  font-size: 14px;
+  margin: 16px 0;
+}
+.ican-more .contain section.drop p span {
+  display: inline-block;
+  text-indent: 7px;
+}
+.ican-more .contain section.drop p span:nth-of-type(1) {
+  width: 60%;
+}
+#form_data .close {
+  float: right;
+  margin-right: 20px;
+  font-size: 20px;
+  cursor: pointer;
+  color: red;
+}

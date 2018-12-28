@@ -1,0 +1,164 @@
+package app.entity.smart;
+
+import java.sql.Timestamp;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+
+import app.config.JsonDataUserType;
+
+/**
+ * 课程基础信息表
+ *
+ * @author gongmingbo
+ */
+@Entity
+@Table(name = "app_course_base_info")
+@TypeDef(name = "JsonDataUserType", typeClass = JsonDataUserType.class)
+public class CourseBaseInfo {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String courseCode;
+    private String courseName;
+    private String courseType;
+    private Timestamp courseCreationTime;
+    private String courseTeachr;
+    private String sectionNumber;//表示上课节数
+    private String classPlace;
+    private Integer powerPoint;
+    @Column(columnDefinition = "jsonb")
+    @Type(type = "JsonDataUserType")
+    private String courseTags;
+    private String schoolId;
+    private String weeks;//表示周数
+    private String week;//表示星期几
+    private String state;//t表示正常，f表示删除状态
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getWeek() {
+        return week;
+    }
+
+    public void setWeek(String week) {
+        this.week = week;
+    }
+
+    @Override
+    public String toString() {
+        return "CourseBaseInfo [id=" + id + ", courseCode=" + courseCode + ", courseName=" + courseName
+                + ", courseType=" + courseType + ", courseCreationTime=" + courseCreationTime + ", courseTeachr="
+                + courseTeachr + ", sectionNumber=" + sectionNumber + ", classPlace=" + classPlace + ", powerPoint="
+                + powerPoint + ", courseTags=" + courseTags + ", schoolId=" + schoolId + ", weeks=" + weeks + "]";
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getCourseCode() {
+        return courseCode;
+    }
+
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+
+    public String getCourseType() {
+        return courseType;
+    }
+
+    public void setCourseType(String courseType) {
+        this.courseType = courseType;
+    }
+
+    public Timestamp getCourseCreationTime() {
+        return courseCreationTime;
+    }
+
+    public void setCourseCreationTime(Timestamp courseCreationTime) {
+        this.courseCreationTime = courseCreationTime;
+    }
+
+    public String getCourseTeachr() {
+        return courseTeachr;
+    }
+
+    public void setCourseTeachr(String courseTeachr) {
+        this.courseTeachr = courseTeachr;
+    }
+
+    public String getSectionNumber() {
+        return sectionNumber;
+    }
+
+    public void setSectionNumber(String sectionNumber) {
+        this.sectionNumber = sectionNumber;
+    }
+
+    public String getClassPlace() {
+        return classPlace;
+    }
+
+    public void setClassPlace(String classPlace) {
+        this.classPlace = classPlace;
+    }
+
+    public Integer getPowerPoint() {
+        return powerPoint;
+    }
+
+    public void setPowerPoint(Integer powerPoint) {
+        this.powerPoint = powerPoint;
+    }
+
+    public String getCourseTags() {
+        return courseTags;
+    }
+
+    public void setCourseTags(String courseTags) {
+        this.courseTags = courseTags;
+    }
+
+    public String getWeeks() {
+        return weeks;
+    }
+
+    public void setWeeks(String weeks) {
+        this.weeks = weeks;
+    }
+
+    public String getSchoolId() {
+        return schoolId;
+    }
+
+    public void setSchoolId(String schoolId) {
+        this.schoolId = schoolId;
+    }
+}

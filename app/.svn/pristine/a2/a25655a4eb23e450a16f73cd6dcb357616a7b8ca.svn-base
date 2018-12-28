@@ -1,0 +1,17 @@
+package app.repository;
+
+import app.entity.smart.Knowledge;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import java.util.List;
+
+public interface KnowledgeRepository extends JpaRepository<Knowledge, String > {
+    List<Knowledge> findByProfessionId(String id);
+
+    List<Knowledge> findByProfessionIdAndKnowledgeIdIsNot(String id, String knowledgeId);
+
+    @Query(value = "select COUNT (*) from app_knowledge_prerequisite where prerequisite_id = :pre", nativeQuery = true)
+    int countByPre(@Param("pre") String pre);
+}

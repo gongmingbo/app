@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>推荐学习录入</title>
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/need.css">
+</head>
+
+<body>
+  <div class="ican-header">
+    <h1>
+      <img src="./imgs/logo.png" alt="">
+      知我
+    </h1>
+    <ul>
+      <li>必修课程录入</li>
+      <li>选修课程录入</li>
+      <li class="active">推荐学习录入</li>
+      <li>职业选择</li>
+    </ul>
+    <div class="login-state">
+      <span>小张</span>
+      <span>|</span>
+      <span>退出</span>
+    </div>
+  </div>
+  <div class="ican-select">
+    <section class="choose" id="choose">
+      <label for="schools">学校 :</label>
+      <input type="text" id="chooseItem">
+      <div id="schools" class="dataWrapper">
+        <p>支持中文/拼音/简拼输入</p>
+        <ul>
+          <li class="active">常用</li>
+          <li>A</li>
+          <li>B</li>
+          <li>C</li>
+          <li>D</li>
+          <li>E</li>
+          <li>F</li>
+          <li>G</li>
+          <li>H</li>
+          <li>I</li>
+          <li>J</li>
+          <li>K</li>
+          <li>L</li>
+          <li>M</li>
+          <li>N</li>
+          <li>O</li>
+          <li>P</li>
+          <li>Q</li>
+          <li>R</li>
+          <li>S</li>
+          <li>T</li>
+          <li>U</li>
+          <li>V</li>
+          <li>W</li>
+          <li>X</li>
+          <li>Y</li>
+          <li>Z</li>
+        </ul>
+        <div class="school-list">
+          <h3>A</h3>
+          <div class="school-names">
+            <span>安庆大学</span>
+            <span>澳门f大学</span>
+            <span>澳门大学</span>
+            <span>澳门大dfdf学</span>
+            <span>澳门大学</span>
+            <span>澳门大学sfsdfsdf</span>
+            <span>澳门大学</span>
+            <span>澳门大学ffdf</span>
+            <span>澳门大学</span>
+            <span>澳门大学</span>
+            <span>澳门大学</span>
+            <span>澳门大dfd学</span>
+            <span>澳门大学</span>
+            <span>澳门大学</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <label for="institute">院系 :</label>
+      <select id="institute">
+        <option value="">计算机学院</option>
+        <option value="">建筑学院</option>
+        <option value="">物理学院</option>
+      </select>
+    </section>
+    <section>
+      <label for="specialty">专业 :</label>
+      <select id="specialty">
+        <option value="">软件工程</option>
+        <option value="">数学</option>
+        <option value="">物理</option>
+      </select>
+    </section>
+  </div>
+  <div class="ican-class">
+    <table cellspacing="0" class="tableElective">
+      <caption>推荐学习列表</caption>
+      <tr>
+        <th colspan="6">
+          <button onclick="checkedAll()">全选</button>
+          <button onclick="checkeOthers()">反选</button>
+          <button onclick="removeClass()">删除</button>
+          <button onclick="uploadClass()">上传</button>
+        </th>
+      </tr>
+      <tr>
+        <td>
+          <input type="checkbox">
+          <p class="titleChoose">我不是产品经理</p>
+        </td>
+        <td>
+          <p>2018-12-31</p>
+        </td>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="checkbox">
+          <p class="titleChoose">人人都是产品经理</p>
+        </td>
+        <td>
+          <p>2018-12-31</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="checkbox">
+          <p class="titleChoose">打死产品经理</p>
+        </td>
+        <td>
+          <p>2018-12-31</p>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="ican-modal" id="deleteModal">
+    <div class="delete-box">
+        <h3>确定删除该资料？</h3>
+        <div><span>资料名称:</span>
+          <span>人人都是产品经理</span>
+        </div>
+        <button>取消</button>
+        <button type="submit">确定</button>
+    </div>  
+  </div>
+  <script>
+    //初始化choose组件
+    function initChoose() {
+      document.querySelector('#choose').addEventListener("click", function (e) {
+        if (e.target.nodeName === "INPUT") {
+          document.querySelector('.dataWrapper').style.display = "block"
+        }
+        if (e.target.nodeName === "LI") {
+          document.querySelector('#choose h3').innerText = e.target.innerText
+          Array.prototype.slice.apply(e.target.parentNode.children).forEach(element => {
+            element.classList.remove('active')
+          });
+          e.target.classList.add('active')
+        }
+        if (e.target.nodeName === "SPAN") {
+          document.querySelector('.dataWrapper').style.display = "none"
+          document.querySelector('#chooseItem').value = e.target.innerText
+        }
+      })
+    }
+    //显示模态框
+    function openRecommendModal() {
+      document.querySelector('#deleteModal').style.display = "block"
+    }
+    //判断是否选中checkbox
+    function isCheck() {
+      document.querySelector('.tableElective').addEventListener('click', function () {
+        Array.prototype.slice.call(document.querySelectorAll('input[type=checkbox]')).forEach(function (x) {
+          if (x.checked) {
+            x.parentNode.parentNode.style.background = "#343D5F"
+          } else {
+            x.parentNode.parentNode.style.background = "#48516F"
+          }
+        })
+      })
+    }
+    //全选
+    function checkedAll() {
+      Array.prototype.slice.call(document.querySelectorAll('input[type=checkbox]')).forEach(function (x) {
+        x.checked = true
+      })
+    }
+    //反选
+    function checkeOthers() {
+      Array.prototype.slice.call(document.querySelectorAll('input[type=checkbox]')).forEach(function (x) {
+        x.checked = !x.checked
+      })
+    }
+    //删除
+    function removeClass() {
+      openRecommendModal()
+    }
+    //上传
+    function uploadClass() {
+      Array.prototype.slice.call(document.querySelectorAll('input[type=checkbox]')).forEach(function (x) {
+        if (x.checked) {
+          // 上传文件业务逻辑
+        }
+      })
+    }
+    window.onload = function () {
+      initChoose()
+      isCheck()
+    }
+  </script>
+</body>
+
+</html>

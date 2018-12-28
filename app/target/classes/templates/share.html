@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>app下载</title>
+    <script src="/jquery-3.3.1.min.js"></script>
+    <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+    }
+    .main {
+      margin: 0 auto;
+      width: 980px;
+      height: 500px;
+    }
+    p {
+      font-size: 24px;
+      text-align: center;
+    }
+    .down_box {
+      background-color: brown;
+      display: flex;
+      justify-content: space-around;
+      position: relative;
+    }
+    .down_box h3 {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      color: #fff;
+      font-size: 20px;
+      width: 100%;
+      text-align: center;
+    }
+    .down_box a {
+      margin: 50px 0 80px 0;
+    }
+    .down_box a:nth-child(2) {
+      margin-top: 66px;
+    }
+    .down_box a img {
+      width: 120px;
+    }
+    .down_box_2 {
+      display: flex;
+      justify-content: space-around;
+      /* background-color: brown; */
+    }
+    .down_box_2 a {
+      text-decoration: none;
+      margin-top: 50px;
+    }
+    .down_box_2 a p {
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+    <div class="main">
+        <p>客户端下载平台</p>
+        <div class="down_box">
+            <a id="ios"><img src="/imgs/ios.png" alt=""></a>
+            <a id="android"><img src="/imgs/android.png" alt=""></a>
+            <h3>点击图标下载安装</h3>
+        </div>
+        <p>扫码下载</p>
+        <div class="down_box_2">
+            <a href="#">
+                <img src="/imgs/ios_code.png" alt="">
+                <p>苹果扫码</p>
+            </a>
+            <a href="#">
+                <img src="/imgs/android_code.png" alt="">
+                <p>安卓扫码</p>
+            </a>
+        </div>
+    </div>
+<script>
+    $(function(){
+        $("#ios").click(function(){
+            alert("暂无iOS版本");
+           $("#ios").attr('href','#');
+        });
+        $("#android").click(function(){
+           $("#android").attr('href','http://114.55.253.31:8082/api/latest-release');
+        });
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>职业选择</title>
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/need.css">
+</head>
+
+<body>
+  <div class="ican-header">
+    <h1>
+      <img src="./imgs/logo.png" alt="">
+      知我
+    </h1>
+    <ul>
+      <li>必修课程录入</li>
+      <li>选修课程录入</li>
+      <li>推荐学习录入</li>
+      <li class="active">职业选择</li>
+    </ul>
+    <div class="login-state">
+      <span>小张</span>
+      <span>|</span>
+      <span>退出</span>
+    </div>
+  </div>
+  <div class="ican-select">
+    <section class="choose" id="choose">
+      <label for="schools">学校 :</label>
+      <input type="text" id="chooseItem">
+      <div id="schools" class="dataWrapper">
+        <p>支持中文/拼音/简拼输入</p>
+        <ul>
+          <li class="active">常用</li>
+          <li>A</li>
+          <li>B</li>
+          <li>C</li>
+          <li>D</li>
+          <li>E</li>
+          <li>F</li>
+          <li>G</li>
+          <li>H</li>
+          <li>I</li>
+          <li>J</li>
+          <li>K</li>
+          <li>L</li>
+          <li>M</li>
+          <li>N</li>
+          <li>O</li>
+          <li>P</li>
+          <li>Q</li>
+          <li>R</li>
+          <li>S</li>
+          <li>T</li>
+          <li>U</li>
+          <li>V</li>
+          <li>W</li>
+          <li>X</li>
+          <li>Y</li>
+          <li>Z</li>
+        </ul>
+        <div class="school-list">
+          <h3>A</h3>
+          <div class="school-names">
+            <span>安庆大学</span>
+            <span>澳门f大学</span>
+            <span>澳门大学</span>
+            <span>澳门大dfdf学</span>
+            <span>澳门大学</span>
+            <span>澳门大学sfsdfsdf</span>
+            <span>澳门大学</span>
+            <span>澳门大学ffdf</span>
+            <span>澳门大学</span>
+            <span>澳门大学</span>
+            <span>澳门大学</span>
+            <span>澳门大dfd学</span>
+            <span>澳门大学</span>
+            <span>澳门大学</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <label for="institute">院系 :</label>
+      <select id="institute">
+        <option value="">计算机学院</option>
+        <option value="">建筑学院</option>
+        <option value="">物理学院</option>
+      </select>
+    </section>
+    <section>
+      <label for="specialty">专业 :</label>
+      <select id="specialty">
+        <option value="">软件工程</option>
+        <option value="">数学</option>
+        <option value="">物理</option>
+      </select>
+    </section>
+  </div>
+  <div class="ican-cards">
+    <h3>推荐职位</h3>
+    <div class="cards-box">
+      <section class="addCard"></section>
+      <section>
+        <div class="top">
+          <p>JAVA软件工程师</p>
+          <img src="./imgs/change.png" alt="" class="imgEditor">
+          <img src="./imgs/delete.png" alt="" class="imgDelete">
+        </div>
+        <div class="content">
+          <p>
+            <span>知识大纲:</span>
+            <span>3个</span>
+          </p>
+          <p>
+            <span>课程:</span>
+            <span>3门</span>
+          </p>
+          <p>
+            <span>能量值:</span>
+            <span>3J</span>
+          </p>
+        </div>
+        <div class="more">查看更多</div>
+      </section>
+      <section></section>
+      <section></section>
+      <section></section>
+      <section></section>
+      <section></section>
+      <section></section>
+    </div>
+  </div>
+  <div class="ican-modal" id="deleteModal">
+    <div class="delete-box">
+      <h3>确定删除该资料？</h3>
+      <div><span>职位名称:</span>
+        <span>产品经理</span>
+      </div>
+      <button>取消</button>
+      <button type="submit">确定</button>
+    </div>
+  </div>
+  <div class="ican-modal" id="editorModal">
+      <form action="">
+        <h3></h3>
+        <section>
+          <label for="">职位名称:</label>
+          <input type="text">
+        </section>
+        <section>
+          <label for="">目标大纲:</label>
+          <input type="text">
+        </section>
+        <section>
+          <label for="">目标课程:</label>
+          <input type="text">
+        </section>
+        <section>
+          <label for="">目标能量值:</label>
+          <input type="text">
+        </section>
+        <button>取消</button>
+        <button type="submit">确定</button>
+      </form>
+    </div>
+  <script>
+    //初始化choose组件
+    function initChoose() {
+      document.querySelector('#choose').addEventListener("click", function (e) {
+        if (e.target.nodeName === "INPUT") {
+          document.querySelector('.dataWrapper').style.display = "block"
+        }
+        if (e.target.nodeName === "LI") {
+          document.querySelector('#choose h3').innerText = e.target.innerText
+          Array.prototype.slice.apply(e.target.parentNode.children).forEach(element => {
+            element.classList.remove('active')
+          });
+          e.target.classList.add('active')
+        }
+        if (e.target.nodeName === "SPAN") {
+          document.querySelector('.dataWrapper').style.display = "none"
+          document.querySelector('#chooseItem').value = e.target.innerText
+        }
+      })
+    }
+    //监听卡片点击事件
+    function cardClick() {
+      document.querySelector('.cards-box').addEventListener('click', function (e) {
+        //删除卡片
+        if (e.target.nodeName === "IMG" && e.target.className == "imgDelete") {
+          document.querySelector('#deleteModal').style.display = "block"
+        }
+        //编辑卡片
+        if (e.target.nodeName === "IMG" && e.target.className == "imgEditor") {
+          document.querySelector('#editorModal').style.display = "block"
+          document.querySelector('#editorModal h3').innerText = "编辑职位"  
+        }
+        //添加卡片
+        if (e.target.nodeName === "SECTION" && e.target.className == "addCard") {
+          document.querySelector('#editorModal').style.display = "block"
+          document.querySelector('#editorModal h3').innerText = "添加职位"
+        }
+      })
+    }
+    window.onload = function () {
+      initChoose()
+      cardClick()
+    }
+  </script>
+</body>
+</html>

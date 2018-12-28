@@ -1,0 +1,51 @@
+package app.apiservice;
+
+import app.entity.user.CourseTimeTable;
+import app.packet.error.ErrorEnum;
+import app.packet.request.CommonPacket;
+import app.packet.response.CommonMessage;
+import app.service.CourseService;
+import app.service.UserService;
+import com.alibaba.fastjson.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+
+/**
+ * 课程表显示
+ */
+@RestController
+@ControllerAdvice
+@RequestMapping(path = "/api")
+public class Syllabus {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass()) ;
+
+    @Autowired
+    private CourseService courseService;
+    @Autowired
+    private UserService userService;
+
+    @RequestMapping(path="/syllabus",method=RequestMethod.POST)
+    public CommonMessage syllabus(@RequestBody CommonPacket packet){
+        logger.info("userId is: " + packet.getUsername());
+        logger.info("deviceId is: " + packet.getDeviceId());
+        logger.info("token is: " + packet.getToken());
+        CourseTimeTable course=courseService.getCourseTemplate(packet.getUsername());
+        CommonMessage message;
+        if(course==null){
+            message = CommonMessage.failure(ErrorEnum.COURSE_INVALID);
+        }else{
+            String data=course.getCourseTemplate();
+            JSONObject datas = JSONObject.parseObject(data);
+            message=CommonMessage.success(datas,null);
+        }
+        return message;
+    }
+
+    @ExceptionHandler(value = Exception.class)
+    public CommonMessage errorHandler(Exception ex) {
+        return CommonMessage.failure(ErrorEnum.SERVER_INTERNAL_ERROR);
+    }
+}

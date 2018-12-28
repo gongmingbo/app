@@ -1,0 +1,62 @@
+package app.repository;
+
+import app.entity.content.BaseContent;
+import app.entity.json.ContentBaseView;
+import app.entity.json.SearchResultView;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import java.util.Collection;
+import java.util.List;
+
+/**
+ * Created by gongmingbo on 2018/11/12.
+ */
+@Repository
+public interface ContentRepository extends JpaRepository<BaseContent, String> {
+
+    Page<BaseContent> findByProfessionIdAndState(Pageable pageable, String professionId, String state);
+
+    Page<BaseContent> findByState(Pageable pageable, String state);
+
+    Page<BaseContent> findAll(Pageable pageable);
+
+    //查询推荐学习文章视频（历史学习记录排在后面）
+    @Query(value = "(select*from app_content_info where id in :ids " +
+            "and id not in(select learnt_id from app_users_learnt WHERE user_id=:userId and type not in('course')) and state='t' " +
+            "and content_title like :name " +
+            "ORDER BY publish_time DESC) " +
+            "UNION ALL " +
+            "(select*from app_content_info where id in" +
+            "(select learnt_id from app_users_learnt WHERE user_id=:userId and learnt_id in :ids and type not in('course'))" +
+            "and state='t' and content_title like :name) LIMIT :size OFFSET :page",nativeQuery = true)
+    List<BaseContent> contentSearch(@Param("ids") List<String> ids,@Param("userId") String userId,@Param("name") String name,@Param("size") int size,@Param("page") int page);
+
+    BaseContent findByIdAndStateAndContentTitleLike(String id,String state,String name);
+    //查询推荐学习文章视频总条数
+    @Query(value = "select * from app_content_info where id in :ids " +
+            "and state='t' and content_title like :name",nativeQuery = true)
+    List<BaseContent> countContent(@Param("ids") List<String> ids,@Param("name") String name);
+
+    List<BaseContent> findByContentTitleAndState(String contentTitle, String state);
+
+    @Query(value = "select new app.entity.json.ContentBaseView(c.id, c.contentTitle, c.contentType, c.publishTime) from BaseContent c where c.state = :state")
+    List<ContentBaseView> findContentBaseView(@Param("state") String state);
+
+    //分页
+    @Query(value = "select app_content_info.* from app_content_info INNER JOIN app_my_collect ON app_my_collect.resources_id=app_content_info.resources_id where app_my_collect.user_id=:userId and app_my_collect.state='t' and app_my_collect.type not in('course') limit :size offset :page",nativeQuery = true)
+    List<BaseContent> collectContent(@Param("userId") String userId,@Param("page")int page,@Param("size")int size);
+
+    //查询总条数
+    @Query(value = "select count(*) from app_content_info INNER JOIN app_my_collect ON app_my_collect.resources_id=app_content_info.resources_id where app_my_collect.user_id=:userId and app_my_collect.state='t'",nativeQuery = true)
+    int collectContent(@Param("userId") String userId);
+
+    BaseContent findByResourcesId(String id);
+
+    @Query(value = "select new app.entity.json.SearchResultView(b.contentTitle, b.id, b.contentType) from BaseContent b where (b.contentTitle like :keyword or b.contenBody like :keyword) and b.id in :ids")
+    List<SearchResultView> search(@Param("keyword") String keyword, @Param("ids") Collection<String > ids);
+}

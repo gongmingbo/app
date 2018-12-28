@@ -1,0 +1,33 @@
+package app.repository;
+
+import java.util.List;
+
+import app.bankview.ConstantsKey;
+import app.entity.content.BaseContent;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import app.entity.smart.CourseBaseInfo;
+
+@Repository
+public interface CourseBaseInfoRepository extends JpaRepository<CourseBaseInfo, Long> {
+    Page<CourseBaseInfo> findByOrgIdAndCourseTypeAndState(Pageable pageable, String schoolId, String courseType, String state);
+    Page<CourseBaseInfo> findByOrgIdAndCourseTypeAndStateAndCourseNameLike(Pageable pageable, String schoolId, String courseType, String state,String courseName);
+
+    List<CourseBaseInfo> findByCourseTypeAndState(String courseType, String state);
+    List<CourseBaseInfo> findByCourseCode(String courseCode);
+
+    List<CourseBaseInfo> findById(long id);
+
+    //通过用户id查询专业课程
+    @Query(value = "SELECT *from app_course_base_info where org_id=(SELECT pid from app_school_base_info where org_id=(SELECT pid from app_school_base_info where org_id=(SELECT shool_id from app_users_base_info where user_id=:username))) and course_type='必修课' and state='t'",nativeQuery = true)
+    List<CourseBaseInfo> majorCourses(@Param("username") String username);
+
+    //查询选修课程
+    @Query(value = "SELECT *from app_course_base_info where org_id=(SELECT org_id from app_school_base_info where org_id=(SELECT pid from app_school_base_info where org_id=(SELECT pid from app_school_base_info where org_id=(SELECT pid from app_school_base_info where org_id=(SELECT shool_id from app_users_base_info where user_id=:username))))  and pid is null) and course_type='选修课' and state='t'\n",nativeQuery = true)
+    List<CourseBaseInfo> elective(@Param("username")String username);
+}

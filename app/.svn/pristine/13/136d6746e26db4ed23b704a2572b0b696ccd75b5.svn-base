@@ -1,0 +1,290 @@
+package app.bankview;
+
+import app.entity.content.Attachment;
+import app.entity.content.BaseContent;
+import app.entity.smart.ProfessionClassification;
+import app.packet.Pagination;
+import app.repository.AttachmentRepository;
+import app.repository.ContentRepository;
+import app.repository.ProfessionClassificationRepository;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONException;
+import com.sun.xml.internal.ws.api.pipe.Tube;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ResourceUtils;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.sql.Timestamp;
+import java.util.*;
+
+/**
+ * Created by gongmingbo on 2018/11/13.
+ */
+@Controller
+@RequestMapping("/web")
+public class ContentCotroller {
+    @Value("${uploadpath}")
+    private String uploadpath;
+    @Autowired
+    private AttachmentRepository attachmentRepository;
+    @Autowired
+    private ContentRepository contentRepository;
+    @Autowired
+    private ProfessionClassificationRepository professionClassificationRepository;
+
+    /**
+     * 返回带富文本的HTML
+     * @param request
+     * @return
+     */
+   @RequestMapping("index")
+    public String index(HttpServletRequest request) {
+           String professionId=request.getParameter("professionId");
+           String id=request.getParameter("id");
+           request.setAttribute("professionId",professionId);
+           if (!StringUtils.isEmpty(id)){
+               BaseContent baseContent=contentRepository.findOne(Long.parseLong(id));
+               request.setAttribute("baseContent",baseContent);
+           }else {
+               request.setAttribute("baseContent",new BaseContent());
+           }
+        return "index";
+    }
+
+    /**
+     * 返回推荐HTML
+     * @param request
+     * @return
+     */
+    @RequestMapping("recommend")
+    public String recommend(HttpServletRequest request) {
+        List<ProfessionClassification> list=professionClassificationRepository.findAll();
+        request.setAttribute("list",list);
+        return "recommend";
+    }
+
+    /**
+     * 获取推荐列表
+     * @param request
+     * @return
+     */
+    @RequestMapping("/getrecommend")
+    @ResponseBody
+    public String getRecommend(HttpServletRequest request){
+       String professionId=request.getParameter("professionId");
+       String pag=request.getParameter("page");
+       int pageNum=Integer.parseInt(pag);
+        Pageable pageable=new PageRequest(pageNum-1,10);
+       Page<BaseContent> list=  contentRepository.findByProfessionIdAndState(pageable,professionId,"t");
+       List<BaseContent> listBaseContent=list.getContent();
+         Pagination pagination=new Pagination();
+         pagination.setPage(pageNum);
+         pagination.setPageSize(10);
+         pagination.setTotalPage(list.getTotalPages());
+         Map<String,Object>map=new HashMap<>();
+         map.put("data",listBaseContent);
+         map.put("page",pagination);
+           return JSON.toJSONString(map);
+    }
+
+    /**
+     * 编辑或添加推挤内容
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/addcontent")
+    @ResponseBody
+    @Transactional
+    public String addContent(HttpServletRequest request) throws Exception{
+        List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("file");
+        String title=request.getParameter("title");
+        String description=request.getParameter("description");
+        String body=request.getParameter("body");
+        String type=request.getParameter("type");
+        String tag=request.getParameter("tag");
+        String professionId=request.getParameter("professionId");
+        String id=request.getParameter("id");
+        String tags[]=tag.split(",");
+        String uuid=UUID.randomUUID().toString();
+        BaseContent c =new BaseContent();
+        if (!StringUtils.isEmpty(id)){
+           c=contentRepository.findOne(Long.parseLong(id));
+           uuid=c.getResourcesId();
+           professionId=c.getProfessionId();
+        }
+        //保存附件
+        for (MultipartFile m:files) {
+            String fileName = m.getOriginalFilename();
+            if (StringUtils.isEmpty(fileName)){
+                break;
+            }
+            File targetFile = new File(uploadpath + "ajax/", "files");
+            if (!targetFile.exists()) {
+                targetFile.mkdirs();
+            }
+            String NewFileName = UUID.randomUUID().toString() + fileName;
+            FileOutputStream out = new FileOutputStream(uploadpath + "ajax/files/" + NewFileName);
+            out.write(m.getBytes());
+            out.close();
+            Attachment a=new Attachment();
+            a.setAttachmentName(fileName);
+            String attachmentType=fileName.substring(fileName.indexOf(".")+1);
+            a.setAttachmentType(attachmentType);
+            a.setResourcesId(uuid);
+            a.setAttachmentTime(new Timestamp(new Date().getTime()));
+            a.setAttachmentUrl("/resources/ajax/files/"+ NewFileName);
+            attachmentRepository.saveAndFlush(a);
+            c.setContentAttachment(true);
+        }
+        c.setContentTitle(title);
+        c.setContentDescription(description);
+        c.setContentType(type);
+        c.setContenBody(body);
+        c.setPublishTime(new Timestamp(new Date().getTime()));
+        c.setContentTag(JSON.toJSONString(tags));
+        c.setResourcesId(uuid);
+        c.setProfessionId(professionId);
+        c.setState("t");
+        contentRepository.saveAndFlush(c);
+        return JSON.toJSONString(c);
+    }
+
+    /**
+     * 删除推荐
+     * @param request
+     * @return
+     */
+    @RequestMapping("/delete")
+    @ResponseBody
+    public String delete(HttpServletRequest request){
+        String ids=request.getParameter("ids");
+        String id[]=ids.split(",");
+        for (int i = 0; i < id.length; i++) {
+            BaseContent baseContent=contentRepository.findOne(Long.parseLong(id[i]));
+            baseContent.setState("f");
+            contentRepository.saveAndFlush(baseContent);
+        }
+        return null;
+    }
+    //----------------------------------以下为富文本配置-----------------------------------------------------------------
+    //获取配置文件
+    @RequestMapping("/configjson")
+    @ResponseBody
+    public void getConfigInfo(HttpServletRequest request, HttpServletResponse response) {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("utf-8");
+        try {
+            Resource resource = new ClassPathResource("config.json");
+            File file = resource.getFile();
+            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+            PrintWriter writer = response.getWriter();
+            StringBuffer buffer = new StringBuffer();
+            String str = null;
+            while ((str = br.readLine()) != null) {
+                buffer.append(str);
+            }
+            writer.write(buffer.toString());
+            writer.flush();
+            writer.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    //上传图片
+    @RequestMapping("/uploadimages")
+    @ResponseBody
+    public String upImage(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("upfile");
+            for (MultipartFile m : files) {
+                String fileName = m.getOriginalFilename();
+                File targetFile = new File(uploadpath + "ueditor/", "images");
+                if (!targetFile.exists()) {
+                    targetFile.mkdirs();
+                }
+                String NewFileName = UUID.randomUUID().toString() + fileName;
+                System.out.println(m.getSize());
+                FileOutputStream out = new FileOutputStream(uploadpath + "ueditor/images/" + NewFileName);
+                out.write(m.getBytes());
+                Map<String, String> map = new HashMap<>();
+                map.put("state", "SUCCESS");
+                map.put("url", "/resources/ueditor/images/" + NewFileName);
+                return JSON.toJSONString(map);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+    //上传视频
+    @RequestMapping("/uploadvideo")
+    @ResponseBody
+    public String upvideo(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("upfile");
+            for (MultipartFile m : files) {
+                String fileName = m.getOriginalFilename();
+                File targetFile = new File(uploadpath + "ueditor/", "video");
+                if (!targetFile.exists()) {
+                    targetFile.mkdirs();
+                }
+                String NewFileName = UUID.randomUUID().toString() + fileName;
+                System.out.println(m.getSize());
+                FileOutputStream out = new FileOutputStream(uploadpath + "ueditor/video/" + NewFileName);
+                out.write(m.getBytes());
+                Map<String, String> map = new HashMap<>();
+                map.put("state", "SUCCESS");
+                map.put("url", "/resources/ueditor/video/" + NewFileName);
+                return JSON.toJSONString(map);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+    //上传附件
+    @RequestMapping("/uploadfile")
+    @ResponseBody
+    public String upfile(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("upfile");
+            for (MultipartFile m : files) {
+                String fileName = m.getOriginalFilename();
+                File targetFile = new File(uploadpath + "ueditor/", "file");
+                if (!targetFile.exists()) {
+                    targetFile.mkdirs();
+                }
+                String NewFileName = UUID.randomUUID().toString() + fileName;
+                System.out.println(m.getSize());
+                FileOutputStream out = new FileOutputStream(uploadpath + "ueditor/file/" + NewFileName);
+                out.write(m.getBytes());
+                Map<String, String> map = new HashMap<>();
+                map.put("state", "SUCCESS");
+                map.put("url", "/resources/ueditor/file/" + NewFileName);
+                return JSON.toJSONString(map);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+}
+
+

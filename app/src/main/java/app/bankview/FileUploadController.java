@@ -1,0 +1,51 @@
+package app.bankview;
+
+import app.packet.error.ErrorEnum;
+import app.packet.response.CommonMessage;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+
+import static app.packet.error.ErrorEnum.INVALID_FILE;
+
+@Controller
+@ControllerAdvice
+@RequestMapping(path = "/web")
+public class FileUploadController {
+    @Value("${uploadpath}")
+    private String rootPath;
+
+    @ExceptionHandler(value = Exception.class)
+    public CommonMessage errorHandler(Exception ex) {
+        ex.printStackTrace();
+        return CommonMessage.failure(ErrorEnum.SERVER_INTERNAL_ERROR);
+    }
+
+    @RequestMapping(path = "/upload", method = RequestMethod.POST)
+    @ResponseBody
+    CommonMessage upload(@RequestParam("file") MultipartFile file) throws IOException {
+        if (!file.isEmpty()) {
+            File dir = new File(rootPath, "icons");
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+            String oriNmae = file.getOriginalFilename();
+          //  String name = System.currentTimeMillis() + "_" + oriNmae;
+            String name = System.currentTimeMillis() + oriNmae.substring(oriNmae.indexOf("."));
+            String path = rootPath + "/icons/" + name;
+            File to = new File(path);
+            file.transferTo(to);
+            HashMap<String, String> data = new HashMap<>();
+            data.put("filePath", "/resources/icons/" + name);
+            data.put("oriName", file.getOriginalFilename());
+            return CommonMessage.success(data);
+        } else {
+            return CommonMessage.failure(INVALID_FILE);
+        }
+    }
+}

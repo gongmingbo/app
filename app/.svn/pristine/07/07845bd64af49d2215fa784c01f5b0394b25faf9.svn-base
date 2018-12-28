@@ -1,0 +1,14 @@
+package app.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import app.entity.smart.CourseBaseInfo;
+
+@Repository
+public interface CourseBaseInfoRepository extends JpaRepository<CourseBaseInfo, Long> {
+         List<CourseBaseInfo> findBySchoolIdAndCourseType(String schoolId,String courseType);
+         List<CourseBaseInfo> findById(long id);
+}

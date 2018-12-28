@@ -1,0 +1,23 @@
+package app.service;
+
+import app.entity.content.BaseContent;
+import app.entity.json.ContentBaseView;
+import app.entity.smart.CourseBaseInfo;
+import app.entity.user.CourseTimeTable;
+
+import java.util.List;
+
+/*
+* 学生课程表查询接口
+* */
+public interface CourseService {
+    CourseTimeTable getCourseTemplate(String username);
+
+    List<CourseBaseInfo> getAllCompulsory();
+
+    List<CourseBaseInfo> getAllElective();
+
+    List<BaseContent> getAllContent();
+
+    List<ContentBaseView> getAllContentBaseView();
+}

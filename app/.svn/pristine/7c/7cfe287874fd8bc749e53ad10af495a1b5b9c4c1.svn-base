@@ -1,0 +1,15 @@
+package app.repository;
+
+import app.entity.content.BaseContent;
+import app.entity.user.Collect;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface CollectRepository extends JpaRepository<Collect, String> {
+    Page<Collect> findAll(Pageable pageable);
+    Collect findByUserIdAndResourcesId(String userId,String resourceId);
+    Page<Collect> findByUserIdAndStateOrderByTimeDesc(Pageable pageable,String userId,String state);
+}

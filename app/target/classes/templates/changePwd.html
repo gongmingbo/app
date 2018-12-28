@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>修改密码</title>
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/changePwd.css">
+    <script type="text/javascript" src="/jquery-3.3.1.min.js"></script>
+    <script src="/md5.js"></script>
+</head>
+<body>
+<div class="ican-wrapper">
+    <div class="box">
+        <div class="header">
+            <h3><img src="/imgs/logo.png"></h3>
+            <a href="/web/recommend"> <span>返回首页</span></a>
+        </div>
+        <div class="content">
+            <h3>修改密码</h3>
+            <form action="">
+                <div class="section first">
+                    <label class="star" for="">原密码:</label>
+                    <input class="odlPassword" type="password">
+                </div>
+                <div class="section">
+                    <label class="star" for="">新密码:</label>
+                    <input class="newPassword" type="password">
+                </div>
+                <div class="section">
+                    <label class="star" for="">确认密码:</label>
+                    <input class="surePassword" type="password">
+                </div>
+                <input type="button" value="取消" class="input-cancel">
+                <input type="button" value="确认" class="input-sure">
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+
+    $(".input-sure").click(function () {
+        var odlPassword = $(".odlPassword").val()
+        var newPassword = $(".newPassword").val()
+        var surePassword = $(".surePassword").val()
+        if (!odlPassword.trim()){
+            alert("旧密码不能为空")
+            return
+        }else if (!newPassword.trim()){
+            alert("新密码不能为空")
+            return
+        }else if (!surePassword.trim()){
+            alert("确认密码不能为空")
+            return
+        } else if (newPassword!=surePassword){
+            alert("新密码与确认密码两者不一致！")
+            return
+        }
+        var contimues=true;
+        $("input[type='password']").each(function () {
+            if($(this).val().length<6){
+                contimues =false;
+            }
+        })
+        if (!contimues){
+            alert("密码不能小于6位")
+            return
+        }
+        var url = "/web/changpassword"
+        var data = {
+            odlPassword: hex_md5(odlPassword),
+            newPassword: hex_md5(newPassword),
+            surePassword: hex_md5(surePassword)
+        }
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: data,
+            dataType: "json",
+            async: true,
+            success: function (res) {
+                if (res.state!=true){
+                    alert(res.msg)
+                }else {
+                    window.location.href="/web/quit"
+                }
+            }
+        })
+    })
+    $(".input-cancel").click(function () {
+        window.history.back(-1)
+    })
+</script>
+</body>
+</html>

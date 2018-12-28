@@ -1,0 +1,17 @@
+package app.service;
+
+import app.entity.user.Learnt;
+import app.entity.user.PassKnowledge;
+import app.entity.user.User;
+
+import java.util.List;
+
+public interface WisdomTreeService {
+    List<PassKnowledge> getWisdomTree(String userId, String proId);
+
+    void learn(String resourceId, User user, String type);
+
+    void newTree(User user, String proId);
+
+    List<Learnt> learntHistory(String userId, String proId);
+}

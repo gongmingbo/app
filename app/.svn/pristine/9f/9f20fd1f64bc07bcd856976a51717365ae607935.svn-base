@@ -1,0 +1,59 @@
+package app.entity.content;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+/**
+ * 标签库
+ * @author gongmingbo
+ *
+ */
+@Entity
+@Table(name="app_tags")
+public class Tags {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	private String tagId;
+	private String tagName;
+	private String remark;
+	private String parentId;
+	@Override
+	public String toString() {
+		return "Tags [id=" + id + ", tagId=" + tagId + ", TagName=" + tagName + ", remark=" + remark + ", ParentId="
+				+ parentId + "]";
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getTagId() {
+		return tagId;
+	}
+	public void setTagId(String tagId) {
+		this.tagId = tagId;
+	}
+	public String getTagName() {
+		return tagName;
+	}
+	public void setTagName(String tagName) {
+		tagName = tagName;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	public String getParentId() {
+		return parentId;
+	}
+	public void setParentId(String parentId) {
+		parentId = parentId;
+	}
+	
+}

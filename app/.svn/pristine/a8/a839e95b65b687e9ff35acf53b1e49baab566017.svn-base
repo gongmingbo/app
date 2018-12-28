@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>推荐学习录入</title>
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/need.css">
+    <script type="text/javascript" src="/jquery-3.3.1.min.js"></script>
+</head>
+
+<body>
+<div class="ican-header">
+    <h1>
+        <img src="/imgs/logo.png" alt="">
+        知我
+    </h1>
+    <ul>
+        <li>必修课程录入</li>
+        <li>选修课程录入</li>
+        <li class="active">推荐学习录入</li>
+        <li>职业选择</li>
+    </ul>
+    <div class="login-state">
+        <span>小张</span>
+        <span>|</span>
+        <span>退出</span>
+    </div>
+</div>
+<div class="ican-select">
+    <!--<section class="choose" id="choose">
+      <label for="schools">学校 :</label>
+      <input type="text" id="chooseItem">
+      <div id="schools" class="dataWrapper">
+        <p>支持中文/拼音/简拼输入</p>
+        <ul>
+          <li class="active">常用</li>
+          <li>A</li>
+          <li>B</li>
+          <li>C</li>
+          <li>D</li>
+          <li>E</li>
+          <li>F</li>
+          <li>G</li>
+          <li>H</li>
+          <li>I</li>
+          <li>J</li>
+          <li>K</li>
+          <li>L</li>
+          <li>M</li>
+          <li>N</li>
+          <li>O</li>
+          <li>P</li>
+          <li>Q</li>
+          <li>R</li>
+          <li>S</li>
+          <li>T</li>
+          <li>U</li>
+          <li>V</li>
+          <li>W</li>
+          <li>X</li>
+          <li>Y</li>
+          <li>Z</li>
+        </ul>
+        <div class="school-list">
+          <h3>A</h3>
+          <div class="school-names">
+            <span>安庆大学</span>
+            <span>澳门f大学</span>
+            <span>澳门大学</span>
+            <span>澳门大dfdf学</span>
+            <span>澳门大学</span>
+            <span>澳门大学sfsdfsdf</span>
+            <span>澳门大学</span>
+            <span>澳门大学ffdf</span>
+            <span>澳门大学</span>
+            <span>澳门大学</span>
+            <span>澳门大学</span>
+            <span>澳门大dfd学</span>
+            <span>澳门大学</span>
+            <span>澳门大学</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <label for="institute">院系 :</label>
+      <select id="institute">
+        <option value="">计算机学院</option>
+        <option value="">建筑学院</option>
+        <option value="">物理学院</option>
+      </select>
+    </section>
+    <section>-->
+    <label for="job">岗位 :</label>
+    <select id="job">
+        <option value="">请选择</option>
+        <option th:each="profession ,professionStat : ${list}"
+                 th:text="${profession.professionName}"
+                 th:value="${profession.professionId}">
+        </option>
+    </select>
+    </section>
+</div>
+<div class="ican-class">
+    <table cellspacing="0" class="tableElective">
+        <caption>推荐学习列表</caption>
+        <thead>
+        <tr>
+            <th colspan="6">
+                <button onclick="checkedAll()">全选</button>
+                <button onclick="checkeOthers()">反选</button>
+                <button onclick="removeClass()">删除</button>
+                <!--<button onclick="uploadClass()">上传</button>-->
+                <button onclick="addAction();">新增</button>
+                <button onclick="editAction();">编辑</button>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</div>
+<div class="ican-modal" id="deleteModal">
+    <div class="delete-box">
+        <h3>确定删除该资料？</h3>
+        <div><span>资料名称:</span>
+            <span>人人都是产品经理</span>
+        </div>
+        <button onclick="closeAction();">取消</button>
+        <button type="submit" onclick="submitAction();">确定</button>
+    </div>
+</div>
+<script>
+    //初始化choose组件
+    function initChoose() {
+        /*    document.querySelector('#choose').addEventListener("click", function (e) {
+         if (e.target.nodeName === "INPUT") {
+         document.querySelector('.dataWrapper').style.display = "block"
+         }
+         if (e.target.nodeName === "LI") {
+         document.querySelector('#choose h3').innerText = e.target.innerText
+         Array.prototype.slice.apply(e.target.parentNode.children).forEach(element => {
+         element.classList.remove('active')
+         });
+         e.target.classList.add('active')
+         }
+         if (e.target.nodeName === "SPAN") {
+         document.querySelector('.dataWrapper').style.display = "none"
+         document.querySelector('#chooseItem').value = e.target.innerText
+         }
+         })*/
+        getAticle()
+    }
+
+    //岗位变化时
+    $("#job").change(function () {
+        getAticle()
+    });
+    function getAticle(){
+        var url = "/web/getrecommend"
+        var data = {professionId: $("#job").val(), page: 1}
+        var list = ajax(url, data)
+        console.log(list.data)
+        var tr=""
+        for (n in list.data){
+            tr+=getTr(list.data[n])
+        }
+        $("tbody").empty()
+        $("tbody").append($(tr))
+    }
+    function getTr(data) {
+        var date=new Date(data.publishTime)
+        date = dateFtt("yyyy-MM-dd",date)
+        var tr='<tr>'+
+        '<td>'+
+        '<input type="checkbox">'+
+        '<input type="hidden" value="'+data.id+'">'+
+        ' <p class="titleChoose">'+data.contentTitle+'</p>'+
+        ' </td>'+
+        ' <td>'+
+        ' <p>'+date+'</p>'+
+        ' </td>'+
+        '</td>'+
+        ' </tr>';
+        return tr;
+    }
+    //新增
+    function addAction() {
+        var professionId = $("#job").val()
+        if (!professionId) {
+            alert("请选择岗位")
+            return
+        }
+        location.href = "/web/index?professionId=" + professionId;
+    }
+
+    //显示模态框
+    function openRecommendModal() {
+        document.querySelector('#deleteModal').style.display = "block"
+    }
+    //判断是否选中checkbox
+    function isCheck() {
+        document.querySelector('.tableElective').addEventListener('click', function () {
+            Array.prototype.slice.call(document.querySelectorAll('input[type=checkbox]')).forEach(function (x) {
+                if (x.checked) {
+                    x.parentNode.parentNode.style.background = "#343D5F"
+                } else {
+                    x.parentNode.parentNode.style.background = "#48516F"
+                }
+            })
+        })
+    }
+    //全选
+    function checkedAll() {
+        Array.prototype.slice.call(document.querySelectorAll('input[type=checkbox]')).forEach(function (x) {
+            x.checked = true
+        })
+    }
+    //反选
+    function checkeOthers() {
+        Array.prototype.slice.call(document.querySelectorAll('input[type=checkbox]')).forEach(function (x) {
+            x.checked = !x.checked
+        })
+    }
+    //编辑
+    function editAction(){
+        if ( $('input:checkbox:checked').length!=1){
+           alert("请选择一项")
+            return
+        }
+        location.href = "/web/index?id=" + $('input:checkbox:checked').next().val();
+    }
+
+    //删除
+    function removeClass() {
+        openRecommendModal()
+    }
+   function  closeAction() {
+       document.querySelector('#deleteModal').style.display = "none"
+   }
+   function submitAction() {
+        var arr=new Array()
+       $('input:checkbox:checked').each(function () {
+           arr.push($(this).next().val())
+       })
+       var ids=arr.join(",")
+       var url="/web/delete"
+       var data={ids:ids}
+       ajax(url,data)
+       console.log(ids)
+       getAticle();
+       closeAction()
+   }
+    //上传
+    function uploadClass() {
+        Array.prototype.slice.call(document.querySelectorAll('input[type=checkbox]')).forEach(function (x) {
+            if (x.checked) {
+                // 上传文件业务逻辑
+            }
+        })
+    }
+    window.onload = function () {
+        initChoose()
+        isCheck()
+    }
+    function ajax(url, data) {
+        var result;
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: data,
+            dataType: "json",
+            async: false,
+            success: function (data) {
+                result = data;
+            }
+        });
+        return result;
+    }
+    function dateFtt(fmt,date) { //author: meizz
+        var o = {
+            "M+" : date.getMonth()+1,                 //月份
+            "d+" : date.getDate(),                    //日
+            "h+" : date.getHours(),                   //小时
+            "m+" : date.getMinutes(),                 //分
+            "s+" : date.getSeconds(),                 //秒
+            "q+" : Math.floor((date.getMonth()+3)/3), //季度
+            "S"  : date.getMilliseconds()             //毫秒
+        };
+        if(/(y+)/.test(fmt))
+            fmt=fmt.replace(RegExp.$1, (date.getFullYear()+"").substr(4 - RegExp.$1.length));
+        for(var k in o)
+            if(new RegExp("("+ k +")").test(fmt))
+                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+        return fmt;
+    }
+</script>
+</body>
+
+</html>

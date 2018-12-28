@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>职业选择-更多-添加</title>
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/need.css">
+    <link rel="stylesheet" href="/chosen/chosen.css">
+</head>
+
+<body>
+<div th:replace="navi :: myNavi(${dir})"></div>
+<div class="ican-more">
+    <div class="top" th:id="${proId}">
+     <span onclick="javascript:window.history.back()" style="cursor: pointer;">
+        <<返回项目经理知识点</span></div>
+    <div class="contain">
+        <h3>添加知识点</h3>
+        <form action="">
+            <section>
+                <label for="">知识点名称 : </label>
+                <input type="text" class="name" name="name">
+            </section>
+            <section class="build" style="display: flex;">
+                <label for="" style="width: 8.5%;line-height: 32px;">知识点标签 : </label>
+                <select class="chosen-select" multiple name="tag" data-placeholder="选择标签" style="margin-left: 5px;">
+                    <option th:each="tag : ${tags}" th:value="${tag.tagName}"
+                             th:text="${tag.tagName}" th:selected="${#lists.contains(tagList,tag.tagName)}"></option>
+                </select>
+            </section>
+            <section class="build" style="display: flex;">
+                <label for="" style="width: 8.5%;line-height: 32px;">前置条件 : </label>
+                <select class="chosen-select" name="prev" multiple data-placeholder="选择前置条件" style="margin-left: 5px;">
+                    <option th:each="know : ${knowledge}" th:value="${know.knowledgeId}"
+                            th:text="${know.knowledgeName}" th:selected="${#lists.contains(knowledgeIds, know.knowledgeId)}"></option>
+                </select>
+            </section>
+            <section>
+                <label for="">知识点图标 : </label>
+                <!--<input name="icon-path" style="display: none;" type="text">
+                <span id="icon-name" style="margin-left: 5px;"></span>
+                <input type="file" style="display: none;" class="file-container">
+                <input type="button" value="上传" id="icon-upload" class="upload">-->
+                <select name="icon-path" style="width: 220px;height: 30px;">
+                    <option th:each="icon : ${icons}" th:value="${icon.url}"
+                             th:text="${icon.name}" th:selected="${#lists.contains(iconImage, icon.url)}" ></option>
+                </select>
+            </section>
+            <section>
+                <label for="">选修课程 : </label>
+                <div class="drop-box flex-box">
+                    <section class="course">
+                        <table border="1" cellspacing="0" class="course-table">
+                            <thead>
+                            <td>课程名</td>
+                            <td>能量值</td>
+                            <td>操作</td>
+                            </thead>
+                        </table>
+                    </section>
+                </div>
+                <div style="margin-left: 100px;">
+                    <input type="button" id="course-add" value="添加">
+                </div>
+            </section>
+            <section>
+                <label for="">领域课程 : </label>
+                <div class="drop-box flex-box">
+                    <section class="course">
+                        <table border="1" cellspacing="0" class="content-table">
+                            <thead>
+                            <td>课程名</td>
+                            <td>能量值</td>
+                            <td>操作</td>
+                            </thead>
+                        </table>
+                    </section>
+                </div>
+                <div style="margin-left: 100px;">
+                    <input type="button" id="content-add" value="添加">
+                </div>
+            </section>
+            <section>
+                <label for="">知识点考核 : </label>
+                <input name="exam-path" style="display: none;" type="text">
+                <span id="exam-name" style="margin-left: 5px;"></span>
+                <input type="file" style="display: none;" class="file-container">
+                <input type="button" value="上传" id="exam-upload" class="upload">
+            </section>
+            <section class="buttons">
+                <input type="button" onclick="javascript:window.history.back()" value="取消" >
+                <input type="button" value="确定" id="confirm">
+            </section>
+        </form>
+    </div>
+</div>
+<script src="/jquery-3.3.1.min.js"></script>
+<script src="/chosen/chosen.jquery.js"></script>
+
+<script th:inline="javascript">
+    $(function () {
+        $('.upload').on('click', function () {
+            $(this).prev().click();
+        });
+        $('.file-container').on("change", function (e) {
+            var $this = $(this);
+            if(e.target.files && e.target.files.length > 0){
+                var form = new FormData();
+                form.append('file', e.target.files[0]);
+                $.ajax({
+                    url: "/web/upload",
+                    type: "POST",
+                    data: form,
+                    processData: false,
+                    contentType: false,
+                    success: function (res) {
+                        if (res.success){
+                            $this.prev().text(res.data.oriName);
+                            $this.prev().prev().val(res.data.filePath);
+                        }
+                    }
+                })
+            }
+        })
+        $("#confirm").on('click', function () {
+            var name = $('[name=name]').val();
+            var tag = $('[name=tag]').val();
+            var prev = $('[name=prev]').val();
+            var icon = $('[name=icon-path]').val();
+            var exam = $('[name=exam-path]').val();
+            var iconName = $('[name=icon-path]').text().trim();
+            var examName = $("#exam-name").text();
+
+
+            var data = {
+                knowledgeName: name,
+                tags: tag,
+                prereqs: prev,
+                exam: exam,
+                icon: icon,
+                examFilename: examName,
+                iconFilename: iconName,
+                knowledgeContent: knowledgeContent
+            }
+            var proId = [[${proId}]];
+            var operation = [[${operation}]];
+            var url = operation === "add" ? "/web/pro/" + proId + "/knowledge" : "/web/knowledge/" + [[${kn.knowledgeId}]];
+            var type = operation === "add" ? "PUT" : "POST";
+                $.ajax({
+                url: url,
+                type: type,
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                processData: false,
+//                contentType: false,
+                success: function (res) {
+                    if (res.success){
+                        window.location.href = "/web/pro/" + proId + "/knowledge";
+                    }
+                }
+            })
+        })
+        $('.chosen-select').chosen({no_results_text: "还没有这个标签:", width: "570px"});
+        var courses = [[${courses}]];
+        var contents = [[${contents}]];
+        var kn = [[${kn}]];
+       /* var tag=[[${tag}]];
+        $("select[name='tag'] option").each(function () {
+            var opValue=$(this).attr("value")
+            if($.inArray(opValue, tag)!=-1){
+                  $(this).attr("selected","selected")
+            }
+        })*/
+        var knowledgeContent = kn.knowledgeContent;
+        var selectedCourse = knowledgeContent['courses'];
+        var selectedContents = knowledgeContent['contents'];
+
+        function addCourse(restCourses, selected) {
+            var courseSelect = "<span style='display: none;'>";
+            if (selected){
+                courseSelect += selected.name;
+            }
+            courseSelect += "</span><select data-placeholder=\"选择选修课程\" class='course-select'>\n";
+            for (var i in restCourses) {
+                var course = restCourses[i];
+                if (selected && selected.id == course.id){
+                    courseSelect += "<option value='" + course.id + "' selected>" + course.courseName + "(" + course.courseCode + ")" + "</option>";
+                }else {
+                    courseSelect += "<option value='" + course.id + "'>" + course.courseName + "(" + course.courseCode + ")" + "</option>";
+                }
+            }
+            courseSelect += "</select>"
+            return courseSelect;
+        }
+
+        function addEnergy(selected) {
+            var html = "<span style='display: none;'>";
+            if (selected){
+                html += selected.energy;
+            }
+            html += "</span><input class='energy' ";
+            if (selected){
+                html += "value='" + selected.energy + "'";
+            }
+            html += ">";
+            return html;
+        }
+
+        function addOperation() {
+            return "<a class='edit-row' style='display: none;'>编辑</a><a class='save-row'>保存</a><span class='split-line'>|</span><a class='delete-row'>删除</a>";
+        }
+
+        function addContent(restContents, selected) {
+            var contentSelect = "<span style='display: none;'>";
+            if(selected){
+                contentSelect += selected.title
+            }
+            contentSelect += "</span><select data-placeholder=\"选择领域知识\" class='course-select'>";
+            for (var i in restContents) {
+                var content = restContents[i];
+                if (selected && selected.id === content.id){
+                    contentSelect += "<option value='" + content.id + "' selected>" + content.title + "</option>";
+                }
+                contentSelect += "<option value='" + content.id + "'>" + content.title + "</option>";
+            }
+            contentSelect += "</select>"
+            return contentSelect;
+        }
+
+        function activate($row, index, type) {
+            var $name = $row.find('.name');
+            var $energy = $row.find('.energy');
+            $name.find("span").hide();
+            $name.find("select").show();
+            $energy.find("span").hide();
+            $energy.find("input").show().val($energy.find("span").text());
+            $row.find('.edit-row').hide();
+            $row.find('.save-row').show();
+
+            if (index !== null && index !== undefined) {
+                switch (type) {
+                    case 'course':
+                        $name.find("select").val(selectedCourse[index].id);
+                        break;
+                    case 'content':
+                        $name.find("select").val(selectedContents[index]);
+                        break;
+                    default:
+                        return;
+                }
+            }
+        }
+
+        function deactivate($row, index, type) {
+            var $name = $row.find('.name');
+            var $energy = $row.find('.energy');
+            var select = $name.find("select");
+            var selected = select.find("option:selected");
+            $name.find("span").show().text(selected.text());
+            $name.find("select").hide();
+            $energy.find("span").show().text($energy.find("input").val());
+            $energy.find("input").hide();
+
+            $row.find('.edit-row').show();
+            $row.find('.save-row').hide();
+            switch (type) {
+                case 'course':
+                    var course = {
+                        id:   select.val(),
+                        name: selected.text(),
+                        energy: $energy.find("input").val()
+                    };
+                    if (index !== null && index !== undefined && index >= 0) {
+                        selectedCourse[index] = course;
+                    } else {
+                        selectedCourse.push(course);
+                    }
+                    break;
+                case 'content':
+                    var content = {
+                        id:  select.val(),
+                        title: selected.text(),
+                        energy: $energy.find("input").val()
+                    };
+                    if (index !== null && index !== undefined) {
+                        selectedContents[index] = content;
+                    }else {
+                        selectedContents.push(content);
+                    }
+                    break;
+                default:
+                    return;
+            }
+        }
+
+        function addRow(type, selected) {
+            var row = "<tr><td class='name'>$name</td><td class='energy'>$energy</td><td>$operation</td></tr>";
+            switch (type) {
+                case 'course':
+//                    var remainingCourse = courses.filter(course=>!(course.id in selectedCourse));
+                    row = row.replace("$name", addCourse(courses, selected))
+                        .replace("$energy", addEnergy(selected))
+                        .replace("$operation", addOperation());
+                    break;
+                case 'content':
+//                    var remainingContent = contents.filter(content=>!(content.id in selectedContents));
+                    row = row.replace("$name", addContent(contents, selected))
+                        .replace("$energy", addEnergy(selected))
+                        .replace("$operation", addOperation());
+                    break;
+                default:
+                    return;
+            }
+            row.replace("operation",addOperation());
+            return row;
+        }
+
+        $('#content-add').on('click', function () {
+            var $row = $(addRow('content'));
+            $('.content-table').append($row);
+            activate($row, null, 'content');
+        });
+
+        $('#course-add').on('click', function () {
+            var $row = $(addRow('course'));
+            $('.course-table').append($row);
+            activate($row, null, 'course');
+        });
+
+        $('.course').on('click', '.save-row', function () {
+            var type = $(this).parents('table').hasClass('content-table') ? 'content' : 'course';
+            var $row = $(this).parents('tr');
+            var index = parseInt($('.' + type + '-table tr').index($row)) - 1;
+            deactivate($row, index, type);
+        });
+
+        $('.course').on('click', '.edit-row', function () {
+            var type = $(this).parents('table').hasClass('content-table') ? 'content' : 'course';
+            var $row = $(this).parents('tr');
+            var index = parseInt($('.' + type + '-table tr').index($row)) - 1;
+            activate($row, index, type);
+        });
+
+        $('.course').on('click', '.delete-row', function () {
+            var type = $(this).parents('table').hasClass('content-table') ? 'content' : 'course';
+            var $row = $(this).parents('tr');
+            var index = parseInt($('.' + type + '-table tr').index($row)) - 1;
+            if (type === 'content'){
+                selectedContents.splice(index, 1);
+            }else if (type === 'course'){
+                selectedCourse.splice(index, 1);
+            }
+            $row.remove()
+        });
+        $('[name=name]').val(kn.knowledgeName);
+        $('[name=icon-path]').val(kn.icon);
+        $('[name=exam-path]').val(kn.exam);
+        $("#icon-name").text(kn.iconFilename);
+        $("#exam-name").text(kn.examFilename);
+
+        if(knowledgeContent) {
+            for (var i in knowledgeContent['courses']) {
+                var course = knowledgeContent['courses'][i];
+                var $courseRow = $(addRow('course', course));
+                $('.course-table').append($courseRow);
+            }
+            for (var i in knowledgeContent['contents']) {
+                var content = knowledgeContent['contents'][i];
+                var $contentRow = $(addRow('content', content));
+                $('.content-table').append($contentRow);
+            }
+        }
+    })
+
+</script>
+</body>
+
+</html>

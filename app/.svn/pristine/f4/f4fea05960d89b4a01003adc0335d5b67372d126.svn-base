@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="ican-header font_color" th:fragment="myNavi(dir)">
+    <h1>
+        <img src="/imgs/logo.png" alt="">
+        知我
+    </h1>
+    <ul>
+        <li th:class="${dir} == 'compulsory' ? active " onclick="window.location.href='/web/course/required'">必修课程录入
+        </li>
+        <li th:class="${dir} == 'elective' ? active " onclick="window.location.href='/web/course/elective'">选修课程录入</li>
+        <li th:class="${dir} == 'content' ? active " onclick="window.location.href='/web/recommend '">推荐学习录入</li>
+        <li th:class="${dir} == 'career' ? active " onclick="window.location.href='/web/pro'">职业选择</li>
+        <li th:class="${dir} == 'icon' ? active " onclick="window.location.href='/web/icon.html'">图标管理</li>
+        <li th:class="${dir} == 'label' ? active " onclick="window.location.href='/web/label.html'">标签管理</li>
+    </ul>
+    <div class="login-state">
+        <span class="user" th:text="${session.userName}">小张</span><span class="user"><img class="user" src="/imgs/pw2.png"></span>
+        <div class="changePassword">修改密码</div>
+        <script>
+            $(".user").click(function () {
+                $(".changePassword").show("normal");
+            });
+            $(document).click(function (e) {
+                if (!$(e.target).hasClass("user")) {
+                    $(".changePassword").hide("normal");
+                }
+            })
+            $(".changePassword").click(function () {
+                window.location.href = "/web/changpassword.html"
+            })
+            /* $(".user").mouseleave(function() {
+             $(".changePassword").hide("normal");
+             });*/
+        </script>
+        <span>|</span>
+        <a href="/web/quit">
+            <span style="color: white;">退出</span>
+        </a>
+    </div>
+</div>
+</body>
+</html>

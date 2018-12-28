@@ -1,0 +1,350 @@
+package app.bankview;
+
+import app.entity.content.Attachment;
+import app.entity.content.BaseContent;
+import app.entity.content.Tags;
+import app.entity.smart.CourseBaseInfo;
+import app.entity.smart.ProfessionClassification;
+import app.packet.Pagination;
+import app.packet.error.ErrorEnum;
+import app.packet.response.CommonMessage;
+import app.repository.AttachmentRepository;
+import app.repository.ContentRepository;
+import app.repository.ProfessionClassificationRepository;
+import app.repository.TagRepository;
+import ch.qos.logback.core.net.SyslogOutputStream;
+import com.alibaba.fastjson.JSON;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import javax.persistence.Table;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.sql.Timestamp;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+/**
+ * Created by gongmingbo on 2018/11/13.
+ */
+@Controller
+@RequestMapping("/web")
+@ControllerAdvice
+public class ContentCotroller {
+    @Value("${uploadpath}")
+    private String uploadpath;
+    @Autowired
+    private AttachmentRepository attachmentRepository;
+    @Autowired
+    private ContentRepository contentRepository;
+    @Autowired
+    private ProfessionClassificationRepository professionClassificationRepository;
+    @Autowired
+    private TagRepository tagRepository;
+
+    /**
+     * 返回带富文本的HTML
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping("index")
+    public String index(HttpServletRequest request) {
+        String professionId = request.getParameter("professionId");
+        String id = request.getParameter("id");
+        request.setAttribute("professionId", professionId);
+        List<Tags> tagsList = tagRepository.findByStateOrderById(true);
+        if (!StringUtils.isEmpty(id)) {
+            BaseContent baseContent = contentRepository.findOne(id);
+            Gson gson = new Gson();
+            List<String> tags = gson.fromJson(baseContent.getContentTag(), new TypeToken<List<String>>() {}.getType());
+            for (String tagId:tags){
+               Tags tags1= tagRepository.findOne(tagId);
+                if (tags1 != null&&tags1.isState()==false) {
+                    tagsList.add(tags1);
+                }
+            }
+            request.setAttribute("tagsList", tagsList);
+            request.setAttribute("tags", tags);
+            request.setAttribute("baseContent", baseContent);
+        } else {
+            request.setAttribute("baseContent", new BaseContent());
+            request.setAttribute("tagsList", tagsList);
+            request.setAttribute("tags", Collections.EMPTY_LIST);
+        }
+        return "index";
+
+    }
+
+    /**
+     * 返回推荐HTML
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping("recommend")
+    public String recommend(HttpServletRequest request) {
+        // List<ProfessionClassification> list = professionClassificationRepository.findAll();
+        //  request.setAttribute("list", list);
+        return "recommend";
+    }
+
+    /**
+     * 获取推荐列表
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping("/getrecommend")
+    @ResponseBody
+    public String getRecommend(HttpServletRequest request) {
+        // String professionId = request.getParameter("professionId");
+        String pag = request.getParameter("page");
+        int pageNum = Integer.parseInt(pag);
+        Sort sort = new Sort(Sort.Direction.DESC, "publishTime");
+        Pageable pageable = new PageRequest(pageNum - 1, 10, sort);
+        Page<BaseContent> list = contentRepository.findByState(pageable, "t");
+        List<BaseContent> listBaseContent = list.getContent();
+        Pagination pagination = new Pagination();
+        pagination.setPage(pageNum);
+        pagination.setPageSize(10);
+        pagination.setTotalPage(list.getTotalPages());
+        Map<String, Object> map = new HashMap<>();
+        map.put("data", listBaseContent);
+        map.put("page", pagination);
+        return JSON.toJSONString(map);
+    }
+
+    /**
+     * 编辑或添加推挤内容
+     *
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/addcontent")
+    @ResponseBody
+    @Transactional
+    public String addContent(HttpServletRequest request) throws IOException {
+        List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("file");
+        String title = request.getParameter("title");
+        String description = request.getParameter("description");
+        String body = request.getParameter("body");
+        String type = request.getParameter("type");
+        String tag = request.getParameter("ta");
+        // String professionId = request.getParameter("professionId");
+        String id = request.getParameter("id");
+        String comment = request.getParameter("comment");
+        Set<String> imagesUrls = new HashSet<>();
+        if ("article".equals(type)) {
+            imagesUrls = getImgStr(body);
+        }
+        String tags[] = tag.split(",");
+        for (int i = 0; i < tags.length; i++) {
+           // List<Tags> list = tagRepository.findByTagNameAndState(tags[i],true);
+            Tags tagsOne=tagRepository.findOne(tags[i]);
+            if (StringUtils.isEmpty(tagsOne)) {
+                 Tags tags1 = new Tags();
+                 tags1.setTagName(tags[i]);
+                 tags1.setState(true);
+                 Tags newTag= tagRepository.saveAndFlush(tags1);
+                 tags[i]=newTag.getId();
+            }
+        }
+        String uuid = UUID.randomUUID().toString();
+        BaseContent c = new BaseContent();
+        if (!StringUtils.isEmpty(id)) {
+            c = contentRepository.findOne(id);
+            uuid = c.getResourcesId();
+            //  professionId = c.getProfessionId();
+        }
+        if ("on".equals(comment)) {
+            c.setComment(true);
+        } else {
+            c.setComment(false);
+        }
+        //保存附件
+        for (MultipartFile m : files) {
+            String fileName = m.getOriginalFilename();
+            if (StringUtils.isEmpty(fileName)) {
+                break;
+            }
+            File targetFile = new File(uploadpath + "ajax/", "files");
+            if (!targetFile.exists()) {
+                targetFile.mkdirs();
+            }
+            String NewFileName = UUID.randomUUID().toString() + fileName;
+            // FileOutputStream out = new FileOutputStream(uploadpath + "ajax/files/" + NewFileName);
+            // out.write(m.getBytes());
+            File to = new File(uploadpath + "ajax/files/" + NewFileName);
+            m.transferTo(to);
+            // out.close();
+            Attachment a = new Attachment();
+            a.setAttachmentName(fileName);
+            String attachmentType = fileName.substring(fileName.indexOf(".") + 1);
+            a.setAttachmentType(attachmentType);
+            a.setResourcesId(uuid);
+            a.setAttachmentTime(new Timestamp(new Date().getTime()));
+            a.setAttachmentUrl("/resources/ajax/files/" + NewFileName);
+            attachmentRepository.saveAndFlush(a);
+            c.setContentAttachment(true);
+        }
+        c.setContentTitle(title);
+        c.setContentDescription(description);
+        c.setContentType(type);
+        c.setContenBody(body);
+        c.setPublishTime(new Timestamp(new Date().getTime()));
+        c.setContentTag(JSON.toJSONString(tags));
+        c.setResourcesId(uuid);
+        c.setContentTitleImage(JSON.toJSONString(imagesUrls));
+        c.setState("t");
+        contentRepository.saveAndFlush(c);
+        return JSON.toJSONString(c);
+    }
+
+    /**
+     * 删除附件
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping("/delete/attachment")
+    @ResponseBody
+    @Transactional
+    public String deleteAttAachment(HttpServletRequest request) {
+        String id = request.getParameter("id");
+        Attachment attachment = new Attachment();
+        attachment = attachmentRepository.findOne(Long.parseLong(id));
+        File file = new File(uploadpath + (attachment.getAttachmentUrl().replace("/resources/", "")));
+        boolean b = file.delete();
+        // if (b) {
+        attachmentRepository.delete(Long.parseLong(id));
+        return JSON.toJSONString(attachment);
+        // }
+        // return null;
+    }
+
+    /**
+     * 查看推荐文章视频是否重复
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping("/distinct")
+    @ResponseBody
+    public String distinctByTitle(HttpServletRequest request) {
+        String title = request.getParameter("title");
+        List<BaseContent> list
+                = contentRepository.findByContentTitleAndState(title, "t");
+        Map<String, Object> map = new HashMap<>();
+        if (list != null && list.size() > 0) {
+            map.put("state", true);
+        } else {
+            map.put("state", false);
+        }
+        return JSON.toJSONString(map);
+    }
+
+    /**
+     * 删除推荐
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping("/deletere")
+    @ResponseBody
+    @Transactional
+    public String delete(HttpServletRequest request) {
+        String ids = request.getParameter("ids");
+        String id[] = ids.split(",");
+        for (int i = 0; i < id.length; i++) {
+            BaseContent baseContent = contentRepository.findOne(id[i]);
+            baseContent.setState("f");
+            contentRepository.saveAndFlush(baseContent);
+        }
+        return null;
+    }
+
+    /**
+     * 关闭评论
+     */
+    @RequestMapping("/close/comment")
+    @ResponseBody
+    @Transactional
+    public String closeComment(HttpServletRequest request) {
+        String ids = request.getParameter("ids");
+        String type = request.getParameter("type");
+        String id[] = ids.split(",");
+        for (int i = 0; i < id.length; i++) {
+            BaseContent baseContent = contentRepository.findOne(id[i]);
+            if ("open".equals(type)) {
+                baseContent.setComment(true);
+            } else {
+                baseContent.setComment(false);
+            }
+            contentRepository.saveAndFlush(baseContent);
+        }
+        Map<String, Object> map = new HashMap<>();
+        map.put("state", true);
+        System.out.println();
+        return JSON.toJSONString(map);
+    }
+
+    @ExceptionHandler(value = Exception.class)
+    @ResponseBody
+    public CommonMessage errorHandler(Exception ex) {
+        ex.printStackTrace();
+        return CommonMessage.failure(ErrorEnum.SERVER_INTERNAL_ERROR);
+    }
+
+    /**
+     * 抽取富文本图片地址
+     *
+     * @param htmlStr
+     * @return
+     */
+    public static Set<String> getImgStr(String htmlStr) {
+        Set<String> pics = new HashSet<>();
+        String img = "";
+        Pattern p_image;
+        Matcher m_image;
+        //     String regEx_img = "<img.*src=(.*?)[^>]*?>"; //图片链接地址
+        String regEx_img = "<img.*src\\s*=\\s*(.*?)[^>]*?>";
+        p_image = Pattern.compile
+                (regEx_img, Pattern.CASE_INSENSITIVE);
+        m_image = p_image.matcher(htmlStr);
+        while (m_image.find()) {
+            // 得到<img />数据
+            img = m_image.group();
+            // 匹配<img>中的src数据
+            Matcher m = Pattern.compile("src\\s*=\\s*\"?(.*?)(\"|>|\\s+)").matcher(img);
+            while (m.find()) {
+                pics.add(m.group(1));
+            }
+        }
+        return pics;
+
+    }
+}
+
+

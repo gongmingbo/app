@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>登陆</title>
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/icon_management.css">
+    <script type="text/javascript" src="/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="/css/pageation.css">
+    <script type="text/javascript" src="/pagination.js"></script>
+    <link rel="stylesheet" href="/css/label_management.css">
+</head>
+
+<body>
+<div class="ican-wrapper">
+    <div th:replace="navi :: myNavi(${dir})"></div>
+    <div class="content">
+        <h3>图片列表</h3>
+        <div class="search">
+            <input class="serchName" type="text" placeholder="这里搜索关键词">
+            <button class="serchAction">搜索</button>
+            <button class="addIconAction">新增</button>
+        </div>
+        <div class="table">
+            <table>
+                <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>图标</th>
+                    <th>关键词</th>
+                    <th>创建时间</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+            <!--    分页              -->
+            <div class="pagination_container">
+                <ul class="pagination" id="page"></ul>
+                <div class="pageJump">
+                    <!-- <input class='current_page' type="hidden" value="${pageNo}"/>-->
+                    <!--  <p>共<span class="total_page">2</span>页</p>-->
+                    <form action="" id="getPageNo" method="post">
+                        <input type="hidden" id="pageNo" name="pageNo" value=""/>
+                        <input type="hidden" id="total_page_" name="total_page_" value=""/>
+                        <!-- <span>跳转到第</span>
+                         <input type="text" id="jumpPageNo" name="jumpPageNo"/>
+                         <span>页</span>
+                         <input label="站点id" name="Site" value="${Site }" type="hidden"/>
+                         <input label="栏目id" name="Column" value="${Column }" type="hidden"/>
+                         <input type="hidden" id="date_date" name="date" value="${date }"/>
+                         <button type="button" class="button">确定</button>-->
+                    </form>
+                </div>
+            </div>
+            <script type="text/javascript">
+                function page() {
+                    Page({
+                        num: $("#total_page_").val(), //页码数
+                        startnum: $("#pageNo").val(), //指定页码
+                        elem: $('#page'), //指定的元素
+                        callback: function (n) { //回调函数
+                            $("input[name='pageNo']").val(n);
+                            // $("#getPageNo").submit();
+                            console.log(n)
+                            if (n == 1) {
+                                $('#page a').removeClass('not_allow');
+                                $('.page_prev').addClass('not_allow');
+                            } else if (n >= $('.total_page').html()) {
+                                $('#page a').removeClass('not_allow');
+                                $('.page_next').addClass('not_allow')
+                            } else {
+                                $('#page a').removeClass('not_allow');
+                            }
+                            getTable(n)
+                        }
+                    });
+                }
+            </script>
+            <!-- 分页 -->
+        </div>
+    </div>
+    <div class="modal" style="display: none;z-index:1000;">
+        <div class="form" style="height: auto;">
+            <h3>图标</h3>
+            <div class="section">
+                <label for="">关键字：</label>
+                <input type="text" id="input-label">
+            </div>
+            <div class="section">
+                <label for="">图标图：</label>
+                <input type="file" name="file" style="text-indent: 0;color: black;">
+                <ul id="url_ul"></ul>
+            </div>
+            <button id="cancle">取消</button>
+            <button id="sure">确定</button>
+            <input type="hidden" id="id" value="">
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        function ajax(url, data, type) {
+            var result;
+            $.ajax({
+                type: type,
+                url: url,
+                data: data,
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                    result = data;
+                }
+            });
+            return result;
+        }
+
+        function dateFtt(fmt, date) { //author: meizz
+            var o = {
+                "M+": date.getMonth() + 1,                 //月份
+                "d+": date.getDate(),                    //日
+                "h+": date.getHours(),                   //小时
+                "m+": date.getMinutes(),                 //分
+                "s+": date.getSeconds(),                 //秒
+                "q+": Math.floor((date.getMonth() + 3) / 3), //季度
+                "S": date.getMilliseconds()             //毫秒
+            };
+            if (/(y+)/.test(fmt))
+                fmt = fmt.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt))
+                    fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            return fmt;
+        }
+
+        getTable(1)
+        function getTable(n) {
+            var url = "/web/icon"
+
+            var data = {"pageNum": n, name: $(".serchName").val()}
+            var result = ajax(url, data, "GET")
+            $("#pageNo").val(result.page.page)
+            $("#total_page_").val(result.page.totalPage)
+            page();
+            var data = result.data
+            console.log(result)
+            var html = ""
+            for (index in data) {
+                html += getTr(data[index], index)
+            }
+            $("tbody").empty();
+            $("tbody").append($(html))
+        }
+
+        function getTr(data, index) {
+            var n = parseInt(index) + 1
+            var date = new Date(data.createTime)
+            date = dateFtt("yyyy-MM-dd hh:mm:ss", date)
+            var tr = ' <tr>' +
+                '<td>' + n + '</td>' +
+                '<td>' +
+                '<div style="height: auto;" class="icon-wrapper"><img src="' + data.url + '"></div>' +
+                '</td>' +
+                '<td>' + data.name + '</td>' +
+                '<td>' +
+                '<p>' + date + '</p>' +
+                '</td>' +
+                '<td>' +
+                '<span id="' + data.id + '" class="icon_edit">编辑</span>' +
+                '<span style="margin: 10px;">|</span>' +
+                '<span id="' + data.id + '" class="icon_delete">删除</span>' +
+                '</td>' +
+                '</tr>';
+            return tr
+        }
+
+        //新增
+        $(".addIconAction").click(function () {
+            $("#id").val("")
+            $("#input-label").val("");
+            $("input[name='file']").val("")
+            $(".url").empty()
+            $(".modal").show()
+        })
+        //搜索
+
+        $(".serchAction").click(function () {
+            getTable(1)
+            // $(".modal").show()
+        })
+
+        $("#cancle").click(function () {
+            $(".modal").hide()
+        })
+        $("#sure").click(function () {
+            var url = "/web/icon"
+            var name = $("#input-label").val();
+            var ImagesUul = $(".url").attr("id")
+            if (!name) {
+                alert("关键字不能为空")
+                return
+            } else if (!ImagesUul|| !$("input[name='file']").val()) {
+                alert("请上传图标")
+                return
+            }
+            var data = {name: name, url: ImagesUul, id: $("#id").val()}
+            var result = ajax(url, data, "POST")
+            if (result.state==true) {
+                $(".modal").hide()
+                getTable(1)
+            }else {
+                alert(result.msg)
+            }
+        })
+        $("tbody").on("click", ".icon_delete", function () {
+            if (!confirm("确认删除该图标吗")) {
+                return
+            }
+            var url = "/web/delete"
+            var data = {id: $(this).attr("id")}
+            var result = ajax(url, data, "POST")
+            if (result.id) {
+                $(".modal").hide()
+                getTable(1)
+            }
+        })
+        $("tbody").on("click", ".icon_edit", function () {
+            var url = "/web/edit"
+            var data = {id: $(this).attr("id")}
+            var result = ajax(url, data, "GET")
+            if (result.id) {
+                $(".modal").show()
+                $("#input-label").val(result.name)
+                $("#id").val(result.id)
+                var orgName = result.url
+                orgName = orgName.substring(orgName.indexOf("_") + 1)
+                $("#url_ul").empty()
+                $("#url_ul").append($('<li class="url" id="' + result.url + '" style="color: black">' + orgName + '</li>'))
+            }
+        })
+        $("input[name='file']").on("change", function (e) {
+            var $this = $(this);
+            if (e.target.files && e.target.files.length > 0) {
+                var form = new FormData();
+                form.append('file', e.target.files[0]);
+                $.ajax({
+                    url: "/web/upload",
+                    type: "POST",
+                    data: form,
+                    processData: false,
+                    contentType: false,
+                    success: function (res) {
+                        console.log(res)
+                        if (res.success) {
+                            $this.next().empty()
+                            $this.next().append($('<li class="url" id="' + res.data.filePath + '" style="color: black">' + res.data.oriName + '</li>'))
+                        }
+                    }
+                })
+            }
+        });
+    })
+
+</script>
+</body>
+</html>

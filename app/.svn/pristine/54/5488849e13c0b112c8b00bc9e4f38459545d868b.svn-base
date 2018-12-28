@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>职业选择-更多-添加</title>
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/need.css">
+</head>
+
+<body>
+  <div class="ican-header">
+    <h1>
+      <img src="./imgs/logo.png" alt="">
+      知我
+    </h1>
+    <ul>
+      <li>必修课程录入</li>
+      <li>选修课程录入</li>
+      <li>推荐学习录入</li>
+      <li class="active">职业选择</li>
+    </ul>
+    <div class="login-state">
+      <span>小张</span>
+      <span>|</span>
+      <span>退出</span>
+    </div>
+  </div>
+  <div class="ican-more">
+    <div class="top">
+      <span>
+        <<返回项目经理知识点</span> </div> <div class="contain">
+          <h3>添加知识点</h3>
+          <form action="">
+            <section>
+              <label for="">知识点名称 : </label>
+              <input type="text">
+            </section>
+            <section class="build">
+              <label for="">知识点名称 : </label>
+              <input type="button" value="标签一">
+              <input type="button" value="标签二">
+              <input type="button" value="标签三">
+              <input type="button" value="+">
+            </section>
+            <section>
+              <label for="">需学课程 : </label>
+              <input type="radio" name="needClass">必修课程
+              <input type="radio" name="needClass">选修课程
+              <input type="radio" name="needClass">知识领域
+              <label for="" style="margin-left: 94px;">已选合计</label>
+            </section>
+            <div class="drop-box">
+              <section class="drop">
+                <p><span>课程1</span><span>10KJ能量</span></p>
+                <p><span>课程1</span><span>10KJ能量</span></p>
+                <p><span>课程1</span><span>10KJ能量</span></p>
+                <p><span>课程1</span><span>10KJ能量</span></p>
+                <p><span>课程1</span><span>10KJ能量</span></p>
+              </section>
+              <section class="line"></section>
+              <section class="drop">
+                <p><span>课程1</span><span>10KJ能量</span></p>
+                <p><span>课程1</span><span>10KJ能量</span></p>
+                <p><span>课程1</span><span>10KJ能量</span></p>
+                <p><span>课程1</span><span>10KJ能量</span></p>
+                <p><span>课程1</span><span>10KJ能量</span></p>
+              </section>
+            </div>
+            <section>
+              <label for="">知识点考核 : </label>
+              <a><input type="file">上传</a>
+            </section>
+            <section class="buttons">
+              <input type="button" value="取消">
+              <input type="button" value="确定">
+            </section>
+          </form>
+    </div>
+  </div>
+</body>
+
+</html>

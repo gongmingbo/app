@@ -1,0 +1,111 @@
+package app.bankview;
+
+import app.entity.json.ContentBaseView;
+import app.entity.json.CourseBaseView;
+import app.entity.json.KnowledgeContent;
+import app.entity.smart.Knowledge;
+import app.entity.smart.ProfessionClassification;
+import app.packet.error.ErrorEnum;
+import app.packet.response.CommonMessage;
+import app.repository.KnowledgeRepository;
+import app.repository.ProfessionRepository;
+import com.google.gson.Gson;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Controller
+@ControllerAdvice
+@RequestMapping(path = "/web")
+public class ProfessionController {
+
+    @Autowired
+    private ProfessionRepository professionRepository;
+    @Autowired
+    private KnowledgeRepository knowledgeRepository;
+    private
+
+    @RequestMapping(path = "/pro", method = RequestMethod.GET)
+    String professionsPage(Model model){
+        List<ProfessionClassification> pros = professionRepository.findAll();
+        for(ProfessionClassification p:pros){
+           List<Knowledge> knowledges=knowledgeRepository.findByProfessionId(p.getProfessionId());
+          int energy = 0;
+           for(Knowledge k:knowledges){
+               String content=k.getContents();
+               Gson gson=new Gson();
+               KnowledgeContent knowledgeContent=gson.fromJson(content,KnowledgeContent.class);
+               p.setKnowledgeNumber(knowledgeContent.getContents().size()+knowledgeContent.getCourses().size());
+                int contentEnergy=knowledgeContent.getContents().stream().collect(Collectors.summingInt(ContentBaseView::getEnergy));
+                int courseEnergy= knowledgeContent.getCourses().stream().collect(Collectors.summingInt(CourseBaseView::getEnergy));
+               energy+=contentEnergy+courseEnergy;
+           }
+            p.setEnergy(energy);
+        }
+        model.addAttribute("pros", pros);
+        model.addAttribute("dir", "content");
+
+        return "profession";
+    }
+    @RequestMapping(path = "/pro_more", method = RequestMethod.GET)
+    String pro_more(Model model){
+        List<ProfessionClassification> pros = professionRepository.findAll();
+        model.addAttribute("pros", pros);
+        return "profession_more";
+    }
+    @RequestMapping(path = "/pro_more_add", method = RequestMethod.GET)
+    String pro_more_add(Model model){
+        List<ProfessionClassification> pros = professionRepository.findAll();
+        model.addAttribute("pros", pros);
+        return "profession_more_add";
+    }
+
+    @RequestMapping(path = "/pro", method = RequestMethod.GET, consumes = "application/json")
+    @ResponseBody
+    CommonMessage professions(){
+        List<ProfessionClassification> pros = professionRepository.findAll();
+        return CommonMessage.success(pros);
+    }
+
+    @RequestMapping(path = "/pro/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    CommonMessage fetchProfession(@PathVariable("id") String id){
+        ProfessionClassification pro = professionRepository.findOne(id);
+        return CommonMessage.success(pro);
+    }
+
+    @RequestMapping(path = "/pro/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    CommonMessage deleteProfession(@PathVariable("id") String id){
+        professionRepository.delete(id);
+        return CommonMessage.success();
+    }
+
+    @RequestMapping(path = "/pro/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    CommonMessage modifyProfession(@PathVariable("id") String id, ProfessionClassification profession){
+        ProfessionClassification pro = professionRepository.findOne(id);
+        pro.setProfessionName(profession.getProfessionName());
+        pro.setEnergy(profession.getEnergy());
+        pro.setKnowledgeNumber(profession.getKnowledgeNumber());
+        professionRepository.save(pro);
+        return CommonMessage.success();
+    }
+
+    @RequestMapping(path = "/pro", method = RequestMethod.PUT)
+    @ResponseBody
+    CommonMessage addProfession( ProfessionClassification profession){
+        professionRepository.save(profession);
+        return CommonMessage.success();
+    }
+
+    @ExceptionHandler(value = Exception.class)
+    public CommonMessage errorHandler(Exception ex) {
+        ex.printStackTrace();
+        return CommonMessage.failure(ErrorEnum.SERVER_INTERNAL_ERROR);
+    }
+}

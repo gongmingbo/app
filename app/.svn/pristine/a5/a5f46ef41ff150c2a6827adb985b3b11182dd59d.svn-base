@@ -1,0 +1,76 @@
+package app.service.impl;
+
+import app.entity.user.User;
+import app.packet.request.CommonPacket;
+import app.repository.UserRepository;
+import app.service.UserService;
+import app.util.AESUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+@Service
+public class UserServiceImpl implements UserService {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass()) ;
+
+    @Autowired
+    private UserRepository userRepository;
+    @Value("${api.session.timeout}")
+    private int apiSessionTimeout;
+    @Value("${api.session.encryptSeed}")
+    private String apiSessionEncryptSeed;
+    @Override
+    public User getUser(String username) {
+        return userRepository.findByUserId(username);
+    }
+
+    @Override
+    public boolean validatePassword(String username, String password) {
+        User user = getUser(username);
+        if (user != null ){
+            return user.getUserPassword().equals(password);
+        }else {
+            return false;
+        }
+    }
+
+    @Override
+    public String getToken(String username, String deviceId) {
+        String mixed = String .format("%s|%s|%d", username, deviceId, System.currentTimeMillis() + apiSessionTimeout * 60 * 1000);
+        return AESUtil.encrypt(mixed, apiSessionEncryptSeed);
+    }
+
+    @Override
+    public String validateAndRefreshToken(String username, String deviceId, String token) {
+        String decrypted = AESUtil.decrypt(token, apiSessionEncryptSeed);
+        String[] fields = decrypted.split("|");
+        if (fields.length == 3){
+            String encryptUsername = fields[0];
+            String encryptDeviceId = fields[1];
+            Long timeMillis = Long.parseLong(fields[2]);
+            if (encryptUsername.equals(username) && encryptDeviceId.equals(deviceId)){
+                Long currentMillis = System.currentTimeMillis();
+                if (timeMillis <= currentMillis){
+                    return null;
+                }else {
+                    if (timeMillis - System.currentTimeMillis() < (apiSessionTimeout - 2) * 60 * 1000){
+                        return getToken(username, deviceId);
+                    }else {
+                        return token;
+                    }
+                }
+            }else {
+                return null;
+            }
+        }else {
+            return null;
+        }
+    }
+
+    @Override
+    public String validateAndRefreshToken(CommonPacket packet) {
+        return validateAndRefreshToken(packet.getUsername(), packet.getDeviceId(), packet.getToken());
+    }
+}

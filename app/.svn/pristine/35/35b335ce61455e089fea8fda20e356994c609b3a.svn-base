@@ -1,0 +1,78 @@
+package app.service.impl;
+
+import app.entity.content.Tags;
+import app.entity.smart.Knowledge;
+import app.entity.json.KnowledgeContent;
+import app.repository.KnowledgeRepository;
+import app.repository.TagRepository;
+import app.service.CareerService;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+public class CareerServiceImpl implements CareerService {
+    @Autowired
+    private KnowledgeRepository knowledgeRepository;
+    @Autowired
+    private TagRepository tagRepository;
+    @Override
+    public List<Knowledge> getKnowledgeOfProfession(String proId) {
+        return knowledgeRepository.findByProfessionId(proId);
+
+    }
+
+    @Override
+    public List<Knowledge> getOtherKnowledgeOfProfession(String proId, String knowId){
+        return knowledgeRepository.findByProfessionIdAndKnowledgeIdIsNot(proId, knowId);
+    }
+
+    @Override
+    public Knowledge getKnowledge(String id) {
+        Knowledge knowledge = knowledgeRepository.findOne(id);
+        Gson gson = new Gson();
+        List<String > tags = gson.fromJson(knowledge.getTag(), new TypeToken<List<String >>(){}.getType());
+        knowledge.setTags(tags);
+        KnowledgeContent knowledgeContent = gson.fromJson(knowledge.getContents(), KnowledgeContent.class);
+        knowledge.setKnowledgeContent(knowledgeContent);
+        knowledge.setPrereqs(knowledge.getPrerequisites().stream().map(Knowledge::getKnowledgeId).collect(Collectors.toList()));
+        return knowledge;
+    }
+
+    @Override
+    public int deleteKnowledge(String id) {
+        knowledgeRepository.delete(id);
+        return 0;
+    }
+
+    @Override
+    public void saveKnowledge(Knowledge knowledge) {
+        Gson gson = new Gson();
+        String content = gson.toJson(knowledge.getKnowledgeContent());
+        List<String> preIds = knowledge.getPrereqs();
+        if (preIds != null && preIds.size() > 0){
+            List<Knowledge> pres = knowledgeRepository.findAll(preIds);
+            knowledge.setPrerequisites(pres);
+        }
+        List<String> tags=knowledge.getTags();
+        for (String tag:tags){
+            List<Tags> list=tagRepository.findByTagName(tag);
+            if (list!=null&&list.size()>0){
+
+            }else {
+                Tags tags1=new Tags();
+                tags1.setTagName(tag);
+                tagRepository.saveAndFlush(tags1);
+            }
+        }
+        knowledge.setTag( gson.toJson(knowledge.getTags()));
+        knowledge.setPrerequisiteIds(gson.toJson(preIds));
+        knowledge.setContents(content);
+        knowledgeRepository.save(knowledge);
+    }
+}

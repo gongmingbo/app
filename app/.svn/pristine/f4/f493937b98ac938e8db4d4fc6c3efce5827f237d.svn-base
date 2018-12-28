@@ -1,0 +1,13 @@
+package app.repository;
+
+import app.entity.content.IconManagement;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+/**
+ * Created by gongmingbo on 2018/11/26.
+ */
+public interface IconRepository extends JpaRepository<IconManagement,String>{
+    Page<IconManagement> findByNameLike(Pageable pageable,String name);
+}

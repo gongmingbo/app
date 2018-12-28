@@ -1,0 +1,92 @@
+package app.entity.smart;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+
+import app.config.JsonDataUserType;
+/**
+ * 知识点表
+ * @author gongmingbo
+ *
+ */
+@Entity
+@Table(name="app_knowledge")
+@TypeDef(name = "JsonDataUserType", typeClass = JsonDataUserType.class)
+public class Knowledge {
+	 @Id
+	    @GeneratedValue(strategy = GenerationType.AUTO)
+	 private Long id;
+	 private String knowledgeId;
+	 private String planPathKey;
+	 private String knowledgeName;
+	 @Column(columnDefinition="jsonb")
+	 @Type(type = "JsonDataUserType")
+	 private String knowledgeTag;
+	 @Column(columnDefinition="jsonb")
+	 @Type(type = "JsonDataUserType")
+	 private String courseList;
+	 private boolean knowledgeExam;
+	 private String remark;
+	@Override
+	public String toString() {
+		return "Knowledge [id=" + id + ", knowledgeId=" + knowledgeId + ", planPathKey=" + planPathKey
+				+ ", knowledgeName=" + knowledgeName + ", knowledgeTag=" + knowledgeTag + ", courseList=" + courseList
+				+ ", knowledgeExam=" + knowledgeExam + ", remark=" + remark + "]";
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getKnowledgeId() {
+		return knowledgeId;
+	}
+	public void setKnowledgeId(String knowledgeId) {
+		this.knowledgeId = knowledgeId;
+	}
+	public String getPlanPathKey() {
+		return planPathKey;
+	}
+	public void setPlanPathKey(String planPathKey) {
+		this.planPathKey = planPathKey;
+	}
+	public String getKnowledgeName() {
+		return knowledgeName;
+	}
+	public void setKnowledgeName(String knowledgeName) {
+		this.knowledgeName = knowledgeName;
+	}
+	public String getKnowledgeTag() {
+		return knowledgeTag;
+	}
+	public void setKnowledgeTag(String knowledgeTag) {
+		this.knowledgeTag = knowledgeTag;
+	}
+	public String getCourseList() {
+		return courseList;
+	}
+	public void setCourseList(String courseList) {
+		this.courseList = courseList;
+	}
+	public boolean isKnowledgeExam() {
+		return knowledgeExam;
+	}
+	public void setKnowledgeExam(boolean knowledgeExam) {
+		this.knowledgeExam = knowledgeExam;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	 
+}

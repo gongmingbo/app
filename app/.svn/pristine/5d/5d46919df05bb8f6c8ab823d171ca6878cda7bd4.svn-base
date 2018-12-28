@@ -1,0 +1,68 @@
+package app.service.impl;
+
+import app.entity.content.BaseContent;
+import app.entity.json.ContentBaseView;
+import app.entity.smart.CourseBaseInfo;
+import app.entity.user.CourseTimeTable;
+import app.repository.ContentRepository;
+import app.repository.CourseBaseInfoRepository;
+import app.repository.CourseSyllabusRepository;
+import app.service.CourseService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class CourseServiceImpl implements CourseService {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass()) ;
+
+    @Autowired
+    private  CourseSyllabusRepository courseSyllabusRepository;
+
+    @Autowired
+    private CourseBaseInfoRepository courseBaseInfoRepository;
+
+    @Autowired
+    private ContentRepository contentRepository;
+
+    @Override
+    public CourseTimeTable getCourseTemplate(String username) {
+        return courseSyllabusRepository.findByUserId(username);
+    }
+
+    /*****
+     * 必修课
+     * @return 所有必修课
+     */
+    @Override
+    public List<CourseBaseInfo> getAllCompulsory() {
+        return courseBaseInfoRepository.findByCourseTypeAndState("必修课", "t");
+    }
+
+    /****
+     * 选修课
+     * @return 所有选修课
+     */
+    @Override
+    public List<CourseBaseInfo> getAllElective() {
+        return courseBaseInfoRepository.findByCourseTypeAndState("选修课", "t");
+    }
+
+    @Override
+    public List<BaseContent> getAllContent(){
+        return contentRepository.findAll();
+    }
+
+    /***
+     * 获取领域文章的基础信息
+     * @return
+     */
+    @Override
+    public List<ContentBaseView> getAllContentBaseView(){
+        return contentRepository.findContentBaseView("t");
+    }
+}

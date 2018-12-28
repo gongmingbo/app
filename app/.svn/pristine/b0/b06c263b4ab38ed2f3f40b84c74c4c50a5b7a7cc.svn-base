@@ -1,0 +1,56 @@
+import app.Application;
+import app.entity.TestEntity;
+import app.entity.content.BaseContent;
+import app.entity.content.Comment;
+import app.repository.CommentRepository;
+import app.util.AESUtil;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+public class UnitTest {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass()) ;
+    @Autowired
+    private CommentRepository commentRepository;
+    @Test
+    @Transactional(propagation = Propagation.NOT_SUPPORTED)
+
+    public void commentTest(){
+        Comment comment = new Comment();
+        BaseContent baseContent = new BaseContent();
+        baseContent.setContenBody("test");
+        baseContent.setResourcesId(UUID.randomUUID().toString());
+        comment.setResource(baseContent);
+        commentRepository.save(comment);
+        List<Comment> commentList = commentRepository.findAll();
+        System.out.println(commentList.get(0).getResource().getContenBody());
+    }
+
+    @Test
+    public void sqlTest(){
+        logger.warn("sb");
+    }
+
+    @Test
+    public void encrypt(){
+        String key = "khjghfgdfszds!@#$%hbdssjkd";
+        String encrypted = AESUtil.encrypt("nishigesb", key);
+        String decrypted = AESUtil.decrypt(encrypted, key);
+        logger.warn("encrypted: " + encrypted);
+        logger.warn("decrypted: " + decrypted);
+    }
+}

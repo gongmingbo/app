@@ -1,0 +1,17 @@
+package app.service;
+
+import app.entity.smart.Knowledge;
+
+import java.util.List;
+
+public interface CareerService {
+    List<Knowledge> getKnowledgeOfProfession(String proId);
+
+    List<Knowledge> getOtherKnowledgeOfProfession(String proId, String knowId);
+
+    Knowledge getKnowledge(String id);
+
+    int deleteKnowledge(String id);
+
+    void saveKnowledge(Knowledge knowledge);
+}

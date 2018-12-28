@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>登陆</title>
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/login.css">
+  <script src="/jquery-3.3.1.min.js"></script>
+  <script src="/md5.js"></script>
+</head>
+<body>
+  <div class="ican-wrapper">
+    <div class="login-box">
+      <h3>知我</h3>
+      <h3>后台管理系统登录</h3>
+      <form action="">
+        <input type="text" id="userName">
+        <input type="password" id="password">
+        <button type="button" onclick="submitAction();">登陆</button>
+      </form>
+    </div>
+  </div>
+  <script>
+    function  submitAction() {
+        var userName=$("#userName").val()
+        var password=$("#password").val()
+        password= hex_md5(password);
+        var url="/web/login"
+        var data={userName:userName,password:password}
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: data,
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                   console.log(data)
+                    if (data.success==false){
+                       alert(data.errorMessage)
+                    }else {
+                        window.location.href="/web/recommend"
+                    }
+                }
+            });
+    }
+    window.addEventListener("keyup", function(e) {
+      if (e.target.type === "text") {
+        if (e.target.value == "") {
+          e.target.style.background = "#fff url('/imgs/user_0.png') no-repeat 8px 5px"
+        } else {
+          e.target.style.background = "#fff url('/imgs/user_1.png') no-repeat 8px 5px"
+        }
+      }
+      if (e.target.type === "password") {
+        if (e.target.value == "") {
+          e.target.style.background = "#fff url('/imgs/pwd_0.png') no-repeat 8px 5px"
+        } else {
+          e.target.style.background = "#fff url('/imgs/pwd_1.png') no-repeat 8px 5px"
+        }
+      }
+    })
+  </script>
+</body>
+</html>

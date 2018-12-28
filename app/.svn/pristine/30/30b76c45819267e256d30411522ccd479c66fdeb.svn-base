@@ -1,0 +1,26 @@
+package app.repository;
+
+import app.entity.smart.Knowledge;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import java.util.List;
+
+public interface KnowledgeRepository extends JpaRepository<Knowledge, String > {
+    @Query(value = "select k.contents from app.entity.smart.Knowledge k where k.professionId in (" +
+            "select p.professionId from app.entity.user.PassKnowledge p where p.userId=:userId" +
+            ")",nativeQuery = true)
+    List<String> recommendContent(@Param("userId") String userId);
+
+    List<Knowledge> findByProfessionId(String id);
+
+    List<Knowledge> findByProfessionIdAndKnowledgeIdIsNot(String id, String knowledgeId);
+
+    @Query(value = "select COUNT (*) from app_knowledge_prerequisite where prerequisite_id = :pre", nativeQuery = true)
+    int countByPre(@Param("pre") String pre);
+
+    Knowledge findByKnowledgeNameAndProfessionId(String name, String pro);
+
+    Knowledge findByKnowledgeNameAndProfessionIdAndKnowledgeIdNot(String name, String pro, String id);
+}
